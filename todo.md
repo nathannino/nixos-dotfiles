@@ -1,0 +1,7 @@
+ - Continue eww configuration
+ - replace dunst with eww : https://github.com/lucalabs-de/end (need to learn how to install this as package)
+ - add git repo
+ - add helper script to link generation date to git tag + deal with hmbak files
+ - Add eww configuration to home-manager (This will complicate eww configs, as eww canonize config paths when reloading them, leading to all previous versions of the config being unresponsive instead of being updated to the newer one)
+ - Configure laptop (NixNathanLap)
+ - Change hostnames to NixNathan or something idk

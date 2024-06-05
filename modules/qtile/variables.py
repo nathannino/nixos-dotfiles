@@ -1,0 +1,5 @@
+mod = "mod4"
+terminal = "alacritty"
+runner = "rofi -show drun"
+webbrowser = "librewolf"
+filebrowser = "dolphin"
