@@ -2,9 +2,9 @@
 
 # deal with backups
 
-f_badgit() {
-	echo "${BUILD_DATE}" > "${FLAKE}/badgit"
-}
+#f_badgit() {
+#	echo "${BUILD_DATE}" > "${FLAKE}/badgit"
+#}
 
 f_askhmbak() {
 	echo "Theses home-manager backup files will be deleted :"
@@ -54,7 +54,7 @@ f_git() {
 
 f_main() {
 	f_setdate
-	f_badgit
+	#f_badgit
 	#TODO : Don't run if dry-activate
 	if [[ "${CHOSEN_COMMAND}" = "dry-activate" ]]; then
 		f_git # TODO : wtf can we somehow trick nix into thinking this isn't dirty? I don't want to commit every dry-activate
