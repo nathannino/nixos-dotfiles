@@ -43,7 +43,11 @@ DONTCOMMIT=""
 f_git() {
 	cd "${FLAKE}"
 	git add .
-	git diff-index --quiet HEAD && DONTCOMMIT="y" || git commit -m "${CHOSEN_COMMAND} (Failed) - ${BUILD_DATE}"
+	if git diff-index --quiet HEAD; then
+		DONTCOMMIT="y"
+	else 
+		git commit -m "${CHOSEN_COMMAND} (Failed) - ${BUILD_DATE}"
+	fi
 	cd -
 }
 
