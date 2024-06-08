@@ -44,6 +44,7 @@ f_git() {
 
 
 f_main() {
+	f_setdate
 	#TODO : Don't run if dry-activate
 	if [[ "${CHOSEN_COMMAND}" = "dry-activate" ]]; then
 		f_git # TODO : wtf can we somehow trick nix into thinking this isn't dirty? I don't want to commit every dry-activate
@@ -57,7 +58,6 @@ f_main() {
 		nh os test
 		exit 0;
 	fi
-	f_setdate
 	f_nh
 	exit 0;
 }
