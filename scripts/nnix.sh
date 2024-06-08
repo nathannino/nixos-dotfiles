@@ -31,7 +31,7 @@ f_delhmbak() {
 #}
 
 f_nh() {
-	nh os "${CHOSEN_COMMAND}"
+	nh os "${CHOSEN_COMMAND}" || echo "wtf"
 }
 
 BUILD_DATE=null
