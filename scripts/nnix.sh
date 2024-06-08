@@ -39,10 +39,11 @@ f_setdate() {
 	BUILD_DATE="$(date '+%Y-%m-%d|%H:%M:%S')"
 }
 
+DONTCOMMIT=""
 f_git() {
 	cd "${FLAKE}"
 	git add .
-	git commit -m "${CHOSEN_COMMAND} - ${BUILD_DATE}"
+	git diff-index --quiet HEAD && DONTCOMMIT="y" || git commit -m "${CHOSEN_COMMAND} (Failed) - ${BUILD_DATE}"
 	cd -
 }
 
@@ -56,7 +57,9 @@ f_main() {
 		sudo nixos-rebuild dry-activate --flake "${FLAKE}"
 		exit 0;
 	fi
+	cd "${FLAKE}"
 	f_delhmbak
+	cd -
 	f_git # TODO : Still would like to have this at the end instead tbh... maybe we can delete the commit or annotate it if f_nh failed?
 	#f_getdiff
 	if [[ "${CHOSEN_COMMAND}" = "test" ]]; then
@@ -64,6 +67,14 @@ f_main() {
 		exit 0;
 	fi
 	f_nh
+
+	if [[ -z "${DONTCOMMIT}" ]]; then
+		cd "${FLAKE}"
+		git commit --append -m "${CHOSEN_COMMAND} (Success) - ${BUILD_DATE}"
+		cd -
+	else
+		echo "Nothing added, not automatically commiting"
+	fi
 	exit 0;
 }
 
