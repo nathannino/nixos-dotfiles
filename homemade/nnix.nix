@@ -1,7 +1,6 @@
-#!/bin/sh
+with import <nixpkgs> {};
 
-# deal with backups
-
+writeShellScriptBin "nnix" ''
 f_askhmbak() {
 	echo "Theses home-manager backup files will be deleted :"
 	find ~ -name \*.hmbak -type f
@@ -44,20 +43,20 @@ f_git() {
 
 
 f_main() {
-	f_git # TODO : wtf can we somehow trick nix into thinking this isn't dirty? I don't want to commit every dry-activate
 	#TODO : Don't run if dry-activate
-	if [[ "${CHOSEN_COMMAND}" = "dry-activate" ]]; then
+	if [[ $CHOSEN_COMMAND = "dry-activate" ]]; then
 		sudo nixos-rebuild dry-activate --flake "${FLAKE}"
 		exit 0;
 	fi
 	f_delhmbak
 	#f_getdiff
-	if [[ "${CHOSEN_COMMAND}" = "test" ]]; then
+	if [[ $CHOSEN_COMMAND = "test" ]]; then
 		nh os test
 		exit 0;
 	fi
 	f_setdate
 	f_nh
+	f_git
 	exit 0;
 }
 
@@ -68,10 +67,11 @@ CHOSEN_COMMAND="$1"
 
 
 for i in ${SUPPORTED_COMMANDS[@]}; do
-	if [[ "${i}" = "${CHOSEN_COMMAND}" ]]; then
+	if [[ $i = $CHOSEN_COMMAND ]]; then
 		f_main
 	fi
 done
 
 echo 'Invalid command. List of supported commands : switch | boot | test | dry-activate'
 exit 1;
+''
