@@ -71,6 +71,7 @@ f_main() {
 		exit 0;
 	fi
 	f_nh
+	echo "testing"
 
 	if [[ -z "${DONTCOMMIT}" ]]; then
 		cd "${FLAKE}"
