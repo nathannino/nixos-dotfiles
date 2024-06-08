@@ -68,7 +68,7 @@ SUPPORTED_COMMANDS=('switch' 'boot' 'test' 'dry-activate')
 CHOSEN_COMMAND="$1"
 
 
-for i in ${SUPPORTED_COMMANDS[@]}; do
+for i in "${SUPPORTED_COMMANDS[@]}"; do
 	if [[ "${i}" = "${CHOSEN_COMMAND}" ]]; then
 		f_main
 	fi
