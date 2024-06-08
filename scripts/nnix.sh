@@ -11,7 +11,7 @@ f_delhmbak() {
 	while true; do
 		f_askhmbak
 		#TODO : Break if no hmbak found
-		read -p $'Do you want to continue? (y/n)\n> ' yn
+		read -rp $'Do you want to continue? (y/n)\n> ' yn
 		case $yn in
 			[Yy]* ) echo "ok"; break;;
 			[Nn]* ) exit;;
@@ -21,10 +21,10 @@ f_delhmbak() {
 	find ~ -name \*.hmbak -type f -delete
 }
 
-f_getdiff() {
-	nixos-rebuild build --flake "${FLAKE}" && nvd diff /run/current-system result
-	unlink result
-}
+#f_getdiff() {
+#	nixos-rebuild build --flake "${FLAKE}" && nvd diff /run/current-system result
+#	unlink result
+#}
 
 f_nh() {
 	nh os "${CHOSEN_COMMAND}"
