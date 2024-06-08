@@ -44,13 +44,14 @@ f_git() {
 
 
 f_main() {
-	f_git # TODO : wtf can we somehow trick nix into thinking this isn't dirty? I don't want to commit every dry-activate
 	#TODO : Don't run if dry-activate
 	if [[ "${CHOSEN_COMMAND}" = "dry-activate" ]]; then
+		f_git # TODO : wtf can we somehow trick nix into thinking this isn't dirty? I don't want to commit every dry-activate
 		sudo nixos-rebuild dry-activate --flake "${FLAKE}"
 		exit 0;
 	fi
 	f_delhmbak
+	f_git # TODO : Still would like to have this at the end instead tbh... maybe we can delete the commit or annotate it if f_nh failed?
 	#f_getdiff
 	if [[ "${CHOSEN_COMMAND}" = "test" ]]; then
 		nh os test
