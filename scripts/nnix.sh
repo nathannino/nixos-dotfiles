@@ -66,10 +66,6 @@ f_main() {
 	cd -
 	f_git # TODO : Still would like to have this at the end instead tbh... maybe we can delete the commit or annotate it if f_nh failed?
 	#f_getdiff
-	if [[ "${CHOSEN_COMMAND}" = "test" ]]; then
-		nh os test
-		exit 0;
-	fi
 	f_nh
 	echo "testing"
 
