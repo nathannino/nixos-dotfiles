@@ -71,7 +71,7 @@ f_main() {
 
 	if [[ -z "${DONTCOMMIT}" ]]; then
 		cd "${FLAKE}"
-		git commit --append -m "${CHOSEN_COMMAND} (Success) - ${BUILD_DATE}"
+		git commit --amend -m "${CHOSEN_COMMAND} (Success) - ${BUILD_DATE}"
 		cd -
 	else
 		echo "Nothing added, not automatically commiting"
