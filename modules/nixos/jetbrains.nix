@@ -12,19 +12,19 @@ in
 
   config = lib.mkMerge 
   	[{
-		(lib.mkIf cfg.ultimate {
+		lib.mkIf cfg.ultimate {
   			environment.systemPackages = with pkgs; [
 				jetbrains.idea-ultimate
 				jetbrains.rider
 				jetbrains.clion
 				jetbrains.webstorm
 			];
-    		})
-		(lib.mkIf !cfg.ultimate {
+    		};
+		lib.mkIf !cfg.ultimate {
   			environment.systemPackages = with pkgs; [
 				jetbrains.idea-community-bin
 			];
-		})
+		};
 	}];
   };
 }
