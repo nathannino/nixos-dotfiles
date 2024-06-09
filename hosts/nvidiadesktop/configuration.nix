@@ -18,6 +18,7 @@ in
       ./.${modulespath}/godot.nix
       ./.${modulespath}/default-imports.nix
       ./.${modulespath}/blender.nix
+      ./.${modulespath}/jetbrains.nix
       #./.${modulespath}/mpd-system-borked.nix
       inputs.home-manager.nixosModules.default
     ];
@@ -32,6 +33,7 @@ in
 
   # Modules configuration
   nvidiamodule.enable = true;
+  jetbrainide.ultimate = true;
   # mpdmodule.user = "nathan_nino"; # TODO : Change username... yeah probably should find a way to change this based on the user account... =/
   # qtilemodule.configfile = ./qtilecfg.py;
   # pythoncfg.qtile.enable = true;
