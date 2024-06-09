@@ -19,12 +19,12 @@ in
 				jetbrains.clion
 				jetbrains.webstorm
 			];
-    		})
+    		});
 		(lib.mkIf !cfg.ultimate {
   			environment.systemPackages = with pkgs; [
 				jetbrains.idea-community-bin
 			];
-		})
+		});
 	];
   };
 }
