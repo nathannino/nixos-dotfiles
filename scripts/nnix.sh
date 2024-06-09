@@ -31,7 +31,7 @@ f_delhmbak() {
 #}
 
 f_gitfail() {
-	cd ${FLAKE}
+	cd "${FLAKE}"
 	git commit --amend -m "${CHOSEN_COMMAND} (Failed) - ${BUILD_DATE}"
 	cd -
 	exit 2;
