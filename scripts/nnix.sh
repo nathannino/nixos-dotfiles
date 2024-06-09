@@ -30,8 +30,15 @@ f_delhmbak() {
 #	unlink result
 #}
 
+f_gitfail() {
+	cd ${FLAKE}
+	git commit --amend -m "${CHOSEN_COMMAND} (Failed) - ${BUILD_DATE}"
+	cd -
+	exit 2;
+}
+
 f_nh() {
-	nh os "${CHOSEN_COMMAND}" || echo "wtf"
+	nh os "${CHOSEN_COMMAND}" || f_gitfail
 }
 
 BUILD_DATE=null
@@ -46,7 +53,7 @@ f_git() {
 	if git diff-index --quiet HEAD; then
 		DONTCOMMIT="y"
 	else 
-		git commit -m "${CHOSEN_COMMAND} (Failed) - ${BUILD_DATE}"
+		git commit -m "${CHOSEN_COMMAND} (Cancelled) - ${BUILD_DATE}"
 	fi
 	cd -
 }
@@ -67,7 +74,6 @@ f_main() {
 	f_git # TODO : Still would like to have this at the end instead tbh... maybe we can delete the commit or annotate it if f_nh failed?
 	#f_getdiff
 	f_nh
-	echo "testing"
 
 	if [[ -z "${DONTCOMMIT}" ]]; then
 		cd "${FLAKE}"
