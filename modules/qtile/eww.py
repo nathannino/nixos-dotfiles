@@ -4,9 +4,9 @@ import subprocess, json
 # Seperated for better reuse
 
 def eww_show_layout(_layout, _group):
-    subprocess.run("eww update showlayout=true")
+    subprocess.run("eww update showlayout=true", shell=True)
     sleep(3) # Um... is that bad?
-    subprocess.run("eww update showlayout=false")
+    subprocess.run("eww update showlayout=false", shell=True)
 
 
 def eww_update_groups():
