@@ -17,6 +17,10 @@ def hooks_set_group():
     eww_update_groups()
     eww_update_screens()
 
+@hook.subscribe.layout_change
+def layout_changed(layout, group):
+    eww_show_layout(layout, group)
+
 # Self explanatory
 @hook.subscribe.client_managed
 def client_managed(_client) :

@@ -3,6 +3,12 @@ import subprocess, json
 
 # Seperated for better reuse
 
+def eww_show_layout(_layout, _group):
+    subprocess.run("eww update showlayout=true")
+    sleep(3) # Um... is that bad?
+    subprocess.run("eww update showlayout=false")
+
+
 def eww_update_groups():
     groups_set = qtile.get_groups()
     group_array = []
