@@ -1,11 +1,12 @@
 from libqtile import qtile
 import subprocess, json
+import time
 
 # Seperated for better reuse
 
 def eww_show_layout(_layout, _group):
     subprocess.run("eww update showlayout=true", shell=True)
-    sleep(3) # Um... is that bad?
+    time.sleep(3) # Um... is that bad?
     subprocess.run("eww update showlayout=false", shell=True)
 
 
