@@ -1,4 +1,5 @@
 from libqtile import hook, qtile
+from libqtile.utils import send_notification
 from commons.eww import eww_update_groups, eww_update_screens, eww_reinit_process
 import subprocess
 
