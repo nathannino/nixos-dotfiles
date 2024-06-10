@@ -10,7 +10,7 @@ def eww_show_layout_thread(_layout,_group):
     time.sleep(3) # Um... is that bad?
     subprocess.run("eww update showlayout=false", shell=True)
 
-multiprocess = None
+global multiprocess = None
 
 def eww_show_layout(_layout, _group):
     if (multiprocess != None):
