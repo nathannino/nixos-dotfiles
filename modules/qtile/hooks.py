@@ -20,8 +20,8 @@ def hooks_set_group():
 
 @hook.subscribe.layout_change
 def layout_changed(layout, group):
-    send_notification("qtile","hello")
     eww_show_layout(layout, group)
+    eww_update_groups()
 
 # Self explanatory
 @hook.subscribe.client_managed
