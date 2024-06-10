@@ -1,23 +1,25 @@
 from libqtile import qtile
 import subprocess, json
 import time
-import multiprocessing
+import threading
 
 # Seperated for better reuse
 
-def eww_show_layout_thread(_layout,_group):
+def eww_show_layout_thread(_layout,_group,thnum):
     subprocess.run("eww update showlayout=true", shell=True)
     time.sleep(3) # Um... is that bad?
-    subprocess.run("eww update showlayout=false", shell=True)
+    global thread_number
+    if (thnum == thread_number) :
+        subprocess.run("eww update showlayout=false", shell=True)
+        thread_number = 0
 
-multiprocess = None
+thread_number = 0
 
 def eww_show_layout(_layout, _group):
-    global multiprocess
-    if (multiprocess != None):
-        multiprocess.terminate()
-    multiprocess = multiprocessing.Process(target=eww_show_layout_thread, args=(_layout,_group))
-    multiprocess.start()
+    global thread_number
+    thread_number = thread_number + 1
+    thread = threading.Thread(target=eww_show_layout_thread, args=(_layout,_group,thread_number))
+    thread.start()
 
 
 def eww_update_groups():
