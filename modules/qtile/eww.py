@@ -6,6 +6,7 @@ import threading
 # Seperated for better reuse
 
 def eww_show_layout_thread(_layout,_group,thnum):
+    time.sleep(0.1)
     subprocess.run("eww update showlayout=true", shell=True)
     time.sleep(3) # Um... is that bad?
     global thread_number
