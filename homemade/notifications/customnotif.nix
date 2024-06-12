@@ -4,6 +4,7 @@
 
 pkgs.stdenv.mkDerivation {
 	name = "customnotif";
+	version = "0.1"
 	propogatedBuildInputs = [
 		(pkgs.python311.withPackages (python-pkgs: with python-pkgs; [
 			dbus-python
@@ -13,6 +14,8 @@ pkgs.stdenv.mkDerivation {
     		pkgs.gtk4
 	];
 	dontUnpack = true;
-	installPhase = "install -Dm755 ${./customnotif.py} $out/bin/customnotif";
+	installPhase = ''
+	install -Dm755 ${./customnotif.py} $out/bin/customnotif
+	'';
 }
 
