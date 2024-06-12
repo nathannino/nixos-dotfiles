@@ -13,9 +13,13 @@ pkgs.stdenv.mkDerivation rec {
 			python311Packages.dbus-python
 			python311Packages.pygobject3
 		]))
+	];
+	buildInputs = [
     		pkgs.gobject-introspection
     		pkgs.gtk4
 	];
+
+
 	dontUnpack = true;
 	installPhase = ''
 	install -Dm755 ${./customnotif.py} $out/bin/customnotif
