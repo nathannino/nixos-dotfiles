@@ -15,9 +15,18 @@ pkgs.stdenv.mkDerivation rec {
 		]))
 	];
 	buildInputs = [
-    		pkgs.gobject-introspection
-    		pkgs.gtk4
+    		pkgs.gtk3
 	];
+	nativeBuildInputs = [
+    		pkgs.gobject-introspection
+		pkgs.wrapGAppsHook3
+	];
+
+	# Just look at the manual a few months later and you'll understand this ok. Also gnome wow
+	#dontWrapGApps = true;
+	#preFixup = ''
+	#	makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
+	#'';
 
 
 	dontUnpack = true;
