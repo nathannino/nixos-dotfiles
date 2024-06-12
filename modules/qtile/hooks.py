@@ -45,4 +45,5 @@ def startup_complete():
 
 @hook.subscribe.startup_once
 def startup_once():
-        subprocess.Popen("dunst")
+        # subprocess.Popen("dunst")
+        subprocess.Popen("n-customnotif")
