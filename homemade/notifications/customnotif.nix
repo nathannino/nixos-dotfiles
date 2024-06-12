@@ -13,6 +13,6 @@ pkgs.stdenv.mkDerivation {
     		pkgs.gtk4
 	];
 	dontUnpack = true;
-	installPhase = "install -Dm755 ${./customnotif.py} $out/bin/customnotif"
+	installPhase = "install -Dm755 ${./customnotif.py} $out/bin/customnotif";
 };
 
