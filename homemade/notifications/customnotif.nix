@@ -4,7 +4,7 @@
 
 pkgs.stdenv.mkDerivation {
 	name = "customnotif";
-	propogatedBuildINputs = [
+	propogatedBuildInputs = [
 		(pkgs.python311.withPackages (python-pkgs: with python-pkgs; [
 			dbus-python
 			pygobject3
