@@ -41,7 +41,7 @@ in
             # rofi # We using eww instead omg # ok quick update GOD NO. We are not using eww instead this is a horrible idea whyyyyyyyyy
             # wofi
             rofi-wayland # turns out this also supports xorg, I am the stupid
-	    (import ./../../notifications/customnotif.nix)
+	    (import ./../../homemade/notifications/customnotif.nix)
         ];
     };
 }
