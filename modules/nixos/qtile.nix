@@ -41,7 +41,23 @@ in
             # rofi # We using eww instead omg # ok quick update GOD NO. We are not using eww instead this is a horrible idea whyyyyyyyyy
             # wofi
             rofi-wayland # turns out this also supports xorg, I am the stupid
-	    callPackage ./../../homemade/notifications/customnotif.nix {}
+	    stdenv.mkDerivation {
+	pname = "customnotif";
+	version = "0.1";
+	src = ./.;
+	propogatedBuildInputs = [
+		(pkgs.python311.withPackages (python-pkgs: with python-pkgs; [
+			dbus-python
+			pygobject3
+		]))
+    		pkgs.gobject-introspection
+    		pkgs.gtk4
+	];
+	dontUnpack = true;
+	installPhase = ''
+	install -Dm755 ${./customnotif.py} $out/bin/customnotif
+	'';
+}
         ];
     };
 }
