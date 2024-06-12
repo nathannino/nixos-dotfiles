@@ -18,6 +18,7 @@
   let
     system = "x68_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    pkgs-stable = nixpkgs-stable.legacyPackages.${system}
   in
   {
     nixosConfigurations = {

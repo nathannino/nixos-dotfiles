@@ -8,7 +8,7 @@ python311Packages.buildPythonApplication rec {
 	format = "other";
 	src = ./.;
 
-	propogatedBuildInputs = [
+	propagatedBuildInputs = [
 		python311Packages.dbus-python
 		python311Packages.pygobject3
     		pkgs.gobject-introspection

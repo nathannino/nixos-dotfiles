@@ -34,6 +34,10 @@ in
       };
 
       # services.picom.enable = true;
+	
+	nixpkgs.config.packageOverrides = pkgs: {
+		customnotif = pkgs.callPackage ./../../homemade/notifications/customnotif.nix { };
+	};
 
         environment.systemPackages = with pkgs; [
             eww #TODO : Maybe this could be seperated... not sure
