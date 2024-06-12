@@ -2,15 +2,17 @@
 
 # Technically, I should be using buildPythonPackage or buildPythonApplication, but I don't want to setup the required file to make a pip package, soo....
 
-python311Packages.buildPythonApplication rec {
+pkgs.stdenv.mkDerivation rec {
 	pname = "customnotif";
-	version = "0.1";
+	version = "0.2";
 	format = "other";
 	src = ./.;
 
 	propagatedBuildInputs = [
-		python311Packages.dbus-python
-		python311Packages.pygobject3
+		(pkgs.python311.withPackages (pythonPackages: with pythonPackages; [
+			python311Packages.dbus-python
+			python311Packages.pygobject3
+		]))
     		pkgs.gobject-introspection
     		pkgs.gtk4
 	];
