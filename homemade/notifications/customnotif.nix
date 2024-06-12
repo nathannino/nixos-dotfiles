@@ -1,9 +1,9 @@
-# Technically, I should be using buildPythonPackage or buildPythonApplication, but I don't want to setup the required file to make a pip package, soo....
 
+# Technically, I should be using buildPythonPackage or buildPythonApplication, but I don't want to setup the required file to make a pip package, soo....
 let
-	pkgs = import <nixpkgs> {};
+	pkgs = nixpkgs
 in
-pkgs.stdenv.mkDerivation rec {
+pkgs.stdenv.mkDerivation {
 	name = "customnotif";
 	propogatedBuildInputs = [
 		(pkgs.python311.withPackages (python-pkgs: with python-pkgs; [
