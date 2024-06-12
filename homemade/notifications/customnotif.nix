@@ -14,5 +14,5 @@ pkgs.stdenv.mkDerivation {
 	];
 	dontUnpack = true;
 	installPhase = "install -Dm755 ${./customnotif.py} $out/bin/customnotif";
-};
+}
 
