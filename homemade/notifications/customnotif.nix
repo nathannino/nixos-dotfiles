@@ -4,7 +4,7 @@
 
 pkgs.stdenv.mkDerivation rec {
 	pname = "customnotif";
-	version = "0.2";
+	version = "0.3";
 	format = "other";
 	src = ./.;
 
