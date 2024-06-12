@@ -1,7 +1,7 @@
 
 # Technically, I should be using buildPythonPackage or buildPythonApplication, but I don't want to setup the required file to make a pip package, soo....
 let
-	pkgs = nixpkgs
+	pkgs = nixpkgs;
 in
 pkgs.stdenv.mkDerivation {
 	name = "customnotif";
