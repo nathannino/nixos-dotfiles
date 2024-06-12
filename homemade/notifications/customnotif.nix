@@ -31,7 +31,7 @@ pkgs.stdenv.mkDerivation rec {
 
 	dontUnpack = true;
 	installPhase = ''
-	install -Dm755 ${./customnotif.py} $out/bin/customnotif
+	install -Dm755 ${./customnotif.py} $out/bin/n-customnotif
 	'';
 }
 
