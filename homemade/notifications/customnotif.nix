@@ -1,6 +1,7 @@
 {lib, pkgs, python311Packages }
 
 # Technically, I should be using buildPythonPackage or buildPythonApplication, but I don't want to setup the required file to make a pip package, soo....
+{
 pkgs.stdenv.mkDerivation {
 	name = "customnotif";
 	propogatedBuildINputs = [
@@ -13,4 +14,5 @@ pkgs.stdenv.mkDerivation {
 	];
 	dontUnpack = true;
 	installPhase = "install -Dm755 ${./customnotif.py} $out/bin/customnotif"
-}; 
+};
+}
