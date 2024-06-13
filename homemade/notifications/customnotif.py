@@ -14,6 +14,7 @@ import os
 import subprocess
 import re
 import queue
+import textwrap
 
 pipe_dir = os.environ['XDG_RUNTIME_DIR']; # Potential to throw an error TODO : Try catch or something idk
 pipe_input_file = pipe_dir + "/customnotif-input"
@@ -42,6 +43,10 @@ def kill_handler(*args):
 
 escapechars=r'([\n\t\r\b\f])'
 
+app_title_max_length = 50
+summary_max_length = 50
+body_max_length = 100
+
 class Notification:
     def __init__(self, app_name, summary, body, icon): # I don't know why I am keeping the non-json part tbh
         self.app_name = app_name
@@ -49,10 +54,10 @@ class Notification:
         self.body = body
         self.icon = icon # TODO : Generate icon for programs with icon data in hints
         self.json = {
-                "app_name"  : app_name,
-                "summary"   : summary,
-                "body"      : body,
-                "icon"      : icon
+                "app_name"  : "\n".join(textwrap.wrap(app_name,width=app_title_max_length)),
+                "summary"   : "\n".join(textwrap.wrap(summary,width=summary_max_length)),
+                "body"      : "\n".join(textwrap.wrap(body,width=body_max_length)),
+                "icon"      : icon,
         }
         self.jsonticker = {
                 "app_name"  : app_name.encode('unicode_escape').decode().replace("\\","⧹"),
@@ -146,6 +151,7 @@ def send_ticker():
 #     for item in notifications:
 #         string = string + f"{item}"
 #     print(string, flush=True)
+
 
 class NotificationServer(dbus.service.Object):
     def __init__(self):
