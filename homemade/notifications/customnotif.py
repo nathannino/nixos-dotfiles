@@ -57,6 +57,7 @@ class Notification:
                 "app_name"  : "\n".join(textwrap.wrap(app_name,width=app_title_max_length)),
                 "summary"   : "\n".join(textwrap.wrap(summary,width=summary_max_length)),
                 "body"      : "\n".join(textwrap.wrap(body,width=body_max_length)),
+                "timestamp" : "{:%Y-%b-%d %H:%M}".format(datetime.datetime.now())
                 "icon"      : icon,
         }
         self.jsonticker = {
@@ -166,7 +167,7 @@ class NotificationServer(dbus.service.Object):
         #print("  App Icon:", app_icon)
         #print("  Summary:", summary)
         #print("  Body:", body)
-        #print("  Actions:", actions)
+        print("  Actions:", actions)
         # print("  Hints:", hints) # TODO : Parse image data when required : Discord most likely
         #print("  Timeout:", timeout)
         #print("Hi!")
