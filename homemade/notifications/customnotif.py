@@ -15,6 +15,7 @@ import subprocess
 import re
 import queue
 import textwrap
+import datetime
 
 pipe_dir = os.environ['XDG_RUNTIME_DIR']; # Potential to throw an error TODO : Try catch or something idk
 pipe_input_file = pipe_dir + "/customnotif-input"
@@ -57,7 +58,7 @@ class Notification:
                 "app_name"  : "\n".join(textwrap.wrap(app_name,width=app_title_max_length)),
                 "summary"   : "\n".join(textwrap.wrap(summary,width=summary_max_length)),
                 "body"      : "\n".join(textwrap.wrap(body,width=body_max_length)),
-                "timestamp" : "{:%Y-%b-%d %H:%M}".format(datetime.datetime.now())
+                "timestamp" : "{:%Y-%b-%d %H:%M}".format(datetime.datetime.now()),
                 "icon"      : icon,
         }
         self.jsonticker = {
