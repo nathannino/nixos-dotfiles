@@ -13,6 +13,7 @@ import atexit
 import os
 import subprocess
 import re
+import queue
 
 pipe_dir = os.environ['XDG_RUNTIME_DIR']; # Potential to throw an error TODO : Try catch or something idk
 pipe_input_file = pipe_dir + "/customnotif-input"
@@ -64,6 +65,8 @@ notifications = []
 notification_ticker_int = 0
 notification_ticker_name = ["notificationone","notificationtwo"]
 
+taskq = queue.Queue()
+
 no_new_threads = False
 
 def start_thread():
@@ -92,11 +95,15 @@ def add_object(notif):
     notifications_popup.append(notif.jsonticker)
     notifications.append(notif.json)
     start_thread()
-    print_state()
+    taskq.put(notif)
+
 
 def print_state():
-    with open(pipe_output_file, "w") as pipe:
-        pipe.write(json.dumps(notifications))
+    while True:
+        _notif = taskq.get()
+        with open(pipe_output_file, "w") as pipe:
+            pipe.write(json.dumps(notifications))
+        taskq.task_done() # Unecessary, but why not tbh
 
 # TODO :
 # [X] Make notification ticker switch between 2 notifications with an animation
@@ -183,6 +190,8 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, kill_handler)
     signal.signal(signal.SIGTERM, kill_handler)
     setup_output_pipe()
+    output_thread = threading.Thread(target=print_state,)
+    output_thread.start()
     server = NotificationServer()
     setup_pipe_thread()
     mainloop = GLib.MainLoop()
