@@ -16,12 +16,24 @@ import re
 import queue
 import textwrap
 import datetime
+import uuid
+
+
+notifications_popup = []
+notifications = []
+notification_ticker_int = 0
+notification_ticker_name = ["notificationone","notificationtwo"]
+
+taskq = queue.Queue()
+
+
 
 pipe_dir = os.environ['XDG_RUNTIME_DIR']; # Potential to throw an error TODO : Try catch or something idk
 pipe_input_file = pipe_dir + "/customnotif-input"
 pipe_output_file = pipe_dir + "/customnotif-output"
 
 def setup_pipe():
+    global notifications
     try :
         os.mkfifo(pipe_input_file)
     except FileExistsError :
@@ -30,7 +42,22 @@ def setup_pipe():
     while True:
         with open(pipe_input_file, "r") as pipe:
             for line in pipe:
-                print(line)
+                try :
+                    command = line.split()
+                    match command[0]:
+                        case "clear-all" :
+                            notifications = []
+                            taskq.put(None)
+                        case "refresh" :
+                            taskq.put(None)
+                        case "clear" :
+                            notifuuid = command[1]
+                            notifications = list(filter(lambda noti: noti["uuid"] != notifuuid,notifications))
+                            taskq.put(None)
+
+                
+                except IndexError:
+                    print("Invalid format oh no :shrug:") # We won't see this, it's just to make sure nothing crashes.
 
 
 def exit_handler():
@@ -60,19 +87,13 @@ class Notification:
                 "body"      : "\n".join(textwrap.wrap(body,width=body_max_length)),
                 "timestamp" : "{:%Y-%b-%d %H:%M}".format(datetime.datetime.now()),
                 "icon"      : icon,
+                "uuid"      : str(uuid.uuid1())
         }
         self.jsonticker = {
                 "app_name"  : app_name.encode('unicode_escape').decode().replace("\\","⧹"),
                 "summary"   : summary.encode('unicode_escape').decode().replace("\\","⧹"),
                 "body"      : body.encode('unicode_escape').decode().replace("\\","⧹"),
         }
-
-notifications_popup = []
-notifications = []
-notification_ticker_int = 0
-notification_ticker_name = ["notificationone","notificationtwo"]
-
-taskq = queue.Queue()
 
 no_new_threads = False
 

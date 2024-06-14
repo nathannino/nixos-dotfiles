@@ -21,7 +21,7 @@
             unar
             nil
             mpv
-            dunst
+            # dunst (Replaced by custom package, see qtile.nix)
             libnotify
 	    nix-output-monitor
 	    nvd
