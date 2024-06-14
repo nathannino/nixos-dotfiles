@@ -24,8 +24,6 @@ notifications = []
 notification_ticker_int = 0
 notification_ticker_name = ["notificationone","notificationtwo"]
 
-taskq = queue.Queue()
-
 
 
 pipe_dir = os.environ['XDG_RUNTIME_DIR']; # Potential to throw an error TODO : Try catch or something idk
@@ -47,13 +45,13 @@ def setup_pipe():
                     match command[0]:
                         case "clear-all" :
                             notifications = []
-                            taskq.put(None)
+                            print_state()
                         case "refresh" :
-                            taskq.put(None)
+                            print_state()
                         case "clear" :
                             notifuuid = command[1]
                             notifications = list(filter(lambda noti: noti["uuid"] != notifuuid,notifications))
-                            taskq.put(None)
+                            print_state()
 
                 
                 except IndexError:
@@ -123,15 +121,12 @@ def add_object(notif):
     notifications_popup.append(notif.jsonticker)
     notifications.insert(0,notif.json)
     start_thread()
-    taskq.put(notif)
+    print_state()
 
 
 # This used to be a named pipe, but was too unreliable. Why didn't I think of just running eww update lol. The logic should still work with a queue, but the right thing to do would be to... TODO : Remove queue and thread
 def print_state():
-    while True:
-        _notif = taskq.get()
-        subprocess.run("eww update notifs=\'"+json.dumps(notifications)+"\'", shell=True)
-        taskq.task_done() # Unecessary, but why not tbh
+    subprocess.run("eww update notifs=\'"+json.dumps(notifications)+"\'", shell=True)
 
 # TODO :
 # [X] Make notification ticker switch between 2 notifications with an animation
