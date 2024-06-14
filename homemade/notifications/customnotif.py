@@ -121,7 +121,7 @@ def wait_object():
 
 def add_object(notif):
     notifications_popup.append(notif.jsonticker)
-    notifications.append(notif.json)
+    notifications.insert(0,notif.json)
     start_thread()
     taskq.put(notif)
 
