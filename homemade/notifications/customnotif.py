@@ -126,16 +126,16 @@ def add_object(notif):
     taskq.put(notif)
 
 
+# This used to be a named pipe, but was too unreliable. Why didn't I think of just running eww update lol. The logic should still work with a queue, but the right thing to do would be to... TODO : Remove queue and thread
 def print_state():
     while True:
         _notif = taskq.get()
-        with open(pipe_output_file, "w") as pipe:
-            pipe.write(json.dumps(notifications))
+        subprocess.run("eww update notifs=\'"+json.dumps(notifications)+"\'", shell=True)
         taskq.task_done() # Unecessary, but why not tbh
 
 # TODO :
 # [X] Make notification ticker switch between 2 notifications with an animation
-# [ ] Escape special characters
+# [?] Escape special characters
 def send_ticker():
     global notification_ticker_int
     global notifications_popup
