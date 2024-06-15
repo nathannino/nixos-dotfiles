@@ -149,7 +149,7 @@ def add_object(notif):
 
 # This used to be a named pipe, but was too unreliable. Why didn't I think of just running eww update lol. The logic should still work with a queue, but the right thing to do would be to... TODO : Remove queue and thread
 def print_state():
-    subprocess.run("eww update notifs=\'"+json.dumps(notifications)+"\'", shell=True)
+    subprocess.Popen("eww update notifs=\'"+json.dumps(notifications)+"\'", shell=True)
 
 # TODO :
 # [X] Make notification ticker switch between 2 notifications with an animation
@@ -163,8 +163,6 @@ def send_ticker():
         return
     
     subprocess.run("eww update notificationticker=true", shell=True)
-
-    print(json.dumps(notifications_popup[0]))
 
     subprocess.run("eww update notificationtickerint="+str(notification_ticker_int), shell=True)
     subprocess.run("eww update " + notification_ticker_name[notification_ticker_int] + "=\'" + json.dumps(notifications_popup[0]) +"\'", shell=True)
@@ -207,8 +205,8 @@ class NotificationServer(dbus.service.Object):
         #print("  App Icon:", app_icon)
         #print("  Summary:", summary)
         #print("  Body:", body)
-        print("  Actions:", actions)
-        # print("  Hints:", hints) # TODO : Parse image data when required : Discord most likely
+        #print("  Actions:", actions)
+        print("  Hints:", hints) # TODO : Parse image data when required : Discord most likely
         #print("  Timeout:", timeout)
         #print("Hi!")
         add_object(Notification(app_name, summary, body, app_icon))
