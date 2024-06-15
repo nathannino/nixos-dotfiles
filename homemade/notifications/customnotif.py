@@ -24,11 +24,31 @@ notifications = []
 notification_ticker_int = 0
 notification_ticker_name = ["notificationone","notificationtwo"]
 
-
+unread = "0"
 
 pipe_dir = os.environ['XDG_RUNTIME_DIR']; # Potential to throw an error TODO : Try catch or something idk
 pipe_input_file = pipe_dir + "/customnotif-input"
 pipe_output_file = pipe_dir + "/customnotif-output"
+
+def setunread(newunread):
+    global unread
+    unread = newunread
+    subprocess.run("eww update \'notificationunread=" + unread + "\'", shell=True)
+
+def resetunread():
+    setunread("0")
+
+def incrementunread():
+    global unread
+    if (unread == "9+" or unread == "NaN"):
+        return
+    if (unread == "9"):
+        setunread("9+")
+        return
+    try :
+        setunread(str(int(unread)+1))
+    except ValueError:
+        setunread("NaN")
 
 def setup_pipe():
     global notifications
@@ -48,6 +68,8 @@ def setup_pipe():
                             print_state()
                         case "refresh" :
                             print_state()
+                        case "read" :
+                            resetunread()
                         case "clear" :
                             notifuuid = command[1]
                             notifications = list(filter(lambda noti: noti["uuid"] != notifuuid,notifications))
@@ -122,6 +144,7 @@ def add_object(notif):
     notifications.insert(0,notif.json)
     start_thread()
     print_state()
+    incrementunread()
 
 
 # This used to be a named pipe, but was too unreliable. Why didn't I think of just running eww update lol. The logic should still work with a queue, but the right thing to do would be to... TODO : Remove queue and thread
