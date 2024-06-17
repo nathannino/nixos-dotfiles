@@ -188,7 +188,7 @@ def send_ticker():
 #    print(fr"""(box :orientation 'vertical' {string or ''})""", flush=True)
 
 # def print_state():
-#     string = ""
+#     string = "".replace("'","'\"'\"'")
 #     for item in notifications:
 #         string = string + f"{item}"
 #     print(string, flush=True)
@@ -204,11 +204,12 @@ class NotificationServer(dbus.service.Object):
         #print("Received Notification:")
         #print("  App Name:", app_name)
         #print("  Replaces ID:", replaces_id)
-        #print("  App Icon:", app_icon)
+        print("  App Icon:", app_icon)
         #print("  Summary:", summary)
         #print("  Body:", body)
         #print("  Actions:", actions)
         print("  Hints:", hints) # TODO : Parse image data when required : Discord most likely
+        print("  Urgency: " + str(hints.get("sender-pid")))
         #print("  Timeout:", timeout)
         #print("Hi!")
         add_object(Notification(app_name, summary, body, app_icon))
