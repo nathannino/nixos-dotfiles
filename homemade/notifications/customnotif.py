@@ -11,6 +11,7 @@ import sys
 import signal
 import atexit
 import os
+import os.path
 import subprocess
 import re
 import queue
@@ -94,17 +95,17 @@ escapechars=r'([\n\t\r\b\f])'
 app_title_max_length = 50
 summary_max_length = 50
 body_max_length = 100
+body_max_length_image = 75
 
 class Notification:
     def __init__(self, app_name, summary, body, icon): # I don't know why I am keeping the non-json part tbh
-        self.app_name = app_name
-        self.summary = summary
-        self.body = body
-        self.icon = icon # TODO : Generate icon for programs with icon data in hints
+        true_body_max_length = body_max_length
+        if (icon is not None) :
+            true_body_max_length = body_max_length_image
         self.json = {
                 "app_name"  : "\n".join(textwrap.wrap(app_name,width=app_title_max_length)),
                 "summary"   : "\n".join(textwrap.wrap(summary,width=summary_max_length)),
-                "body"      : "\n".join(textwrap.wrap(body,width=body_max_length)),
+                "body"      : "\n".join(textwrap.wrap(body,width=true_body_max_length)),
                 "timestamp" : "{:%Y-%b-%d %H:%M}".format(datetime.datetime.now()),
                 "icon"      : icon,
                 "uuid"      : str(uuid.uuid1())
@@ -204,15 +205,20 @@ class NotificationServer(dbus.service.Object):
         #print("Received Notification:")
         #print("  App Name:", app_name)
         #print("  Replaces ID:", replaces_id)
-        print("  App Icon:", app_icon)
         #print("  Summary:", summary)
         #print("  Body:", body)
         #print("  Actions:", actions)
-        print("  Hints:", hints) # TODO : Parse image data when required : Discord most likely
-        print("  Urgency: " + str(hints.get("sender-pid")))
+        #print("  Hints:", hints) # TODO : Parse image data when required : Discord most likely
+        print("  sender-pid: " + str(hints.get("sender-pid")))
         #print("  Timeout:", timeout)
         #print("Hi!")
-        add_object(Notification(app_name, summary, body, app_icon))
+        app_icon_true = None
+        if (os.path.isfile(app_icon)) :
+            app_icon_true = app_icon
+        else :
+            print("  App Icon:", app_icon)
+
+        add_object(Notification(app_name, summary, body, app_icon_true))
         return 0
 
     @dbus.service.method('org.freedesktop.Notifications', out_signature='ssss')
