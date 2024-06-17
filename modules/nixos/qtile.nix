@@ -46,6 +46,7 @@ in
             # wofi
             rofi-wayland # turns out this also supports xorg, I am the stupid
 	    customnotif
+	    networkmanagerapplet
         ];
     };
 }

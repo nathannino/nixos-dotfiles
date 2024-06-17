@@ -25,7 +25,6 @@
             libnotify
 	    nix-output-monitor
 	    nvd
-	    networkmanagerapplet
         ];
     };
 }
