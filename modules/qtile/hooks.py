@@ -1,7 +1,7 @@
 from libqtile import hook, qtile
 from libqtile.utils import send_notification
 from commons.eww import eww_update_groups, eww_update_screens, eww_reinit_process, eww_show_layout
-import subprocess
+import subprocess, shutil
 
 #updates
 
@@ -47,4 +47,4 @@ def startup_complete():
 def startup_once():
         # subprocess.Popen("dunst")
         subprocess.Popen("n-customnotif")
-        subprocess.Popen("nm-applet")
+        subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
