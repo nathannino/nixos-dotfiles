@@ -47,4 +47,4 @@ def startup_complete():
 def startup_once():
         # subprocess.Popen("dunst")
         subprocess.Popen("n-customnotif")
-        subprocess.Popen("sleep 5 && nm-applet --indicator", shell=True)
+        subprocess.Popen("nm-applet")
