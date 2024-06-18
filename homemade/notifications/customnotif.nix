@@ -12,6 +12,7 @@ pkgs.stdenv.mkDerivation rec {
 		(pkgs.python311.withPackages (pythonPackages: with pythonPackages; [
 			python311Packages.dbus-python
 			python311Packages.pygobject3
+			python311Packages.pypng
 		]))
 	];
 	buildInputs = [

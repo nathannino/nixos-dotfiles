@@ -10,6 +10,7 @@ in pkgs.mkShell {
       python-pkgs.dbus-python
       python-pkgs.pygobject3
       python-pkgs.jedi-language-server
+      python-pkgs.pypng
     ]))
     pkgs.gobject-introspection
     pkgs.gtk4

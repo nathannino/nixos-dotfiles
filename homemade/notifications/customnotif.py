@@ -18,6 +18,8 @@ import queue
 import textwrap
 import datetime
 import uuid
+import png
+import shutil
 
 
 notifications_popup = []
@@ -26,6 +28,9 @@ notification_ticker_int = 0
 notification_ticker_name = ["notificationone","notificationtwo"]
 
 unread = "0"
+
+homedir = os.environ['HOME']
+filedir = homedir+"/.cache/ncustomnotif"
 
 pipe_dir = os.environ['XDG_RUNTIME_DIR']; # Potential to throw an error TODO : Try catch or something idk
 pipe_input_file = pipe_dir + "/customnotif-input"
@@ -51,6 +56,11 @@ def incrementunread():
     except ValueError:
         setunread("NaN")
 
+def removefile(fileuuid):
+    notiffilepath = filedir+"/"+fileuuid+".png"
+    if (os.path.isfile(notiffilepath)) :
+        os.remove(notiffilepath)
+
 def setup_pipe():
     global notifications
     try :
@@ -74,6 +84,7 @@ def setup_pipe():
                         case "clear" :
                             notifuuid = command[1]
                             notifications = list(filter(lambda noti: noti["uuid"] != notifuuid,notifications))
+                            removefile(notifuuid)
                             print_state()
 
                 
@@ -98,7 +109,7 @@ body_max_length = 100
 body_max_length_image = 75
 
 class Notification:
-    def __init__(self, app_name, summary, body, icon): # I don't know why I am keeping the non-json part tbh
+    def __init__(self, app_name, summary, body, icon, uuidstr): # I don't know why I am keeping the non-json part tbh
         true_body_max_length = body_max_length
         if (icon is not None) :
             true_body_max_length = body_max_length_image
@@ -108,7 +119,7 @@ class Notification:
                 "body"      : "\n".join(textwrap.wrap(body,width=true_body_max_length)),
                 "timestamp" : "{:%Y-%b-%d %H:%M}".format(datetime.datetime.now()),
                 "icon"      : icon,
-                "uuid"      : str(uuid.uuid1())
+                "uuid"      : uuidstr
         }
         self.jsonticker = {
                 "app_name"  : app_name.encode('unicode_escape').decode().replace("\\","⧹"),
@@ -195,6 +206,51 @@ def send_ticker():
 #     print(string, flush=True)
 
 
+# =========[ Image generation =D ]============
+
+# [ I don't know what the license for this piece of text is, but it came from https://specifications.freedesktop.org/notification-spec/notification-spec-latest.html ] (2024-06-17)
+# The "image-data" and "icon-data" hints should be a DBus structure of signature iiibiiay. The components of this structure are as follows dbus.Struct(
+# 1. width : Width of the image in pixels (Ex : dbus.Int32(160))
+# 2. height : Height of the image in pixels (Ex: dbus.Int32(160))
+# 3. rowstride : Distance in bytes between row starts (Ex: dbus.Int32(640))
+# 4. has_alpha : Whether the image has an alpha channel (Ex: dbus.Boolean(True))
+# 5. bits_per_sample : Must always be 8 (Ex: dbus.Int32(8))
+# 6. channels : if has_alpha is True, must be 4, otherwise 3 (Ex: dbus.Int32(4))
+# 7. data : The image data, in RGB byte order (dbus.Array([dbus.Byte(90)...]))
+# )
+
+# As for us, we are going to generate a png file uising
+def generateimage(imagedata, uuid):
+    if (len(imagedata) == 7) :
+        if (int(imagedata[4]) != 8):
+            print("bad bits")
+            return None
+        width = int(imagedata[0])
+        height = int(imagedata[1])
+        rowstride = int(imagedata[2])
+        has_alpha = bool(imagedata[3])
+        if ((has_alpha and int(imagedata[5]) != 4) or (not has_alpha and int(imagedata[5]) != 3)):
+            print("bad channel")
+            return None
+        try :
+            imagedataarray = []
+            for x in range(height) :
+                imagedataarraytwo = []
+                for y in range(rowstride) :
+                    byteindex = x*rowstride+y
+                    imagedataarraytwo.append(imagedata[6][byteindex])
+                imagedataarray.append(imagedataarraytwo)
+            pngpathfile = filedir + "/" + uuid + ".png"
+            png.from_array(imagedataarray,mode="RGBA",info={"bitdepth":8}).save(pngpathfile)
+            return pngpathfile
+        except Exception as e :
+            print(str(e))
+    else :
+        print("no")
+    return None
+
+# ============================================
+
 class NotificationServer(dbus.service.Object):
     def __init__(self):
         bus_name = dbus.service.BusName('org.freedesktop.Notifications', bus=dbus.SessionBus())
@@ -208,17 +264,22 @@ class NotificationServer(dbus.service.Object):
         #print("  Summary:", summary)
         #print("  Body:", body)
         #print("  Actions:", actions)
-        #print("  Hints:", hints) # TODO : Parse image data when required : Discord most likely
-        print("  sender-pid: " + str(hints.get("sender-pid")))
+        # print("  Hints:", hints) # TODO : Parse image data when required : Discord most likely
+        #print("  sender-pid: " + str(hints.get("sender-pid")))
         #print("  Timeout:", timeout)
         #print("Hi!")
         app_icon_true = None
+        notifssh = str(uuid.uuid1())
         if (os.path.isfile(app_icon)) :
             app_icon_true = app_icon
         else :
-            print("  App Icon:", app_icon)
+            imagedata = hints.get("image-data")
+            if (imagedata is not None) :
+                app_icon_true = generateimage(imagedata, notifssh)
+            else :
+                print("no images")
 
-        add_object(Notification(app_name, summary, body, app_icon_true))
+        add_object(Notification(app_name, summary, body, app_icon_true, notifssh))
         return 0
 
     @dbus.service.method('org.freedesktop.Notifications', out_signature='ssss')
@@ -228,7 +289,6 @@ class NotificationServer(dbus.service.Object):
 DBusGMainLoop(set_as_default=True)
 
 def setup_pipe_thread():
-    print("testing")
     thread = threading.Thread(target=setup_pipe)
     thread.start()
 
@@ -239,7 +299,16 @@ def setup_output_pipe():
         os.remove(pipe_output_file)
         os.mkfifo(pipe_output_file)
 
+def setup_filedir():
+    if (os.path.isdir(filedir)) :
+        shutil.rmtree(filedir)
+    elif (os.path.exists(filedir)) :
+        raise Exception
+    os.makedirs(filedir)
+
+
 if __name__ == '__main__':
+    setup_filedir()
     atexit.register(exit_handler)
     signal.signal(signal.SIGINT, kill_handler)
     signal.signal(signal.SIGTERM, kill_handler)
