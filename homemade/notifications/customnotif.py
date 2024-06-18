@@ -36,6 +36,14 @@ pipe_dir = os.environ['XDG_RUNTIME_DIR']; # Potential to throw an error TODO : T
 pipe_input_file = pipe_dir + "/customnotif-input"
 pipe_output_file = pipe_dir + "/customnotif-output"
 
+
+def setup_filedir():
+    if (os.path.isdir(filedir)) :
+        shutil.rmtree(filedir)
+    elif (os.path.exists(filedir)) :
+        raise Exception
+    os.makedirs(filedir)
+
 def setunread(newunread):
     global unread
     unread = newunread
@@ -76,6 +84,7 @@ def setup_pipe():
                     match command[0]:
                         case "clear-all" :
                             notifications = []
+                            setup_filedir()
                             print_state()
                         case "refresh" :
                             print_state()
@@ -219,7 +228,7 @@ def send_ticker():
 # 7. data : The image data, in RGB byte order (dbus.Array([dbus.Byte(90)...]))
 # )
 
-# As for us, we are going to generate a png file uising
+# As for us, we are going to generate a png file using pypng. We are going to do it as badly as needed, because this is meant for me alone tbh, so it can be as spagetti code as needed ;)
 def generateimage(imagedata, uuid):
     if (len(imagedata) == 7) :
         if (int(imagedata[4]) != 8):
@@ -229,6 +238,9 @@ def generateimage(imagedata, uuid):
         height = int(imagedata[1])
         rowstride = int(imagedata[2])
         has_alpha = bool(imagedata[3])
+        pngmode = "RGB"
+        if (has_alpha) :
+            pngmode = "RGBA"
         if ((has_alpha and int(imagedata[5]) != 4) or (not has_alpha and int(imagedata[5]) != 3)):
             print("bad channel")
             return None
@@ -241,12 +253,13 @@ def generateimage(imagedata, uuid):
                     imagedataarraytwo.append(imagedata[6][byteindex])
                 imagedataarray.append(imagedataarraytwo)
             pngpathfile = filedir + "/" + uuid + ".png"
-            png.from_array(imagedataarray,mode="RGBA",info={"bitdepth":8}).save(pngpathfile)
+
+            png.from_array(imagedataarray,mode=pngmode,info={"bitdepth":8}).save(pngpathfile)
             return pngpathfile
         except Exception as e :
-            print(str(e))
+            print(str(e)) # It's horrible, but I would rather have the exception be printed on my console then it being sent back to the notification
     else :
-        print("no")
+        print("Bad image data")
     return None
 
 # ============================================
@@ -298,13 +311,6 @@ def setup_output_pipe():
     except FileExistsError :
         os.remove(pipe_output_file)
         os.mkfifo(pipe_output_file)
-
-def setup_filedir():
-    if (os.path.isdir(filedir)) :
-        shutil.rmtree(filedir)
-    elif (os.path.exists(filedir)) :
-        raise Exception
-    os.makedirs(filedir)
 
 
 if __name__ == '__main__':
