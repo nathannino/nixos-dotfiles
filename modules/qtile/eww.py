@@ -28,7 +28,12 @@ def eww_update_groups():
     group_array = []
     for group in groups_set:
         groupset = groups_set[group]
-        group_dict = {'name': groupset['name'],'label' : groupset['label'], 'windows' : groupset['windows'], 'focus' : groupset['focus'], 'screen' : groupset['screen'], 'layout' : groupset['layout']};
+
+        istiled = False
+
+        if (len(groupset['tiled_windows']) != 0) : istiled = True
+
+        group_dict = {'name': groupset['name'],'label' : groupset['label'], 'windows' : groupset['windows'], 'focus' : groupset['focus'], 'screen' : groupset['screen'], 'layout' : groupset['layout'], 'isfull' : istiled};
         group_array.append(group_dict)
     
     subprocess.run("eww update groups=\'" + json.dumps(group_array) + "\'",shell=True)
