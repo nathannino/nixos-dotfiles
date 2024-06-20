@@ -36,7 +36,7 @@ def eww_update_groups():
         group_dict = {'name': groupset['name'],'label' : groupset['label'], 'windows' : groupset['windows'], 'focus' : groupset['focus'], 'screen' : groupset['screen'], 'layout' : groupset['layout'], 'isfull' : istiled};
         group_array.append(group_dict)
     
-    subprocess.run("eww update groups=\'" + json.dumps(group_array) + "\'",shell=True)
+    subprocess.run("eww update groups=\'" + json.dumps(group_array).replace("'","'\"'\"'") + "\'",shell=True)
 
 def eww_update_screens():
     subprocess.run("eww update currentscreen=\'" + json.dumps(qtile.current_screen.info()) + "\'", shell=True)
