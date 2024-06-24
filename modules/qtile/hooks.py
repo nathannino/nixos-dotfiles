@@ -1,7 +1,7 @@
 from libqtile import hook, qtile
 from libqtile.utils import send_notification
 from commons.eww import eww_update_groups, eww_update_screens, eww_reinit_process, eww_show_layout
-import subprocess, shutil
+import subprocess, shutil, os, signal
 
 #updates
 
@@ -58,13 +58,24 @@ def shutdown_process(popen, terminate) :
         else :
             popen.kill()
 
+def shutdown_processgroup(popen, terminate) :
+    if (popen is None) :
+        return
+
+    if (popen.poll() is None) :
+        if (terminate) :
+            os.killpg(os.getpgid(popen.pid), signal.SIGTERM)
+        else :
+            os.killpg(os.getpgid(popen.pid), signal.SIGKILL)
+
+
 @hook.subscribe.shutdown
 def shutdown_qtile():
     global notificationsdaemon
     global networkmanager_applet
     global compositor_process
 
-    shutdown_process(notificationsdaemon, false)
+    shutdown_processgroup(notificationsdaemon, false)
     shutdown_process(networkmanager_applet, true)
     shutdown_process(compositor_process, true)
 
@@ -80,5 +91,5 @@ def startup_once():
             print("unsupported") # Replace with something idk
 
         # subprocess.Popen("dunst")
-        notificationsdaemon = subprocess.Popen(shutil.which("n-customnotif"))
+        notificationsdaemon = subprocess.Popen(shutil.which("n-customnotif"), shell=True, preexec_fn=os.setsid)
         networkmanager_applet = subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
