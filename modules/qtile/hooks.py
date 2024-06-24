@@ -43,8 +43,18 @@ def startup_complete():
     eww_reinit_process()
     eww_update_screens()
 
+notificationsdaemon = None
+
+@hook.subscribe.shutdown
+def shutdown_qtile():
+    global notificationsdaemon
+    if notificationdaemon is not None :
+        if notificationdaemon.poll() is not None:
+            notificationdaemon.kill()
+
 @hook.subscribe.startup_once
 def startup_once():
+        global notificationsdaemon
         # subprocess.Popen("dunst")
-        subprocess.Popen("n-customnotif")
+        notificationsdaemon = subprocess.Popen("n-customnotif")
         subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
