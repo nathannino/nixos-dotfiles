@@ -31,6 +31,7 @@ from commons.keys import keys, mouse
 from commons.groupsnlayouts import groups, layouts
 from commons.variables import *
 import commons.hooks
+import shutil
 
 import subprocess
 
@@ -61,9 +62,4 @@ screens = [
         top = bar.Gap(35),
     ),
 ]
-
-@hook.subscribe.startup_once
-def autostart():
-    if (qtile.core.name == "x11"):
-        subprocess.Popen(["picom"])
 

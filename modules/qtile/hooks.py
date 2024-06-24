@@ -43,18 +43,42 @@ def startup_complete():
     eww_reinit_process()
     eww_update_screens()
 
+
 notificationsdaemon = None
+networkmanager_applet = None
+compositor_process = None
+
+def shutdown_process(popen, terminate) :
+    if (popen is None) :
+        return
+
+    if (popen.poll() is None) :
+        if (terminate) :
+            popen.terminate()
+        else :
+            popen.kill()
 
 @hook.subscribe.shutdown
 def shutdown_qtile():
     global notificationsdaemon
-    if notificationdaemon is not None :
-        if notificationdaemon.poll() is not None:
-            notificationdaemon.kill()
+    global networkmanager_applet
+    global compositor_process
+
+    shutdown_process(notificationsdaemon, false)
+    shutdown_process(networkmanager_applet, true)
+    shutdown_process(compositor_process, true)
 
 @hook.subscribe.startup_once
 def startup_once():
         global notificationsdaemon
+        global networkmanager_applet
+        global compositor_process
+
+        if (qtile.core.name == "x11"):
+            compositor_process = subprocess.Popen([shutil.which("picom")])
+        else :
+            print("unsupported") # Replace with something idk
+
         # subprocess.Popen("dunst")
-        notificationsdaemon = subprocess.Popen("n-customnotif")
-        subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
+        notificationsdaemon = subprocess.Popen(shutil.which("n-customnotif"))
+        networkmanager_applet = subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
