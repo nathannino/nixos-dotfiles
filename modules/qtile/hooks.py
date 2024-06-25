@@ -72,6 +72,7 @@ def shutdown_processgroup(popen, terminate) :
 
 @hook.subscribe.shutdown
 def shutdown_qtile():
+    print("noop")
     #global notificationsdaemon
     #global networkmanager_applet
     #global compositor_process
