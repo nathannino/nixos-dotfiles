@@ -57,6 +57,7 @@ def shutdown_process(popen, terminate) :
             popen.terminate()
         else :
             popen.kill()
+        popen.wait()
 
 def shutdown_processgroup(popen, terminate) :
     if (popen is None) :
@@ -75,7 +76,7 @@ def shutdown_qtile():
     global networkmanager_applet
     global compositor_process
 
-    shutdown_processgroup(notificationsdaemon, false)
+    shutdown_process(notificationsdaemon, false)
     shutdown_process(networkmanager_applet, true)
     shutdown_process(compositor_process, true)
 
@@ -91,5 +92,5 @@ def startup_once():
             print("unsupported") # Replace with something idk
 
         # subprocess.Popen("dunst")
-        notificationsdaemon = subprocess.Popen(shutil.which("n-customnotif"), shell=True, preexec_fn=os.setsid)
+        notificationsdaemon = subprocess.Popen(shutil.which("n-customnotif"))
         networkmanager_applet = subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
