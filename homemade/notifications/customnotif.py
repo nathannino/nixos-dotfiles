@@ -71,12 +71,13 @@ def removefile(fileuuid):
 
 def setup_pipe():
     global notifications
+    run_thread = True
     try :
         os.mkfifo(pipe_input_file)
     except FileExistsError :
         os.remove(pipe_input_file)
         os.mkfifo(pipe_input_file)
-    while True:
+    while run_thread:
         with open(pipe_input_file, "r") as pipe:
             for line in pipe:
                 try :
@@ -95,6 +96,8 @@ def setup_pipe():
                             notifications = list(filter(lambda noti: noti["uuid"] != notifuuid,notifications))
                             removefile(notifuuid)
                             print_state()
+                        case "close-thread" :
+                            run_thread = False # Maybe this will allow us to close the thread correctly?
 
                 
                 except IndexError:
@@ -107,6 +110,8 @@ def exit_handler():
     os.remove(pipe_output_file)
 
 def kill_handler(*args):
+    with open(pipe_input_file, "w") as pipe:
+        pipe.write("close-thread")
     sys.exit(0)
 
 

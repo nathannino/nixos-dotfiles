@@ -72,14 +72,14 @@ def shutdown_processgroup(popen, terminate) :
 
 @hook.subscribe.shutdown
 def shutdown_qtile():
-    print("noop")
-    #global notificationsdaemon
-    #global networkmanager_applet
-    #global compositor_process
+    #print("noop")
+    global notificationsdaemon
+    global networkmanager_applet
+    global compositor_process
 
-    #shutdown_process(notificationsdaemon, false)
-    #shutdown_process(networkmanager_applet, true)
-    #shutdown_process(compositor_process, true)
+    shutdown_process(notificationsdaemon, true)
+    shutdown_process(networkmanager_applet, true)
+    shutdown_process(compositor_process, true)
 
 def open_process(program_name_arguments):
     subprocess.run(program_name_arguments)
@@ -95,13 +95,13 @@ def startup_once():
         global compositor_process
 
         if (qtile.core.name == "x11"):
-            # compositor_process = subprocess.Popen([shutil.which("picom")])
-            open_process_thread([shutil.which("picom")])
+            compositor_process = subprocess.Popen([shutil.which("picom")])
+            # open_process_thread([shutil.which("picom")])
         else :
             print("unsupported") # Replace with something idk
 
         # subprocess.Popen("dunst")
-        # notificationsdaemon = subprocess.Popen(shutil.which("n-customnotif"))
-        open_process_thread([shutil.which("n-customnotif")])
-        #networkmanager_applet = subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
-        open_process_thread([shutil.which("nm-applet"),"--indicator"])
+        notificationsdaemon = subprocess.Popen(shutil.which("n-customnotif"))
+        # open_process_thread([shutil.which("n-customnotif")])
+        networkmanager_applet = subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
+        # open_process_thread([shutil.which("nm-applet"),"--indicator"])
