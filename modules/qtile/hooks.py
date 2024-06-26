@@ -85,9 +85,9 @@ def shutdown_qtile():
     global networkmanager_applet
     global compositor_process
 
-    shutdown_process(notificationsdaemon, True, "notification")
-    shutdown_process(networkmanager_applet, True, "nm-applet")
-    shutdown_process(compositor_process, True, "picom")
+    shutdown_process(notificationsdaemon , True , "notification")
+    shutdown_process(networkmanager_applet , True , "nm-applet")
+    shutdown_process(compositor_process , True , "picom")
 
 #def open_process(program_name_arguments):
 #    subprocess.run(program_name_arguments)
