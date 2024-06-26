@@ -47,4 +47,4 @@ def eww_open_screen(index) :
 def eww_reinit_process():
     subprocess.run("eww close-all", shell=True)
     for index, screen in enumerate(qtile.screens) :
-        eww_open_screen(index)
+        eww_open_screen(screen.index)
