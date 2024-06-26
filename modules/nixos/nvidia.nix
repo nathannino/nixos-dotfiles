@@ -14,7 +14,7 @@ in
     # Enable OpenGL # TODO : Should this me moved to another module?
     hardware.opengl = {
       enable = true;
-      driSupport = true;
+      # driSupport = true;
       driSupport32Bit = true;
     };
 
