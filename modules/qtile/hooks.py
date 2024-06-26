@@ -49,8 +49,9 @@ notificationsdaemon = None
 networkmanager_applet = None
 compositor_process = None
 
-def shutdown_process(popen, terminate) :
+def shutdown_process(popen, terminate, logging_text) :
     if (popen is None) :
+        logger.warning("Popen is None : " + logging_text)
         return
 
     if (popen.poll() is None) :
@@ -59,9 +60,13 @@ def shutdown_process(popen, terminate) :
         else :
             popen.kill()
         popen.wait()
+        logger.warning("[temp] Popen closed successfully : " + logging_text)
+    else :
+        logger.warning("Popen.poll() is none : " + logging_text)
 
-def shutdown_processgroup(popen, terminate) :
+def shutdown_processgroup(popen, terminate, logging_text) :
     if (popen is None) :
+        logger.warning("Popen is None : " + logging_text)
         return
 
     if (popen.poll() is None) :
@@ -69,6 +74,8 @@ def shutdown_processgroup(popen, terminate) :
             os.killpg(os.getpgid(popen.pid), signal.SIGTERM)
         else :
             os.killpg(os.getpgid(popen.pid), signal.SIGKILL)
+    else :
+        logger.warning("Popen.poll() is none : " + logging_text)
 
 
 @hook.subscribe.shutdown
@@ -78,9 +85,9 @@ def shutdown_qtile():
     global networkmanager_applet
     global compositor_process
 
-    shutdown_process(notificationsdaemon, true)
-    shutdown_process(networkmanager_applet, true)
-    shutdown_process(compositor_process, true)
+    shutdown_process(notificationsdaemon, true, "notification")
+    shutdown_process(networkmanager_applet, true, "nm-applet")
+    shutdown_process(compositor_process, true, "picom")
 
 #def open_process(program_name_arguments):
 #    subprocess.run(program_name_arguments)
@@ -103,7 +110,7 @@ def startup_once():
 
         # subprocess.Popen("dunst")
         notificationsdaemon = subprocess.Popen(shutil.which("n-customnotif"))
-        logger.warning(notificationsdaemon.pid)
+        logger.warning("notification pid : " + str(notificationsdaemon.pid))
         # open_process_thread([shutil.which("n-customnotif")])
         networkmanager_applet = subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
         # open_process_thread([shutil.which("nm-applet"),"--indicator"])
