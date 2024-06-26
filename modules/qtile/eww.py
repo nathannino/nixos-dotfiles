@@ -41,10 +41,10 @@ def eww_update_groups():
 def eww_update_screens():
     subprocess.run("eww update currentscreen=\'" + json.dumps(qtile.current_screen.info()) + "\'", shell=True)
 
-def eww_open_screen(index) :
-    subprocess.run("eww open topbar --screen " + str(index) + " --id topbar" + str(index), shell=True)
+def eww_open_screen(screen) :
+    subprocess.run("eww open topbar --screen 0 --pos " + str(screen.x) + "x" + str(screen.y) + " --size " + str(screen.width) + "x" + str(screen.height) + " --id topbar" + str(screen.index), shell=True)
 
 def eww_reinit_process():
     subprocess.run("eww close-all", shell=True)
     for index, screen in enumerate(qtile.screens) :
-        eww_open_screen(screen.index)
+        eww_open_screen(screen)
