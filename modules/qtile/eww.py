@@ -42,7 +42,7 @@ def eww_update_screens():
     subprocess.run("eww update currentscreen=\'" + json.dumps(qtile.current_screen.info()) + "\'", shell=True)
 
 def eww_open_screen(screen) :
-    subprocess.run("eww open topbar --screen 0 --pos " + str(screen.x) + "x" + str(screen.y) + " --size " + str(screen.width) + "x" + str(screen.height) + " --id topbar" + str(screen.index), shell=True)
+    subprocess.run("eww open topbar --screen 0 --pos " + str(screen.x) + "x" + str(screen.y) + " --size " + str(screen.width) + "x30" + " --id topbar" + str(screen.index), shell=True)
 
 def eww_reinit_process():
     subprocess.run("eww close-all", shell=True)
