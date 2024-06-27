@@ -58,9 +58,9 @@ def get_screen_name(screenobj,ignoreother):
             raise
 
 def get_screen_name_old_index(screen_oldindex,ignoreother) :
-    if (index is None) :
+    if (screen_oldindex is None) :
         if (ignoreother) :
-            return index
+            return screen_oldindex
         else :
             logger.error("Screen index is not an integer")
             raise TypeError
