@@ -1,6 +1,7 @@
 from libqtile import hook, qtile
 from libqtile.utils import send_notification
 from commons.eww import eww_update_groups, eww_update_screens, eww_reinit_process, eww_show_layout
+import commons.screen
 import subprocess, shutil, os, signal, threading
 from libqtile.log_utils import logger
 
@@ -101,6 +102,8 @@ def startup_once():
         global notificationsdaemon
         global networkmanager_applet
         global compositor_process
+
+        commons.screen.regenerate_screen_name
 
         if (qtile.core.name == "x11"):
             compositor_process = subprocess.Popen([shutil.which("picom")])

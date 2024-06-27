@@ -2,6 +2,7 @@ from libqtile import qtile
 import subprocess, json
 import time
 import threading
+import commons.screen
 
 # Seperated for better reuse
 
@@ -33,16 +34,21 @@ def eww_update_groups():
 
         if (len(groupset['tiled_windows']) != 0) : istiled = True
 
-        group_dict = {'name': groupset['name'],'label' : groupset['label'], 'windows' : groupset['windows'], 'focus' : groupset['focus'], 'screen' : groupset['screen'], 'layout' : groupset['layout'], 'isfull' : istiled};
+        group_dict = {'name': groupset['name'],'label' : groupset['label'], 'windows' : groupset['windows'], 'focus' : groupset['focus'], 'screen' : commons.screen.get_screen_name(groupset['screen']), 'layout' : groupset['layout'], 'isfull' : istiled};
         group_array.append(group_dict)
     
     subprocess.run("eww update groups=\'" + json.dumps(group_array).replace("'","'\"'\"'") + "\'",shell=True)
 
+# TODO : use new system?
 def eww_update_screens():
     subprocess.run("eww update currentscreen=\'" + json.dumps(qtile.current_screen.info()) + "\'", shell=True)
 
+def eww_generate_id(id_prefix,screenid) :
+    return id_prefix + commons.screen.get_screen_name(screenid)
+
 def eww_open_screen(screen) :
-    subprocess.run("eww open topbar --screen 0 --pos " + str(screen.x) + "x" + str(screen.y) + " --size " + str(screen.width) + "x30" + " --id topbar" + str(screen.index) + " --arg barscreen=" + str(screen.index), shell=True)
+    screen_name = commons.screen.get_screen_name(screen.index)
+    subprocess.run("eww open topbar --screen " + screen_name + " --id topbar" + eww_generate_id("topbar",screen.index) + " --arg barscreen=" + screen_name, shell=True)
 
 def eww_reinit_process():
     subprocess.run("eww close-all", shell=True)
