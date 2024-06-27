@@ -1,6 +1,7 @@
 import subprocess, shutil, re
 from libqtile.log_utils import logger
 from libqtile import hook, qtile
+import commons.eww
 
 def regex_to_dict(regex_output) :
     regex_array = []
@@ -61,3 +62,9 @@ def regenerate_screen_name():
         regenerate_screen_name_xorg()
     else:
         regenerate_screen_name_wayland()
+
+@hook.subscribe.screens_reconfigured
+def screen_reconf():
+    regenerate_screen_name()
+    commons.eww.eww_update_groups
+

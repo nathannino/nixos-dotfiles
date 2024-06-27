@@ -50,9 +50,10 @@ def eww_generate_id(id_prefix,screenid) :
 def eww_open_screen(screen) :
     logger.warning(str(screen.index))
     screen_name = commons.screen.get_screen_name(screen.index, False)
-    subprocess.run("eww open topbar --screen " + screen_name + " --id topbar" + eww_generate_id("topbar",screen.index) + " --arg barscreen=" + screen_name, shell=True)
+    subprocess.run("eww open topbar --screen " + screen_name + " --id " + eww_generate_id("topbar",screen.index) + " --arg barscreen=" + screen_name, shell=True)
 
 def eww_reinit_process():
     subprocess.run("eww close-all", shell=True)
     for index, screen in enumerate(qtile.screens) :
         eww_open_screen(screen)
+    eww_update_groups()
