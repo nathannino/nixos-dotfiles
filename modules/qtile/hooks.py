@@ -103,7 +103,7 @@ def startup_once():
         global networkmanager_applet
         global compositor_process
 
-        commons.screen.regenerate_screen_name
+        commons.screen.regenerate_screen_name()
 
         if (qtile.core.name == "x11"):
             compositor_process = subprocess.Popen([shutil.which("picom")])
