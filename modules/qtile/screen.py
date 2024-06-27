@@ -17,11 +17,11 @@ def sort_screen_dictionary_entry(dict_entry) :
 screen_dictionary = []
 def update_screen_dictionary(new_screen_dictionary):
     global screen_dictionary
-    new_screen_dictionary_sorted = new_screen_dictionary.sort(key=sort_screen_dictionary_entry)
-    logger.warning(str(new_screen_dictionary_sorted))
+    new_screen_dictionary.sort(key=sort_screen_dictionary_entry)
+    logger.warning(str(new_screen_dictionary))
     # TODO : Check difference (i.e to kill eww bars no longer needed)
 
-    screen_dictionary = new_screen_dictionary_sorted
+    screen_dictionary = new_screen_dictionary
 
 def get_screen_name(index,ignoreother):
     global screen_dictionary
