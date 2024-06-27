@@ -28,6 +28,7 @@ def eww_show_layout(_layout, _group):
 def eww_update_groups():
     groups_set = qtile.get_groups()
     group_array = []
+    screen_array = qtile.get_screens()
     for group in groups_set:
         groupset = groups_set[group]
 
@@ -35,7 +36,7 @@ def eww_update_groups():
 
         if (len(groupset['tiled_windows']) != 0) : istiled = True
 
-        group_dict = {'name': groupset['name'],'label' : groupset['label'], 'windows' : groupset['windows'], 'focus' : groupset['focus'], 'screen' : commons.screen.get_screen_name(groupset['screen'], True), 'layout' : groupset['layout'], 'isfull' : istiled};
+        group_dict = {'name': groupset['name'],'label' : groupset['label'], 'windows' : groupset['windows'], 'focus' : groupset['focus'], 'screen' : commons.screen.get_screen_name(screeb_array[groupset['screen']], True), 'layout' : groupset['layout'], 'isfull' : istiled};
         group_array.append(group_dict)
     
     subprocess.run("eww update groups=\'" + json.dumps(group_array).replace("'","'\"'\"'") + "\'",shell=True)
@@ -45,11 +46,11 @@ def eww_update_screens():
     subprocess.run("eww update currentscreen=\'" + json.dumps(qtile.current_screen.info()) + "\'", shell=True)
 
 def eww_generate_id(id_prefix,screenid) :
-    return id_prefix + commons.screen.get_screen_name(screenid, False)
+    return id_prefix + commons.screen.get_screen_name_index(screenid)
 
 def eww_open_screen(screen) :
     logger.warning(str(screen.index))
-    screen_name = commons.screen.get_screen_name(screen.index, False)
+    screen_name = commons.screen.get_screen_name_index(screen.index)
     subprocess.run("eww open topbar --screen " + screen_name + " --id " + eww_generate_id("topbar",screen.index) + " --arg barscreen=" + screen_name, shell=True)
 
 def eww_reinit_process():
