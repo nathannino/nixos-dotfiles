@@ -45,7 +45,7 @@ def get_screen_name(screenobj,ignoreother):
         if (ignoreother) :
             return screen_obj
         else :
-            logger.error("Screen index is not an integer")
+            logger.error("Screenobj is a NoneType")
             raise TypeError
 
     try :
@@ -54,7 +54,7 @@ def get_screen_name(screenobj,ignoreother):
         if (ignoreother) :
             return screenobj
         else :
-            logger.error("Screen index is not an integer")
+            logger.error("Screenobj is not a valid type and we are probably in a really bad spot right now")
             raise
 
 def get_screen_name_old_index(screen_oldindex,ignoreother) :
@@ -62,7 +62,7 @@ def get_screen_name_old_index(screen_oldindex,ignoreother) :
         if (ignoreother) :
             return screen_oldindex
         else :
-            logger.error("Screen index is not an integer")
+            logger.error("Screen oldindex is not an integer")
             raise TypeError
     screen_array = qtile.get_screens()
     return get_screen_name(screen_array[screen_oldindex],ignoreother)
