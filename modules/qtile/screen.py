@@ -23,13 +23,19 @@ def update_screen_dictionary(new_screen_dictionary):
 
     screen_dictionary = new_screen_dictionary_sorted
 
-def get_screen_name(index):
+def get_screen_name(index,ignoreother):
     global screen_dictionary
     try :
         return screen_dictionary[index]["name"]
     except IndexError :
         logger.error("Screen index \"" + str(index) + "\" not found in screen name dictionary")
         return str(index)
+    except TypeError :
+        if (ignoreother) :
+            return index
+        else :
+            logger.error("Screen index is not an integer")
+            raise
 
 def regenerate_screen_name_xorg():
     xrandr_process = subprocess.run([shutil.which("xrandr"), "--listmonitors"], capture_output=True, text=True)
