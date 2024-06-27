@@ -25,6 +25,14 @@ def update_screen_dictionary(new_screen_dictionary):
 
 def get_screen_name(index,ignoreother):
     global screen_dictionary
+
+    if (index is None)
+        if (ignoreother) :
+            return index
+        else :
+            logger.error("Screen index is not an integer")
+            raise TypeError
+
     try :
         return screen_dictionary[index]["name"]
     except IndexError :
@@ -36,6 +44,7 @@ def get_screen_name(index,ignoreother):
         else :
             logger.error("Screen index is not an integer")
             raise
+
 
 def regenerate_screen_name_xorg():
     xrandr_process = subprocess.run([shutil.which("xrandr"), "--listmonitors"], capture_output=True, text=True)
