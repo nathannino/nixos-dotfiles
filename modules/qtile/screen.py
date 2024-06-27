@@ -57,6 +57,16 @@ def get_screen_name(screenobj,ignoreother):
             logger.error("Screen index is not an integer")
             raise
 
+def get_screen_name_old_index(screen_oldindex,ignoreother) :
+    if (index is None) :
+        if (ignoreother) :
+            return index
+        else :
+            logger.error("Screen index is not an integer")
+            raise TypeError
+    screen_array = qtile.get_screens()
+    return get_screen_name(screen_array[screen_oldindex],ignoreother)
+
 
 def regenerate_screen_name_xorg():
     xrandr_process = subprocess.run([shutil.which("xrandr"), "--listmonitors"], capture_output=True, text=True)
