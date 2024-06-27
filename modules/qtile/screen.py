@@ -40,5 +40,5 @@ def regenerate_screen_name_wayland():
 def regenerate_screen_name():
     if (qtile.core.name == "x11"):
         regenerate_screen_name_xorg()
-    else
+    else:
         regenerate_screen_name_wayland()
