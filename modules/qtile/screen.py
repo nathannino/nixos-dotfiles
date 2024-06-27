@@ -18,15 +18,18 @@ screen_dictionary = []
 def update_screen_dictionary(new_screen_dictionary):
     global screen_dictionary
     new_screen_dictionary_sorted = new_screen_dictionary.sort(key=sort_screen_dictionary_entry)
+    logger.warning(str(new_screen_dictionary_sorted))
     # TODO : Check difference (i.e to kill eww bars no longer needed)
 
     screen_dictionary = new_screen_dictionary_sorted
 
 def get_screen_name(index):
     global screen_dictionary
-    return screen_dictionary[index]["name"]
-    logger.error("Screen index \"" + str(index) + "\" not found in screen name dictionary")
-    return ""
+    try :
+        return screen_dictionary[index]["name"]
+    except IndexError :
+        logger.error("Screen index \"" + str(index) + "\" not found in screen name dictionary")
+        return str(index)
 
 def regenerate_screen_name_xorg():
     xrandr_process = subprocess.run([shutil.which("xrandr"), "--listmonitors"], capture_output=True, text=True)
@@ -38,6 +41,7 @@ def regenerate_screen_name_wayland():
     logger.error("regenerate_screen_name_wayland not implemented yet oupsies =/")
 
 def regenerate_screen_name():
+    logger.warning("regenerating screen dictionary")
     if (qtile.core.name == "x11"):
         regenerate_screen_name_xorg()
     else:
