@@ -88,5 +88,5 @@ def regenerate_screen_name():
 def screen_reconf():
     logger.warning("screen reconf event")
     regenerate_screen_name()
-    commons.eww.eww_update_groups
+    commons.eww.eww_update_groups()
 
