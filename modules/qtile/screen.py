@@ -26,7 +26,7 @@ def update_screen_dictionary(new_screen_dictionary):
 def get_screen_name(index,ignoreother):
     global screen_dictionary
 
-    if (index is None)
+    if (index is None) :
         if (ignoreother) :
             return index
         else :
