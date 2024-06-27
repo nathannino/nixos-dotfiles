@@ -12,7 +12,7 @@ def regex_to_dict(regex_output) :
     return regex_array
 
 def sort_screen_dictionary_entry(dict_entry) :
-    return dict_entry.index
+    return dict_entry["index"]
 
 screen_dictionary = []
 def update_screen_dictionary(new_screen_dictionary):
