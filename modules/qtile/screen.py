@@ -41,9 +41,9 @@ def attempt_screen_translation(screenobj) :
 def get_screen_name(screenobj,ignoreother):
     global screen_dictionary
 
-    if (index is None) :
+    if (screenobj is None) :
         if (ignoreother) :
-            return index
+            return screen_obj
         else :
             logger.error("Screen index is not an integer")
             raise TypeError
@@ -52,7 +52,7 @@ def get_screen_name(screenobj,ignoreother):
         return attempt_screen_translation(screenobj)
     except TypeError :
         if (ignoreother) :
-            return index
+            return screenobj
         else :
             logger.error("Screen index is not an integer")
             raise
