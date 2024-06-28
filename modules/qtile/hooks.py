@@ -40,6 +40,10 @@ def client_killed(_client) :
 def client_name_updated(_client):
     eww_update_groups()
 
+@hook.subscribe.client_focus
+def client_focus(_client) :
+    eww_update_groups()
+
 @hook.subscribe.startup_complete
 def startup_complete():
     eww_reinit_process()
