@@ -16,7 +16,7 @@
 
         environment.systemPackages = with pkgs; [
             protonup #Imperative (not declarative), but since steam updates automatically anyways... is fine
-	    itch # not steam, but like....
+	    # itch # not steam, but like.... # Dependency is broken oups
         ];
     };
 }
