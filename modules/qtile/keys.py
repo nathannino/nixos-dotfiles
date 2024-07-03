@@ -3,6 +3,8 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from commons.variables import mod, terminal, runner, webbrowser, filebrowser
 from commons.groupsnlayouts import groups
+import commons.window_ext
+from libqtile.log_utils import logger
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -92,6 +94,10 @@ for i in groups:
         ]
     )
 
+@lazy.function
+def set_position_floating_ext(qtile,x,y) :
+    logger.warning(str(x) + "/" + str(y))
+    
 
 # Drag floating layouts.
 mouse = [

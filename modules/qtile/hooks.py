@@ -25,6 +25,10 @@ def hooks_set_group():
     eww_update_groups()
     eww_update_screens()
 
+@hook.subscribe.float_change
+def float_change():
+    commons.window_ext.recheck_window_state()
+
 @hook.subscribe.layout_change
 def layout_changed(layout, group):
     eww_update_groups()
@@ -33,12 +37,13 @@ def layout_changed(layout, group):
 # Self explanatory
 @hook.subscribe.client_managed
 def client_managed(client_window) :
+    commons.window_ext.register_window(client_window)
     eww_update_groups()
 
 # Self explanatory
 @hook.subscribe.client_killed
 def client_killed(client_window) :
-    commons.window_ext.recheck_window_state() # Test, will remove
+    commons.window_ext.deregister_window(client_window)
     eww_update_groups()
 
 # Self explanatory
