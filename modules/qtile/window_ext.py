@@ -44,7 +44,7 @@ def recheck_window_state() :
     window_floating = []
     window_fullscreen = []
 
-    for window_obj in qtile.windows :
+    for window_obj in qtile.windows() :
         move_window_state(window_obj,deregister=False)
 
 
