@@ -86,6 +86,9 @@ def regenerate_screen_name():
 
 @hook.subscribe.screens_reconfigured
 def screen_reconf():
+    from commons.hooks import is_shutdown
+    if (is_shutdown) :
+        return
     logger.warning("screen reconf event")
     regenerate_screen_name()
     commons.eww.eww_update_groups()
