@@ -24,8 +24,8 @@ def deregister_window(window_killed) :
     list_silence_remove(window_fullscreen,window_killed)
 
 def _reorder_window_zaxis(window_list) :
-    for window_obj in window_list :
-        window_obj.move_to_top()
+    for window_index in range(len(window_list)) :
+        window_list[window_index].move_to_top()
 
 def mark_as_latest_floating(window_obj) :
     global window_floating
