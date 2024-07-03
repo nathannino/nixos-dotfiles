@@ -1,5 +1,6 @@
 from libqtile import qtile
 from libqtile.backend import base
+from libqtile.widget.base import _Widget
 
 window_tiling = []
 window_floating = []
