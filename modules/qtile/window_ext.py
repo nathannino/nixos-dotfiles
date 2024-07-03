@@ -43,12 +43,13 @@ def move_window_state(window_to_update,deregister=True,check_exists=False) :
     global window_tiling
     global window_floating
     global window_fullscreen
+    window_info = window_to_update.info()
 
     # Exit if already in the correct spot
     if (check_exists) :
-        if (window_to_update["fullscreen"] and window_to_update in window_fullscreen) :
+        if (window_info["fullscreen"] and window_to_update in window_fullscreen) :
             return
-        elif (window_to_update["floating"] and window_to_update in window_floating) :
+        elif (window_info["floating"] and window_to_update in window_floating) :
             return
         elif (window_to_update in window_tiling) :
             return
@@ -58,12 +59,12 @@ def move_window_state(window_to_update,deregister=True,check_exists=False) :
         deregister_window(window_to_update)
 
     # Put inside correct spot
-    if (window_to_update["group"] is None) :
+    if (window_info["group"] is None) :
         return # TODO : This is bar. We need to keep bar in mind or something
 
-    if (window_to_update["fullscreen"]) :
+    if (window_info["fullscreen"]) :
         window_fullscreen.append(window_to_update)
-    elif (window_to_update["floating"]) :
+    elif (window_info["floating"]) :
         window_floating.append(window_to_update)
     else :
         window_tiling.append(window_to_update)
