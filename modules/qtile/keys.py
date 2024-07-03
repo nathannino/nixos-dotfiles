@@ -94,34 +94,37 @@ for i in groups:
         ]
     )
 
-@lazy.function
-def set_position_floating_ext(qtile,x,y) :
-    qtile.current_window.set_position_floating(x,y)
-    commons.window_ext.mark_as_latest_floating(qtile.current_window)
+# Broken due to being called every time the mouse moves. Also unfinished tbh
+#@lazy.function
+#def set_position_floating_ext(qtile,x,y) :
+#    qtile.current_window.set_position_floating(x,y)
+#    commons.window_ext.mark_as_latest_floating(qtile.current_window)
     
-@lazy.function
-def set_size_floating_ext(qtile,x,y) :
-    qtile.current_window.set_size_floating(x,y)
-    commons.window_ext.mark_as_latest_floating(qtile.current_window)
+# Broken due to being called every time the mouse moves. Also unfinished tbh
+#@lazy.function
+#def set_size_floating_ext(qtile,x,y) :
+#    qtile.current_window.set_size_floating(x,y)
+#    commons.window_ext.mark_as_latest_floating(qtile.current_window)
 
-@lazy.function
-def get_position_ext(qtile) :
-    qtile.current_window.enable_floating()
-    commons.window_ext.mark_as_latest_floating(qtile.current_window)
-    logger.warning(str(returnvalue))
-    return qtile.current_window.get_position()
+# Broken due to not being able to send the data over to set_size_floating, for some reason? Also unfinished tbh
+#@lazy.function
+#def get_position_ext(qtile) :
+#    qtile.current_window.enable_floating()
+#    commons.window_ext.mark_as_latest_floating(qtile.current_window)
+#    logger.warning(str(returnvalue))
+#    return qtile.current_window.get_position()
 
-@lazy.function
-def get_size_ext(qtile) :
-    qtile.current_window.enable_floating()
-    commons.window_ext.mark_as_latest_floating(qtile.current_window)
-    return qtile.current_window.get_size()
+# Broken due to not being able to send the data over to set_size_floating, for some reason? Also unfinished tbh
+#@lazy.function
+#def get_size_ext(qtile) :
+#    qtile.current_window.enable_floating()
+#    commons.window_ext.mark_as_latest_floating(qtile.current_window)
+#    return qtile.current_window.get_size()
 
 @lazy.function
 def set_floating_ext(qtile) :
-    qtile.current_window.enable_floating()
     commons.window_ext.mark_as_latest_floating(qtile.current_window)
-    logger.warning("marked as latest")
+    commons.window_ext.reorder_window_zaxis()
 
 # Drag floating layouts.
     # Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
