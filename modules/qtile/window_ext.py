@@ -27,9 +27,9 @@ def move_window_state(window_to_update,deregister=True) :
     if (deregister) : 
         deregister_window(window_to_update)
 
-    if (window_to_update.fullscreen) :
+    if (window_to_update["fullscreen"]) :
         window_fullscreen.append(window_to_update)
-    elif (window_to_update.floating) :
+    elif (window_to_update["floating"]) :
         window_floating.append(window_to_update)
     else :
         window_tiling.append(window_to_update)
