@@ -72,7 +72,7 @@ def move_window_state(window_to_update,deregister=True,check_exists=False) :
 def get_all_window_obj() :
     return [
             i 
-            for i in qtile.window_map.values() 
+            for i in qtile.windows_map.values() 
             if not isinstance(i, (base.Internal, _Widget)) and isinstance(i, CommandObject)
     ]
 
