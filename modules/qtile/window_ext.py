@@ -73,7 +73,7 @@ def get_all_window_obj() :
     return [
             i 
             for i in qtile.window_map.values() 
-            if not isinstance(i, (base.Internal, _Widget)) and isinstance(i, CommandObject))
+            if not isinstance(i, (base.Internal, _Widget)) and isinstance(i, CommandObject)
     ]
 
 
