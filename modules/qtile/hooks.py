@@ -6,6 +6,7 @@ import subprocess, shutil, os, signal, threading
 from libqtile.log_utils import logger
 
 #updates
+is_shutdown = False
 
 #hooks
 
@@ -22,37 +23,51 @@ def recheck_windows():
 # Fired if 1) screen changes to a new group 2) when 2 groups are switched 3) when a screen is focused
 @hook.subscribe.setgroup
 def hooks_set_group():
+    if (is_shutdown) :
+        return
     eww_update_groups()
     eww_update_screens()
 
 @hook.subscribe.float_change
 def float_change():
+    if (is_shutdown) :
+        return
     commons.window_ext.recheck_window_state()
 
 @hook.subscribe.layout_change
 def layout_changed(layout, group):
+    if (is_shutdown) :
+        return
     eww_update_groups()
     eww_show_layout(layout, group)
 
 # Self explanatory
 @hook.subscribe.client_managed
 def client_managed(client_window) :
+    if (is_shutdown) :
+        return
     commons.window_ext.register_window(client_window)
     eww_update_groups()
 
 # Self explanatory
 @hook.subscribe.client_killed
 def client_killed(client_window) :
+    if (is_shutdown) :
+        return
     commons.window_ext.deregister_window(client_window)
     eww_update_groups()
 
 # Self explanatory
 @hook.subscribe.client_name_updated
 def client_name_updated(_client):
+    if (is_shutdown) :
+        return
     eww_update_groups()
 
 @hook.subscribe.client_focus
 def client_focus(_client) :
+    if (is_shutdown) :
+        return
     eww_update_groups()
 
 @hook.subscribe.startup_complete
@@ -96,6 +111,8 @@ def shutdown_processgroup(popen, terminate, logging_text) :
 
 @hook.subscribe.shutdown
 def shutdown_qtile():
+    global is_shutdown
+    is_shutdown = True
     #print("noop")
     global notificationsdaemon
     global networkmanager_applet
