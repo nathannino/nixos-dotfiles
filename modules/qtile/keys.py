@@ -106,18 +106,16 @@ def set_size_floating_ext(qtile,x,y) :
 
 @lazy.function
 def get_position_ext(qtile) :
-    returnvalue = qtile.current_window.get_position()
     qtile.current_window.enable_floating()
     commons.window_ext.mark_as_latest_floating(qtile.current_window)
     logger.warning(str(returnvalue))
-    return returnvalue
+    return qtile.current_window.get_position()
 
 @lazy.function
 def get_size_ext(qtile) :
-    returnvalue = qtile.current_window.get_size()
     qtile.current_window.enable_floating()
     commons.window_ext.mark_as_latest_floating(qtile.current_window)
-    return returnvalue
+    return qtile.current_window.get_size()
 
 # Drag floating layouts.
     # Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
