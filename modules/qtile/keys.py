@@ -99,7 +99,7 @@ def set_position_floating_ext(qtile,x,y) :
     qtile.currentWindow.set_position_floating(x,y)
     
 @lazy.function
-def set_size_floating_ext(qtile,x,y)
+def set_size_floating_ext(qtile,x,y) :
     qtile.currentWindow.set_size_floating(x,y)
 
 # Drag floating layouts.
