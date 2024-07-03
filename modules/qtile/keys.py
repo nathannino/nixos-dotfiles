@@ -96,11 +96,11 @@ for i in groups:
 
 @lazy.function
 def set_position_floating_ext(qtile,x,y) :
-    qtile.currentWindow.set_position_floating(x,y)
+    qtile.current_window.set_position_floating(x,y)
     
 @lazy.function
 def set_size_floating_ext(qtile,x,y) :
-    qtile.currentWindow.set_size_floating(x,y)
+    qtile.current_window.set_size_floating(x,y)
 
 # Drag floating layouts.
     # Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
