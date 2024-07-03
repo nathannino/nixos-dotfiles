@@ -26,7 +26,7 @@ def _reorder_window_zaxis(window_list) :
 
 def mark_as_latest_floating(window_obj) :
     global window_floating
-    if (list_silence_remove(window_obj)) :
+    if (list_silence_remove(window_floating,window_obj)) :
         window_floating.append(window_obj)
 
 
