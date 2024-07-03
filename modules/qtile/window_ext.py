@@ -39,13 +39,25 @@ def reorder_window_zaxis():
     _reorder_window_zaxis(window_fullscreen)
 
 
-def move_window_state(window_to_update,deregister=True) :
+def move_window_state(window_to_update,deregister=True,check_exists=False) :
     global window_tiling
     global window_floating
     global window_fullscreen
+
+    # Exit if already in the correct spot
+    if (check_exists) :
+        if (window_to_update["fullscreen"] and window_to_update in window_fullscreen) :
+            return
+        elif (window_to_update["floating"] and window_to_update in window_floating) :
+            return
+        elif (window_to_update in window_tiling) :
+            return
+
+    # Remove if needed
     if (deregister) : 
         deregister_window(window_to_update)
 
+    # Put inside correct spot
     if (window_to_update["group"] is None) :
         return # TODO : This is bar. We need to keep bar in mind or something
 
@@ -59,15 +71,8 @@ def move_window_state(window_to_update,deregister=True) :
 
 #Avoid if possible, but kinda have to sometimes, you know...
 def recheck_window_state() :
-    global window_tiling
-    global window_floating
-    global window_fullscreen
-    window_tiling = []
-    window_floating = []
-    window_fullscreen = []
-
     for window_obj in qtile.windows() :
-        move_window_state(window_obj,deregister=False)
+        move_window_state(window_obj,deregister=True,check_exists=True)
     reorder_window_zaxis()
 
 

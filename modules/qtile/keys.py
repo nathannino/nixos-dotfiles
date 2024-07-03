@@ -97,15 +97,31 @@ for i in groups:
 @lazy.function
 def set_position_floating_ext(qtile,x,y) :
     qtile.current_window.set_position_floating(x,y)
+    commons.window_ext.mark_as_latest_floating(qtile.current_window)
     
 @lazy.function
 def set_size_floating_ext(qtile,x,y) :
     qtile.current_window.set_size_floating(x,y)
+    commons.window_ext.mark_as_latest_floating(qtile.current_window)
+
+@lazy.function
+def get_position_ext(qtile) :
+    returnvalue = qtile.current_window.get_position()
+    qtile.current_window.enable_floating()
+    commons.window_ext.mark_as_latest_floating(qtile.current_window)
+    return returnvalue
+
+@lazy.function
+def get_size_ext(qtile) :
+    returnvalue = qtile.current_window.get_size()
+    qtile.current_window.enable_floating()
+    commons.window_ext.mark_as_latest_floating(qtile.current_window)
+    return returnvalue
 
 # Drag floating layouts.
     # Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
 mouse = [
-    Drag([mod], "Button1", set_position_floating_ext(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", set_size_floating_ext(), start=lazy.window.get_size()),
+    Drag([mod], "Button1", lazy.window.set_position_floating(), start=get_position_ext()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(), start=get_size_ext()),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
