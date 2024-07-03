@@ -2,6 +2,7 @@ from libqtile import qtile
 from libqtile.backend import base
 from libqtile.widget.base import _Widget
 from libqtile.command.base import CommandObject
+from libqtile.log_utils import logger
 
 window_tiling = []
 window_floating = []
