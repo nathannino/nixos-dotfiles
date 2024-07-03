@@ -109,6 +109,7 @@ def get_position_ext(qtile) :
     returnvalue = qtile.current_window.get_position()
     qtile.current_window.enable_floating()
     commons.window_ext.mark_as_latest_floating(qtile.current_window)
+    logger.warning(str(returnvalue))
     return returnvalue
 
 @lazy.function
