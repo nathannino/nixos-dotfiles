@@ -40,7 +40,9 @@ def reorder_window_zaxis():
     global window_floating
     global window_fullscreen
     _reorder_window_zaxis(window_tiling)
+    logger.warning("=====")
     _reorder_window_zaxis(window_floating)
+    logger.warning("=====")
     _reorder_window_zaxis(window_fullscreen)
 
 
