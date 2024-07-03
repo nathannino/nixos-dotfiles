@@ -1,13 +1,17 @@
 from libqtile import hook, qtile
 from libqtile.utils import send_notification
 from commons.eww import eww_update_groups, eww_update_screens, eww_reinit_process, eww_show_layout
-import commons.screen
+import commons.screen, commons.window_ext
 import subprocess, shutil, os, signal, threading
 from libqtile.log_utils import logger
 
 #updates
 
 #hooks
+
+@hook.subscribe.user("recheck_windows")
+def recheck_windows():
+    commons.window_ext.recheck_window_state()
 
 # Fired if the screen with focus changes
 # @hook.subscribe.current_screen_change # Check if duplicated by setgroup... probably is
@@ -27,12 +31,12 @@ def layout_changed(layout, group):
 
 # Self explanatory
 @hook.subscribe.client_managed
-def client_managed(_client) :
+def client_managed(client_window) :
     eww_update_groups()
 
 # Self explanatory
 @hook.subscribe.client_killed
-def client_killed(_client) :
+def client_killed(client_window) :
     eww_update_groups()
 
 # Self explanatory
