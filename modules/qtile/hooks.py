@@ -9,6 +9,7 @@ from libqtile.log_utils import logger
 
 #hooks
 
+# Wow you don't work
 @hook.subscribe.user("recheck_windows")
 def recheck_windows():
     commons.window_ext.recheck_window_state()
@@ -37,6 +38,7 @@ def client_managed(client_window) :
 # Self explanatory
 @hook.subscribe.client_killed
 def client_killed(client_window) :
+    commons.window_ext.recheck_window_state() # Test, will remove
     eww_update_groups()
 
 # Self explanatory
