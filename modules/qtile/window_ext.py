@@ -69,10 +69,17 @@ def move_window_state(window_to_update,deregister=True,check_exists=False) :
     else :
         window_tiling.append(window_to_update)
 
+def get_all_window_obj() :
+    return [
+            i 
+            for i in qtile.window_map.values() 
+            if not isinstance(i, (base.Internal, _Widget)) and isinstance(i, CommandObject))
+    ]
+
 
 #Avoid if possible, but kinda have to sometimes, you know...
 def recheck_window_state() :
-    for window_obj in qtile.windows() :
+    for window_obj in get_all_window_obj() :
         move_window_state(window_obj,deregister=True,check_exists=True)
     reorder_window_zaxis()
 
