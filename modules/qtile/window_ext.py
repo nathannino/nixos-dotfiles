@@ -46,7 +46,7 @@ def move_window_state(window_to_update,deregister=True) :
     if (deregister) : 
         deregister_window(window_to_update)
 
-    if (window_to_update["group" is None]) :
+    if (window_to_update["group"] is None) :
         return # TODO : This is bar. We need to keep bar in mind or something
 
     if (window_to_update["fullscreen"]) :
