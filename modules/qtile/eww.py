@@ -45,7 +45,10 @@ def eww_update_screens():
     subprocess.run("eww update currentscreen=\'" + commons.screen.get_screen_name(qtile.current_screen.info(), False) + "\'", shell=True)
 
 def eww_generate_id(id_prefix,screenid) :
-    return id_prefix + commons.screen.get_screen_name_index(screenid)
+    try :
+        return id_prefix + commons.screen.get_screen_name_index(screenid)
+    except IndexError :
+        return id_prefix + str(screenid)
 
 def eww_open_screen(screen) :
     logger.warning(str(screen.index))
