@@ -35,7 +35,7 @@ def attempt_screen_translation(screenobj) :
     for screen_dict_entry in screen_dictionary :
         if (screen_dict_entry["x"] == screenobj["x"] and screen_dict_entry["y"] == screenobj["y"]) :
             return screen_dict_entry["name"]
-    logger.error("Screen (x:" + screenobj["x"] + "y:" + screenobj["y"] + ") could not be matched")
+    logger.error("Screen (x:" + str(screenobj["x"]) + "y:" + str(screenobj["y"]) + ") could not be matched")
     return screenobj["index"]
 
 def get_screen_name(screenobj,ignoreother):

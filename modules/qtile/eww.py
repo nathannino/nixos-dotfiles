@@ -49,7 +49,13 @@ def eww_generate_id(id_prefix,screenid) :
 
 def eww_open_screen(screen) :
     logger.warning(str(screen.index))
-    screen_name = commons.screen.get_screen_name_index(screen.index)
+    screen_name = ""
+    try :
+        screen_name = commons.screen.get_screen_name_index(screen.index)
+    except IndexError :
+        screen_name = str(screen.index)
+        logger.warning("Screen index is bad")
+
     subprocess.run("eww open topbar --screen " + screen_name + " --id " + eww_generate_id("topbar",screen.index) + " --arg barscreen=" + screen_name, shell=True)
 
 def eww_reinit_process():
