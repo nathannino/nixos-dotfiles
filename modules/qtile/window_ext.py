@@ -3,6 +3,7 @@ from libqtile.backend import base
 from libqtile.widget.base import _Widget
 from libqtile.command.base import CommandObject
 from libqtile.log_utils import logger
+from libqtile.utils import send_notification
 
 window_tiling = []
 window_floating = []
@@ -69,10 +70,13 @@ def move_window_state(window_to_update,deregister=True,check_exists=False) :
 
     if (window_info["fullscreen"]) :
         window_fullscreen.append(window_to_update)
+        send_notifications("move_window_state","state changed to fullscreen")
     elif (window_info["floating"]) :
         window_floating.append(window_to_update)
+        send_notifications("move_window_state","state changed to floating")
     else :
         window_tiling.append(window_to_update)
+        send_notifications("move_window_state","state changed to tilling")
 
 def get_all_window_obj() :
     return [
