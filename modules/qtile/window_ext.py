@@ -59,7 +59,7 @@ def move_window_state(window_to_update,deregister=True,check_exists=False) :
         elif (window_info["floating"] and window_to_update in window_floating) :
             send_notification("move_window_state","window already floating")
             return
-        elif (window_to_update in window_tiling) :
+        elif (((not window_info["fullscreen"]) and (not window_info["floating"])) and window_to_update in window_tiling) :
             send_notification("move_window_state","window already tilling")
             return
 
