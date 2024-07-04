@@ -33,7 +33,7 @@ def float_change():
     if (is_shutdown) :
         return
     commons.window_ext.recheck_window_state()
-    send_notification("float_change")
+    send_notification("testing","float_change")
 
 @hook.subscribe.layout_change
 def layout_changed(layout, group):
