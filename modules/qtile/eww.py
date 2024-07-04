@@ -42,7 +42,7 @@ def eww_update_groups():
 
 # TODO : use new system?
 def eww_update_screens():
-    subprocess.run("eww update currentscreen=\'" + commons.screen.get_screen_name(qtile.current_screen.info(), False) + "\'", shell=True)
+    subprocess.run("eww update currentscreen=\'" + str(commons.screen.get_screen_name(qtile.current_screen.info(), False)) + "\'", shell=True)
 
 def eww_generate_id(id_prefix,screenid) :
     try :
