@@ -27,8 +27,8 @@ def deregister_window(window_killed) :
 
 def _reorder_window_zaxis(window_list) :
     for window_index in range(len(window_list)) :
+        window_list[window_index].keep_above(False)
         window_list[window_index].move_to_top()
-        send_notification("_reorder_window_zaxis","window {" + str(window_list[window_index].info()["name"]) + "} moved to top")
 
 def mark_as_latest_floating(window_obj) :
     global window_floating
@@ -55,13 +55,10 @@ def move_window_state(window_to_update,deregister=True,check_exists=False) :
     # Exit if already in the correct spot
     if (check_exists) :
         if (window_info["fullscreen"] and window_to_update in window_fullscreen) :
-            send_notification("move_window_state","window already fullscreen")
             return
         elif (window_info["floating"] and window_to_update in window_floating) :
-            send_notification("move_window_state","window already floating")
             return
         elif (((not window_info["fullscreen"]) and (not window_info["floating"])) and window_to_update in window_tiling) :
-            send_notification("move_window_state","window already tilling")
             return
 
     # Remove if needed
@@ -74,13 +71,10 @@ def move_window_state(window_to_update,deregister=True,check_exists=False) :
 
     if (window_info["fullscreen"]) :
         window_fullscreen.append(window_to_update)
-        send_notification("move_window_state","state changed to fullscreen")
     elif (window_info["floating"]) :
         window_floating.append(window_to_update)
-        send_notification("move_window_state","state changed to floating")
     else :
         window_tiling.append(window_to_update)
-        send_notification("move_window_state","state changed to tilling")
 
 def get_all_window_obj() :
     return [
