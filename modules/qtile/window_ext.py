@@ -27,7 +27,6 @@ def deregister_window(window_killed) :
 def _reorder_window_zaxis(window_list) :
     for window_index in range(len(window_list)) :
         window_list[window_index].move_to_top()
-        logger.warning(str(window_list[window_index].info()))
 
 def mark_as_latest_floating(window_obj) :
     global window_floating
@@ -41,9 +40,7 @@ def reorder_window_zaxis():
     global window_floating
     global window_fullscreen
     _reorder_window_zaxis(window_tiling)
-    logger.warning("=====")
     _reorder_window_zaxis(window_floating)
-    logger.warning("=====")
     _reorder_window_zaxis(window_fullscreen)
 
 
