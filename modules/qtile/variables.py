@@ -10,8 +10,14 @@ filebrowser = "dolphin"
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
-bring_front_click = True
-floats_kept_above = True
+
+# Disabled because of weird behavior in specific situations. If this is reenabled, we should disable window_ext.py
+# bring_front_click = True
+# floats_kept_above = True
+# If window_ext.py is enabled, use this instead
+bring_front_click = False
+floats_kept_above = False
+
 cursor_warp = False
 floating_layout = layout.Floating(
     float_rules=[
@@ -44,4 +50,4 @@ wl_input_rules = None # TODO : Move this to a dedicated wayland config file
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "tester"
+wmname = "LG3D"

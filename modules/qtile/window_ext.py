@@ -5,6 +5,8 @@ from libqtile.command.base import CommandObject
 from libqtile.log_utils import logger
 from libqtile.utils import send_notification
 
+# Note : This will hopefully no longer be required in a later qtile update, and does not fix everything I want it to fix due to intentional qtile limitations
+
 window_tiling = []
 window_floating = []
 window_fullscreen = []
@@ -41,7 +43,6 @@ def reorder_window_zaxis():
     global window_tiling
     global window_floating
     global window_fullscreen
-    return # Test return
     _reorder_window_zaxis(window_tiling)
     _reorder_window_zaxis(window_floating)
     _reorder_window_zaxis(window_fullscreen)
