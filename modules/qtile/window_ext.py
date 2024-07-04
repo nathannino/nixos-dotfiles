@@ -41,6 +41,7 @@ def reorder_window_zaxis():
     global window_tiling
     global window_floating
     global window_fullscreen
+    return # Test return
     _reorder_window_zaxis(window_tiling)
     _reorder_window_zaxis(window_floating)
     _reorder_window_zaxis(window_fullscreen)
