@@ -54,10 +54,13 @@ def move_window_state(window_to_update,deregister=True,check_exists=False) :
     # Exit if already in the correct spot
     if (check_exists) :
         if (window_info["fullscreen"] and window_to_update in window_fullscreen) :
+        send_notification("move_window_state","window already fullscreen")
             return
         elif (window_info["floating"] and window_to_update in window_floating) :
+        send_notification("move_window_state","window already floating")
             return
         elif (window_to_update in window_tiling) :
+        send_notification("move_window_state","window already tilling")
             return
 
     # Remove if needed
