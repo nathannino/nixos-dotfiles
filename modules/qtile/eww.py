@@ -32,7 +32,7 @@ def eww_update_groups():
         group_info = group.info()
         istiled = False
 
-        if (len(groupset['tiled_windows']) != 0) : 
+        if (len(group_info['tiled_windows']) != 0) : 
             if (not group.current_window.info().get("fullscreen",False)) :
                 istiled = True
 
