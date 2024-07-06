@@ -26,16 +26,17 @@ def eww_show_layout(_layout, _group):
 
 
 def eww_update_groups():
-    groups_set = qtile.get_groups()
+    groups_obj = qtile.groups
     group_array = []
-    for group in groups_set:
-        groupset = groups_set[group]
-
+    for group in groups_obj:
+        group_info = group.info()
         istiled = False
 
-        if (len(groupset['tiled_windows']) != 0) : istiled = True
+        if (len(groupset['tiled_windows']) != 0) : 
+            if (not group.current_window.info().get("fullscreen",False)) :
+                istiled = True
 
-        group_dict = {'name': groupset['name'],'label' : groupset['label'], 'windows' : groupset['windows'], 'focus' : groupset['focus'], 'screen' : commons.screen.get_screen_name_old_index(groupset['screen'], True), 'layout' : groupset['layout'], 'isfull' : istiled};
+        group_dict = {'name': group_info['name'],'label' : group_info['label'], 'windows' : group_info['windows'], 'focus' : group_info['focus'], 'screen' : commons.screen.get_screen_name_old_index(group_info['screen'], True), 'layout' : group_info['layout'], 'isfull' : istiled};
         group_array.append(group_dict)
     
     subprocess.run("eww update groups=\'" + json.dumps(group_array).replace("'","'\"'\"'") + "\'",shell=True)
