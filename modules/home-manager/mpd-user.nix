@@ -1,5 +1,5 @@
 # https://github.com/nix-community/home-manager/blob/master/modules/services/mpd.nix
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 let
   cfg = config.mpduser;
