@@ -34,6 +34,7 @@ in
   # Modules configuration
   nvidiamodule.enable = true;
   jetbrainide.ultimate = true;
+  mpduser.directory = "/second-drive"
   # mpdmodule.user = "nathan_nino"; # TODO : Change username... yeah probably should find a way to change this based on the user account... =/
   # qtilemodule.configfile = ./qtilecfg.py;
   # pythoncfg.qtile.enable = true;
