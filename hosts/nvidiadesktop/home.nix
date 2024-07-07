@@ -16,7 +16,7 @@ in
   # manage.
   home.username = "nathan_nino";
   home.homeDirectory = "/home/nathan_nino";
-  mpduser.directory = "/second-drive";
+  mpduser.directory = "/second-drive/mpd-music";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
