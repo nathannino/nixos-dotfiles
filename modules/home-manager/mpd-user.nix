@@ -6,7 +6,9 @@ let
 in
 {
   options.mpduser = {
-  	directory = lib.mkOption
+  	directory = lib.mkOption {
+		default = "";
+	}
   };
   config = {
     services.mpd = {
