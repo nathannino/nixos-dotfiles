@@ -10,11 +10,13 @@ in
       ./.${modulespath}/face.nix
       ./.${modulespath}/qtile-commons.nix
       ./.${modulespath}/default-packages-imports.nix
+      ./.${modulespath}/mpd-user.nix
     ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "nathan_nino";
   home.homeDirectory = "/home/nathan_nino";
+  mpduser.directory = "/second-drive";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
