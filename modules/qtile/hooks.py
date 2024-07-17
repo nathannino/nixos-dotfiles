@@ -72,6 +72,7 @@ def client_focus(_client) :
 
 @hook.subscribe.client_new
 def client_new(client) :
+    return
     # TODO : only do this if x11
     #if (client.name == "Eww - mpdwindow") :
     #    client.static() #nvm, this does the same thing as setting the window type as dock, which for some reason breaks the input =D
