@@ -26,6 +26,7 @@
 	    nix-output-monitor
 	    nvd
 	    qpwgraph
+	    rssguard
         ];
     };
 }
