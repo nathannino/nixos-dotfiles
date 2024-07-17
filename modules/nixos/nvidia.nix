@@ -23,8 +23,8 @@ in
 
     hardware.nvidia = {
 
-      # Prevent screen tearing
-      forceFullCompositionPipeline = true;
+      # Prevent screen tearing. Unfortunately, it overwrites the previous configuration, and it doesn't let me use multihead
+      forceFullCompositionPipeline = false;
 
       # Modesetting is required.
       modesetting.enable = true;
