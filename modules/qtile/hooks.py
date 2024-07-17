@@ -70,6 +70,13 @@ def client_focus(_client) :
         return
     eww_update_groups()
 
+@hook.subscribe.client_new
+def client_new(client) :
+    # TODO : only do this if x11
+    if (client.name == "Eww - mpdwindow") :
+        client.static()
+
+
 @hook.subscribe.startup_complete
 def startup_complete():
     eww_reinit_process()

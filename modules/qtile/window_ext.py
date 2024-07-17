@@ -53,7 +53,6 @@ def move_window_state(window_to_update,deregister=True,check_exists=False) :
     global window_floating
     global window_fullscreen
     window_info = window_to_update.info()
-    logger.warning(str(window_info))
 
     # Exit if already in the correct spot
     if (check_exists) :

@@ -25,6 +25,7 @@
             libnotify
 	    nix-output-monitor
 	    nvd
+	    qpwgraph
         ];
     };
 }

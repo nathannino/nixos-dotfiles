@@ -23,6 +23,9 @@ in
 
     hardware.nvidia = {
 
+      # Prevent screen tearing
+      forceFullCompositionPipeline = true;
+
       # Modesetting is required.
       modesetting.enable = true;
 
