@@ -9,6 +9,6 @@
 			source = ./files/eww; # To use when not modifying eww, to allow reverting without having to handle git
 			# source = config.lib.file.mkOutOfStoreSymlink ./files/eww; # To use when modifying eww.
 			recursive = true;
-		}
-	}
+		};
+	};
 }
