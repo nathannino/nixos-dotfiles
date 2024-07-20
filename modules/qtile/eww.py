@@ -67,3 +67,8 @@ def eww_reinit_process():
     for index, screen in enumerate(qtile.screens) :
         eww_open_screen(screen)
     eww_update_groups()
+
+    qtilecore = "xorg"
+    if (qtile.core.name == "wayland") :
+        qtilecore = "wayland"
+    subprocess.run("eww update qtilecore=" + qtilecore, shell=True)

@@ -1,0 +1,92 @@
+.workspace-group.screen {
+  border-bottom-color: #cc00cc;
+}
+
+.workspace-group.focused-screen {
+  border-bottom-color: yellow;
+}
+
+.workspace-group.bar-screen {
+  border-width: 5px;
+}
+
+.workspace-group {
+  border-color: rgba(0,0,0,0);
+  border-bottom-style: solid;
+  border-width: 3px;
+  border-top-style: solid;
+}
+
+.haswindow {
+  background-color: rgb(33,33,33);
+}
+
+.istiled {
+  background-color: rgb(040,032,044);
+}
+
+.background.topbar {
+  background-color: rgba(42,46,50,0)
+}
+
+.text-overlay {
+  font-weight: bold;
+  background-color: rgba(42,46,50,0.06)
+}
+
+.statusgraph.graphgood {
+  color: white;
+  background-color: rgba(255,255,255,0.5);
+}
+
+.statusgraph.graphwarning {
+  color: yellow;
+  background-color: rgba(255,255,0,0.5);
+}
+
+.statusgraph.graphbad {
+  color: red;
+  background-color: rgba(255,0,0,0.5);
+}
+
+.notification_ticker.app_name, .notificationtoast.app_name {
+  font-weight: bold;
+}
+
+.notification_ticker.seperator, .notificationtoast.seperator {
+  font-weight: bold;
+}
+
+.notification_ticker.summary {
+  font-weight: bold;
+}
+
+.notificationtoast.timestamp {
+  color : gray;
+}
+
+.notificationtoast.notificationbox, .notificationtoast.notificationheader {
+  border-bottom: 2px solid white;
+}
+
+.notificationtoast.notificationheader {
+  background-color: rgba(42,46,50,1);
+}
+
+.notificationwindowxorg.background, .notificationwindowwayland.background, .mpdwindow.background {
+  background-color: rgba(42,46,50,0.75);
+}
+
+.badge.unreadbadge {
+  background-color : rgba(100,100,0,0.10);
+  border-radius : 20px;
+  padding: 0 10px 0 10px;
+}
+
+.notificationtoast.notificationtoastheader {
+  padding-left: 5px;
+}
+
+.notificationtoast.body {
+  padding-left: 5px;
+}

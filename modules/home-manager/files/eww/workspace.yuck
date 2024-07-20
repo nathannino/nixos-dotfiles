@@ -1,0 +1,39 @@
+(defvar groups "[]")
+(defvar currentscreen "ImpossibleValueGoesHereHAHA")
+(defvar showlayout "false")
+(defvar workspacehover "false")
+
+(defwidget workspace [barscreen]
+    (box
+        :space-evenly false
+        :orientation "h"
+        :spacing 0
+    (for group in groups
+    	(revealer 
+		:transition "slideright"
+		:reveal {group.windows != "[]" || group.screen != "null" || workspacehover == barscreen}
+		(eventbox 
+			:onclick "~/.config/eww/scripts/bash/timeout.sh \"qtile cmd-obj -o group ${group.name} -f toscreen\""
+			(box 
+			:class "${group.screen != "null" ? "screen" : "noscreen"} ${group.screen == currentscreen ? "focused-screen" : ""} ${group.screen == barscreen ? "bar-screen" : ""} ${group.windows == "[]" ? "" : "haswindow"} workspace-group" 
+			" ${group.label} ")
+		)
+	)
+    ))
+)
+
+(defwidget focusname [barscreen]
+	(box
+		:space-evenly false
+		:orientation "h"
+		:spacing 0
+		(for group in groups
+			(box
+				:space-evenly false
+				:orientation "h"
+				:spacing 5
+				(label :limit-width 50 :unindent true :text "${group.screen == barscreen ? group.focus != "null" ? group.focus : "" : ""}")
+				(revealer :transition "slideright" :reveal {showlayout || workspacehover == barscreen} (label :limit-width 50 :unindent true :text "${group.screen == barscreen ? "[${group.layout}]" : ""}"))
+			)
+		)
+	))

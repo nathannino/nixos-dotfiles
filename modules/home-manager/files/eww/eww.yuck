@@ -1,0 +1,40 @@
+(include "./workspace.yuck")
+(include "./music.yuck")
+(include "./systemstatus.yuck")
+(include "./notifications.yuck")
+
+(defvar qtilecore "xorg")
+
+(defwindow topbar [barscreen]
+	:monitor 0
+	:geometry (geometry 	:x "0%"
+				:y "0%"
+				:width "100%"
+				:height "30px"
+				:anchor "top center")
+	:stacking "bg"
+	:exclusive false
+	:windowtype "dock"
+	:wm-ignore false
+	:namespace "bar"
+	(topbarwidget :barscreen "${barscreen}")
+)
+
+(defwidget topbarwidget [barscreen]
+	(eventbox
+		:class "${jq(groups,'.[] | select(.screen=="${barscreen}") | .isfull') ? "istiled" : ""}"
+		:onhover "${ workspacehover == "" ? "${EWW_CMD} update workspacehover=${barscreen}" : "sleep 0.05 && ${EWW_CMD} update workspacehover=${barscreen}"}"
+		:onhoverlost "${EWW_CMD} update workspacehover="
+		(centerbox :orientation "h"
+			(box :space-evenly false :spacing 5 
+				(workspace :barscreen "${barscreen}")
+				(focusname :barscreen "${barscreen}")
+			)
+			(tickerparent)
+			(box :halign "end" :space-evenly false :spacing 10 
+				(mpdindicator :doreveal "true" :dowindow "false")
+				(statusbarmain :barscreen "${barscreen}")
+			)
+		)
+	)
+)

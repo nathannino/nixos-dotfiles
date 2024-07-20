@@ -1,0 +1,97 @@
+(defpoll mpdsongname :interval "0.5s" `~/.config/eww/scripts/bash/mpd-songname`)
+(defpoll mpdpaused :interval "0.5s" `~/.config/eww/scripts/bash/mpd-isplaying`)
+(defpoll mpdpercent :interval "0.5s" `~/.config/eww/scripts/bash/mpd-progress`)
+(defvar mpdactionreveal false)
+
+(defwidget mpdindicator [doreveal dowindow]
+	(box
+		:class "mpdindicator statusbar-element"
+		:hexpand "true"
+		(box :visible {mpdsongname != ""}
+			:space-evenly false
+			:spacing 7
+			(eventbox :onhover "eww update mpdactionreveal=true" :onhoverlost "eww update mpdactionreveal=false" :onclick "${dowindow ? "${EWW_CMD} open mpdwindow" : ""}" 
+				(box
+					:space-evenly false
+					:spacing 5
+					(revealer :reveal "${mpdactionreveal || !doreveal}" :transition "slideleft" (button :onclick "mpc stop" (label :markup "<b>X</b>")))
+					(box
+						:orientation "v"
+						:space-evenly false
+						(label :text "${mpdsongname}" :limit-width 80 :truncate-left true :show-truncated true)
+						(progress :value "${mpdpercent}" :orientation "h")
+					)
+					(revealer
+						:reveal "${mpdactionreveal || !doreveal}"
+						:transition "slideright"
+						(box
+							:space-evenly false
+							:orientation "h"
+							:spacing 7
+							(button :onclick "mpc prev"   (label :text " "))
+							(button :onclick "mpc toggle" (box(label :text "" :visible {mpdpaused != ""}) (label :visible {mpdpaused == ""} :text "")))
+							(button :onclick "mpc next"   (label :text " "))
+						)
+					)
+				)
+			)
+		)
+		(box :visible {mpdsongname == ""} 
+			(eventbox :onrightclick "~/.config/eww/scripts/bash/mpd-playall" :onclick "${dowindow ? "${EWW_CMD} open mpdwindow" : ""}"
+				(label :text " ")
+			)
+		)
+	)
+)
+
+(defvar hahalolxd "")
+
+(defwindow mpdwindow
+	:geometry (geometry	:x "0%"
+				:y "0%"
+				:width "810px"
+				:height "100%"
+				:anchor "top right")
+	:stacking "fg"
+	:wm-ignore "false"
+	:windowtype "normal"
+	:exclusive "false"
+	:focusable "true"
+	(box
+		:space-evenly false
+		:orientation "v"
+		:spacing 10
+		:class "notificationtoast window"
+		(mpdheader)
+		(input :onchange "eww update hahalolxd='{}'")
+		(label :text "${hahalolxd}")
+		(scroll
+			:hscroll false
+			:vexpand true
+			(box
+				:space-evenly false
+				:orientation "v"
+				:spacing 10
+				(for notification in notifs
+					(notificationtoast :jsoncontent "${notification}")
+				)
+			)
+		)
+	)
+)
+
+(defwidget mpdheader []
+	(box
+		:orientation "h"
+		:space-evenly false
+		:spacing 0
+		:class "notificationtoast notificationheader"
+		:halign "fill"
+		(mpdindicator :doreveal "false" :dowindow "false")
+		(button
+			:halign "end"
+			:onclick "${EWW_CMD} close mpdwindow"
+			(label :text "Close")
+		)
+	)
+)

@@ -1,0 +1,190 @@
+(defpoll time :interval "1s" `date +%H:%M`)
+(defpoll date :interval "1s" `date "+%a %Y-%m-%d"`)
+(defvar notificationticker false)
+(defvar notificationtickerint 0)
+(defvar notificationone "{}")
+(defvar notificationtwo "{}")
+(defvar notifs "[]")
+
+(defwidget tickerparent []
+	(stack
+		:selected {notificationticker ? "1" : "0"}
+		:transition {notificationticker ? "slideup" : "slidedown"}
+		:same-size false
+		(timedate)
+		(notificationticker)
+	)
+)
+
+(defwidget timedate []
+	(eventbox
+		:class "timedatebutton"
+		(box :class "timedatebox"
+			:spacing 3
+			:space-evenly false
+			:halign "center"
+			(unreadbadge)
+			(label :text "${date} | ${time}")
+		)
+	)
+)
+
+(defwidget notificationticker []
+	(stack
+		:selected {notificationtickerint}
+		:transition "slidedown"
+		:same-size false
+		(notificationtickerdisplay :msg "${notificationone}")
+		(notificationtickerdisplay :msg "${notificationtwo}")
+	)
+)
+
+(defwidget notificationtickerdisplay [msg]
+	(box
+		:spacing 4 
+		:orientation "h"
+		:space-evenly false
+		(label :limit-width "20" :unindent true :truncate true 	:class "notification_ticker app_name" :text "${msg.app_name}")
+		(label 							:class "notification_ticker seperator" :text ":")
+		(label :limit-width "45" :unindent true :truncate true 	:class "notification_ticker summary" :text "${msg.summary}")
+		(label :limit-width "45" :unindent true :truncate true 	:class "notification_ticker body" :text "${msg.body}")
+	)
+)
+
+(defvar notificationunread "0")
+
+(defwidget unreadbadge []
+	(box
+		:visible {notificationunread <= 0 ? "false" : "true"}
+		:class "badge unreadbadge"
+		(label :class "unreadbadge badgelabel" :text "${notificationunread}")
+	)
+)
+
+(defwidget notificationwindowwidget []
+	(box
+		:space-evenly false
+		:orientation "v"
+		:spacing 10
+		:class "notificationtoast window"
+		(notificationheader)
+		(scroll
+			:hscroll false
+			:vexpand true
+			(box
+				:space-evenly false
+				:orientation "v"
+				:spacing 10
+				(for notification in notifs
+					(notificationtoast :jsoncontent "${notification}")
+				)
+			)
+		)
+	)
+)
+
+(defwindow notificationwindowxorg
+	:geometry (geometry	:x "0%"
+				:y "0%"
+				:width "810px"
+				:height "100%"
+				:anchor "top right")
+	:stacking "fg"
+	:wm-ignore "false"
+	:windowtype "dock"
+	:exclusive "false"
+	(notificationwindowwidget)
+)
+
+(defwindow notificationwindowwayland
+	:geometry (geometry	:x "0%"
+				:y "0%"
+				:width "810px"
+				:height "100%"
+				:anchor "top right")
+	:stacking "overlay"
+	:exclusive "false"
+	(notificationwindowwidget)
+)
+
+(defwidget notificationheader []
+	(box
+		:orientation "h"
+		:space-evenly true
+		:spacing 3
+		:halign "fill"
+		:class "notificationtoast notificationheader"
+		(box
+			:orientation "h"
+			:space-evenly false
+			:spacing 10
+			:halign "start"
+			(label :text "")
+			(label :text "Notifications : " :halign "start")
+		)
+		(box
+			:orientation "h"
+			:space-evenly true
+			:spacing 3
+			:halign "end"
+			(button
+				:onclick "~/.config/eww/scripts/bash/notifs/pipe_input.sh refresh"
+				(label :text "Refresh")
+			)
+			(button
+				:onclick "~/.config/eww/scripts/bash/notifs/pipe_input.sh clear-all"
+				(label :text "Clear all")
+			)
+			(button
+				:onclick "${EWW_CMD} close ${qtilecore == "xorg" ? "notificationwindowxorg" : "notificationwindowwayland"}"
+				(label :text "Close")
+			)
+		)
+	)
+)
+
+(defwidget notificationtoast [jsoncontent]
+	(box
+		:orientation "v"
+		:space-evenly false
+		:spacing 3
+		:class "notificationtoast notificationbox"
+		(box
+			:orientation "h"
+			:space-evenly false
+			:spacing 3
+			:valign "start"
+			:halign "center"
+			:class "notificationtoast notificationtoastheader"
+			(label :class "notificationtoast app_name" :text "${jsoncontent.app_name}")
+			(label :class "notificationtoast seperator" :text ":")
+			(label :class "notificationtoast summary" :text "${jsoncontent.summary}")
+		)
+		(box
+			:orientation "h"
+			:space-evenly false
+			:spacing 8
+			:halign "start"
+			:class "notificationtoast body"
+			(image :visible {jsoncontent.icon == "null" ? false : true} :path "${jsoncontent.icon}" :image-width 100 :image-height 100)
+			(label :class "notificationtoast body" :text "${jsoncontent.body}")
+		)
+		(box
+			:orientation "h"
+			:space-evenly false
+			:spacing 10
+			:halign "end"
+			(label :class "notificationtoast timestamp" :text "${jsoncontent.timestamp}")
+			(box
+				:orientation "h"
+				:space-evenly false
+				:spacing 15
+				(button
+					:onclick "~/.config/eww/scripts/bash/notifs/pipe_input.sh 'clear ${jsoncontent.uuid}'"
+					(label :text "Clear")
+				)
+				(label :class "notificationtoast scrollspacer" :text "")
+			)
+		)
+	)
+)

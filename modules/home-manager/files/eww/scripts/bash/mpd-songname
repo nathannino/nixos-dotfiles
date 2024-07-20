@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Get the current playing song from mpc
+MPD_CURRENT_PLAYING=$(mpc current | sed -e 's/.mp3$//g' -e 's/.ogg$//g' -e 's/second-drive\///g' -e 's/"/\\"/g' -e 's/\ \[...........\]//g')
+
+echo "$MPD_CURRENT_PLAYING"

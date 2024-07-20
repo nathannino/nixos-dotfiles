@@ -1,0 +1,132 @@
+(defvar showstatus false)
+(defvar showcpu false)
+(defvar showram false)
+
+(defwidget statusbarmain [barscreen]
+	(box :orientation "h" :space-evenly false :halign "end"
+	(eventbox
+		:onhover "${EWW_CMD} update showstatus=${barscreen}"
+		:onhoverlost "${EWW_CMD} update showstatus=false"
+		(box
+			:space-evenly false
+			:spacing 0
+			(revealer :transition "slideleft" :reveal {showstatus == barscreen || round(EWW_RAM.used_mem_perc,0) >= 50 || showram} (box :spacing 5 :space-evenly false (ramindicator) (label :text "")))
+			(revealer :transition "slideleft" :reveal {showstatus == barscreen || round(EWW_CPU.avg,0) >= 50 || showcpu} (box :spacing 5 :space-evenly false (cpuindicator) (label :text "")))
+			(revealer :transition "slideleft" :reveal {showstatus == barscreen || nethover} (box :spacing 5 :space-evenly false (netindicator) (label :text "")))
+			(revealer :transition "slideleft" :reveal {showstatus == barscreen || EWW_BATTERY.total_avg <= 50 || batindhover} (box :spacing 5 :space-evenly false (batindicator) (label :text "")))
+			(revealer :transition "slideleft" :reveal {showstatus == barscreen} (box :spacing 5 :space-evenly false (notifications :barscreen "${barscreen}") (label :text "")))
+			(revealer :transition "slideleft" :reveal {showstatus == barscreen} (box :spacing 5 :space-evenly false (systray :orientation "h" :space-evenly false :spacing "5" :icon-size "16") (label :text "")))
+			(revealer :transition "slideleft" :reveal {showstatus == barscreen} (box :spacing 5 :space-evenly false (powerbutton) (label :text "")))
+			(revealer :transition "slideleft" :reveal {showstatus != barscreen} (box :spacing 5 :space-evenly false (label :text " ") (label :text "")))
+		)
+	))
+)
+
+(defvar nethover false)
+(defvar netinthover "")
+
+(defwidget netindicator []
+	(box
+		:space-evenly false
+		:spacing 0
+		:class "netindicator statusbar-element"
+		(revealer
+			:transition "slideleft"
+			:reveal nethover
+			(box
+				:space-evenly false
+				:spacing 5
+				(for interface in {jq(EWW_NET, "to_entries")}
+					(eventbox
+						:onclick "${netinthover == interface.key ? "${EWW_CMD} update netinthover=" : "${EWW_CMD} update netinthover=${interface.key}"}"
+						(box
+							:space-evenly false
+							:spacing 5
+							(label :text "${interface.key}")
+							(revealer
+								:transition "slideleft"
+								:reveal {netinthover == interface.key}
+								(box
+									:space-evenly false
+									:spacing 5
+									(label :text "  ${interface.value.NET_DOWN}B/s")
+									(label :text "${interface.value.NET_UP}B/s  ")
+								)
+							)
+						)
+					)
+				)
+			)
+		)
+		(eventbox
+			:onclick "${EWW_CMD} update nethover=${nethover == false}"
+			(label :text " ")
+		)
+	)
+)	
+
+(defwidget cpuindicator []
+	(eventbox
+		:onclick "${EWW_CMD} update showcpu=${showcpu ? "false" : "true"}"
+		(box
+			:class "cpuindicator statusbar-element"
+			:space-evenly false
+			(overlay
+				(label :text "     ")
+				(graph :class "statusgraph ${round(EWW_CPU.avg,0) < 40 ? "graphgood" : round(EWW_CPU.avg,0) < 80 ? "graphwarning" : "graphbad" }" :value "${round(EWW_CPU.avg,0)}" :time-range "1m" :min "0" :max "100")
+				(label :halign "center" :text "cpu ${round(EWW_CPU.avg,0)}%" :class "text-overlay")
+			)
+		)
+	)
+)
+
+(defwidget ramindicator []
+	(eventbox
+		:onclick "${EWW_CMD} update showram=${showram ? "false" : "true"}"
+		(box
+			:class "ramindicator statusbar-element"
+			(overlay
+				(label :text "     ")
+				(graph :class "statusgraph ${round(EWW_RAM.used_mem_perc,0) < 50 ? "graphgood" : round(EWW_RAM.used_mem_perc,0) < 80 ? "graphwarning" : "graphbad" }" :value "${round(EWW_RAM.used_mem_perc,0)}" :time-range "1m" :min "0" :max "100")
+				(label :halign "center" :text "ram ${round(EWW_RAM.used_mem_perc,0)}%" :class "text-overlay")
+			)
+		)
+	)
+)
+
+(defvar batindhover false)
+(defwidget batindicator []
+	(eventbox
+		:onhover "${EWW_CMD} update batindhover=true"
+		:onhoverlost "${EWW_CMD} update batindhover=false"
+		(box
+			:class "batindicator statusbar-element"
+			:spacing 3
+			:space-evenly false
+			:visible {EWW_BATTERY != ""}
+			(revealer :transition "slideleft" :reveal "${EWW_BATTERY.total_avg <= 50 || batindhover}" (label :class "batindicator-remaining" :text "${round(EWW_BATTERY.total_avg,0)}%"))
+			(label :class "font-awesome batindicator-bat" :text "${EWW_BATTERY.total_avg >= 80 ? " " : EWW_BATTERY.total_avg >= 60 ? " " : EWW_BATTERY.total_avg >= 40 ? " " : EWW_BATTERY.total_avg >= 20 ? " " : " "}")
+			(label :class "font-awesome batindicator-charging" :text "${matches(jq(EWW_BATTERY, "del(.total_avg) | to_entries | .[] .value.status"),"Charging") ? "" : ""}")
+		)
+	)
+)
+
+(defwidget notifications [barscreen]
+	(box
+		:class "notificationsbar statusbar-element"
+		(eventbox
+			:onclick "~/.config/eww/scripts/bash/notifs/pipe_input.sh read && ${EWW_CMD} open ${qtilecore == "xorg" ? "notificationwindowxorg" : "notificationwindowwayland"} --screen ${barscreen}"
+			(label :text " " :class "font-awesome")
+		)
+	)
+)
+
+(defwidget powerbutton []
+	(box
+		:class "powerbutton statusbar-element"
+		(eventbox
+			:onclick "~/.config/eww/scripts/bash/timeout.sh \"qtile cmd-obj -o root -f shutdown\""
+			(label :text " " :class "font-awesome")
+		)
+	)
+)

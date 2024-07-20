@@ -1,0 +1,9 @@
+#!/bin/sh
+
+mpc clear
+mpc add /
+mpc shuffle
+mpc random on
+mpc repeat on
+mpc single off
+mpc play

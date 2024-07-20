@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo $(mpc status | tail -n2 | head -n1 | grep paused)

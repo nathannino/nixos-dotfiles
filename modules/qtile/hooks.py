@@ -87,6 +87,7 @@ def startup_complete():
 notificationsdaemon = None
 networkmanager_applet = None
 compositor_process = None
+rss_notifications = None
 
 def shutdown_process(popen, terminate, logging_text) :
     if (popen is None) :
@@ -125,10 +126,12 @@ def shutdown_qtile():
     global notificationsdaemon
     global networkmanager_applet
     global compositor_process
+    global rss_notifications
 
     shutdown_process(notificationsdaemon , True , "notification")
     shutdown_process(networkmanager_applet , True , "nm-applet")
     shutdown_process(compositor_process , True , "picom")
+    shutdown_process(rss_notifications, True, "rssguard")
 
 #def open_process(program_name_arguments):
 #    subprocess.run(program_name_arguments)
@@ -142,6 +145,7 @@ def startup_once():
         global notificationsdaemon
         global networkmanager_applet
         global compositor_process
+        global rss_notifications
 
         commons.screen.regenerate_screen_name()
 
@@ -156,4 +160,5 @@ def startup_once():
         logger.warning("notification pid : " + str(notificationsdaemon.pid))
         # open_process_thread([shutil.which("n-customnotif")])
         networkmanager_applet = subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
+        rss_notifications = subprocess.Popen([shutil.which("rssguard")])
         # open_process_thread([shutil.which("nm-applet"),"--indicator"])
