@@ -66,7 +66,13 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  xdg.portal.enable = true;
+  xdg.portal = {
+	enable = true;
+	extraPortals = {
+		pkgs.xdg-desktop-portal-kde
+		pkgs.xdg-desktop-portal-wlr
+	}
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
