@@ -52,14 +52,5 @@ screens = [
         # x11_drag_polling_rate = 60, You could use VSCode with the python extension and it shows indentation errors, unused imports, et
         top = bar.Gap(35),
     ),
-    Screen(
-        wallpaper='~/.nixos/assets/ProjectPNG/ProjectButNoAlpha.png',
-        wallpaper_mode="fill",
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
-        top = bar.Gap(35),
-    ),
 ]
 
