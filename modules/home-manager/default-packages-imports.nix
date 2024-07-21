@@ -9,5 +9,6 @@
         ./dunst.nix
         ./git.nix
         ./sessionvariables.nix
+	./alacritty.nix
     ];
 }
