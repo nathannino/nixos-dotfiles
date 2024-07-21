@@ -29,6 +29,13 @@
           inputs.home-manager.nixosModules.default
         ];
       };
+      nixnathanlap = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/nixnathanlap/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
+      };
     };
   };
 }
