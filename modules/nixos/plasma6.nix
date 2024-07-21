@@ -10,7 +10,7 @@
 
   # services.displayManager.sddm.wayland.enable = true; # Disabled until I can fix the resolution on second screen
   services.desktopManager.plasma6.enable = true;
-
+  services.displayManager.sddm.theme = "breeze"
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
