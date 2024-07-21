@@ -68,10 +68,10 @@
 
   xdg.portal = {
 	enable = true;
-	extraPortals = {
+	extraPortals = [
 		pkgs.xdg-desktop-portal-kde
 		pkgs.xdg-desktop-portal-wlr
-	}
+	];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
