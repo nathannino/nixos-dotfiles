@@ -2,14 +2,14 @@
 {lib, config, pkgs, ...}:
 
 {
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
       # driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
         intel-media-driver
         libvdpau-va-gl
-        vlp-gpu-rt
+        vpl-gpu-rt
       ];
     };
 

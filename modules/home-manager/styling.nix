@@ -4,7 +4,7 @@
 {
 	qt = {
 		enable = true;
-		platformTheme = "kde";
+		platformTheme.name = "kde";
 		style.name = "Breeze-Dark";
 	};
 
