@@ -17,7 +17,7 @@ in
       ./.${modulespath}/qtile.nix
       ./.${modulespath}/godot.nix
       ./.${modulespath}/default-imports.nix
-      ./.${modulespath}/plasma.nix
+      ./.${modulespath}/plasma6.nix
       ./.${modulespath}/blender.nix
       ./.${modulespath}/jetbrains.nix
       #./.${modulespath}/mpd-system-borked.nix
