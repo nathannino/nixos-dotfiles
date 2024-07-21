@@ -14,6 +14,7 @@ in
       ./.${modulespath}/nvidia.nix
       ./.${modulespath}/steam.nix
       #./.${modulespath}/python-borked.nix
+      ./.${modulespath}/plasma.nix
       ./.${modulespath}/qtile.nix
       ./.${modulespath}/godot.nix
       ./.${modulespath}/default-imports.nix
