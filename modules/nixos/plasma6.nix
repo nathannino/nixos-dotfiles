@@ -16,6 +16,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [ # When starting the config split, check if each package could be included in homemanager
     kdePackages.kscreen
+    kdePackages.sddm-kcm
   ];
     };
 }
