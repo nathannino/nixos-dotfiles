@@ -47,6 +47,11 @@ in
             rofi-wayland # turns out this also supports xorg, I am the stupid
 	    customnotif
 	    networkmanagerapplet
+	    swayosd
         ];
+	
+	systemd.packages = with pkgs; [
+		swayosd
+	];
     };
 }

@@ -87,6 +87,7 @@ def startup_complete():
 notificationsdaemon = None
 networkmanager_applet = None
 compositor_process = None
+waylandosd_process = None
 rss_notifications = None
 
 def shutdown_process(popen, terminate, logging_text) :
@@ -127,10 +128,12 @@ def shutdown_qtile():
     global networkmanager_applet
     global compositor_process
     global rss_notifications
+    global waylandosd_process
 
     shutdown_process(notificationsdaemon , True , "notification")
     shutdown_process(networkmanager_applet , True , "nm-applet")
     shutdown_process(compositor_process , True , "picom")
+    shutdown_process(waylandosd_process, True, "swayosd")
     shutdown_process(rss_notifications, True, "rssguard")
 
 #def open_process(program_name_arguments):
@@ -146,6 +149,7 @@ def startup_once():
         global networkmanager_applet
         global compositor_process
         global rss_notifications
+        global waylandosd_process
 
         commons.screen.regenerate_screen_name()
 
@@ -153,6 +157,7 @@ def startup_once():
             compositor_process = subprocess.Popen([shutil.which("picom")])
             # open_process_thread([shutil.which("picom")])
         else :
+            waylandosd_process = subprocess.Popen([shutil.which("swayosd-server")])
             print("unsupported") # Replace with something idk
 
         # subprocess.Popen("dunst")
