@@ -60,7 +60,11 @@ def eww_open_screen(screen) :
         screen_name = str(screen.index)
         logger.warning("Screen index is bad")
 
-    subprocess.run("eww open topbar --screen " + screen_name + " --id " + eww_generate_id("topbar",screen.index) + " --arg barscreen=" + screen_name, shell=True)
+    topbarname = "topbarxorg"
+    if (qtile.core.name == "wayland") :
+        topbarname = "topbarwayland"
+
+    subprocess.run("eww open " + topbarname + " --screen " + screen_name + " --id " + eww_generate_id("topbar",screen.index) + " --arg barscreen=" + screen_name, shell=True)
 
 def eww_reinit_process():
     subprocess.run("eww close-all", shell=True)

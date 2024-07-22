@@ -5,12 +5,27 @@
 
 (defvar qtilecore "xorg")
 
-(defwindow topbar [barscreen]
+(defwindow topbarxorg [barscreen]
 	:monitor 0
 	:geometry (geometry 	:x "0%"
 				:y "0%"
 				:width "100%"
-				:height "${ qtilecore == "xorg" : "30px" ? "32px"}"
+				:height "30px"
+				:anchor "top center")
+	:stacking "bg"
+	:exclusive false
+	:windowtype "dock"
+	:wm-ignore false
+	:namespace "bar"
+	(topbarwidget :barscreen "${barscreen}")
+)
+
+(defwindow topbarwayland [barscreen]
+	:monitor 0
+	:geometry (geometry 	:x "0%"
+				:y "0%"
+				:width "100%"
+				:height "32px"
 				:anchor "top center")
 	:stacking "bg"
 	:exclusive false
