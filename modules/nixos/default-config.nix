@@ -70,7 +70,7 @@
   xdg.portal = {
 	enable = true;
 	extraPortals = [
-		pkgs.xdg-desktop-portal-kde
+		kdePackages.xdg-desktop-portal-kde
 		pkgs.xdg-desktop-portal-wlr
 	];
   };
