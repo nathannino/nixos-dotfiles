@@ -50,8 +50,8 @@ in
 	    swayosd
         ];
 	
-	systemd.packages = with pkgs; [
-		swayosd
+	systemd.packages = [
+		${pkgs.swayosd}/lib/systemd/system/swayosd-libinput-backend.service
 	];
     };
 }
