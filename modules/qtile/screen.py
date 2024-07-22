@@ -28,10 +28,17 @@ def update_screen_dictionary(new_screen_dictionary):
 
 def get_screen_name_index(index) :
     global screen_dictionary
+    
+    if (qtile.core.name == "wayland") :
+        return str(index)
     return screen_dictionary[index]["name"]
 
 def attempt_screen_translation(screenobj) :
     global screen_dictionary
+    
+    if (qtile.core.name == "wayland") :
+        return screenobj["index"]
+
     for screen_dict_entry in screen_dictionary :
         if (screen_dict_entry["x"] == screenobj["x"] and screen_dict_entry["y"] == screenobj["y"]) :
             return screen_dict_entry["name"]
