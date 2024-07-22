@@ -166,4 +166,5 @@ def startup_once():
         # open_process_thread([shutil.which("n-customnotif")])
         networkmanager_applet = subprocess.Popen([shutil.which("nm-applet"),"--indicator"])
         rss_notifications = subprocess.Popen([shutil.which("rssguard")])
+        subprocess.run([shutil.which("dbus-update-activation-environment"),"--systemd","WAYLAND_DISPLAY","XDG_CURRENT_DESKTOP=sway"])
         # open_process_thread([shutil.which("nm-applet"),"--indicator"])
