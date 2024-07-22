@@ -53,6 +53,6 @@ in
 	systemd.packages = [
 		pkgs.swayosd
 	];
-	systemd.services.swayosd-libinput-backend.wantedBy = ["default.target"]
+	systemd.services.swayosd-libinput-backend.wantedBy = ["default.target"];
     };
 }
