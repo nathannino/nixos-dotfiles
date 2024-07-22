@@ -55,12 +55,12 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     # Add swayosd controls :
-    Key([],"XF86AudioMute",lazy.spawn("swayosd-client --output-volume mute-toggle").when(func=lambda : qtile.core.name == "wayland"))
-    Key([],"XF86AudioRaiseVolume",lazy.spawn("swayosd-client --output-volume raise").when(func=lambda : qtile.core.name == "wayland"))
-    Key([],"XF86AudioLowerVolume",lazy.spawn("swayosd-client --output-volume lower").when(func=lambda : qtile.core.name == "wayland"))
-    Key([],"XF86AudioMicMute",lazy.spawn("swayosd-client --input-volume mute-toggle").when(func=lambda : qtile.core.name == "wayland"))
-    Key([],"XF86MonBrightnessUp",lazy.spawn("swayosd-client --brightness raise").when(func=lambda : qtile.core.name == "wayland"))
-    Key([],"XF86MonBrightnessDown",lazy.spawn("swayosd-client --brightness lower").when(func=lambda : qtile.core.name == "wayland"))
+    Key([],"XF86AudioMute",lazy.spawn("swayosd-client --output-volume mute-toggle").when(func=lambda: qtile.core.name == "wayland")),
+    Key([],"XF86AudioRaiseVolume",lazy.spawn("swayosd-client --output-volume raise").when(func=lambda: qtile.core.name == "wayland")),
+    Key([],"XF86AudioLowerVolume",lazy.spawn("swayosd-client --output-volume lower").when(func=lambda: qtile.core.name == "wayland")),
+    Key([],"XF86AudioMicMute",lazy.spawn("swayosd-client --input-volume mute-toggle").when(func=lambda: qtile.core.name == "wayland")),
+    Key([],"XF86MonBrightnessUp",lazy.spawn("swayosd-client --brightness raise").when(func=lambda: qtile.core.name == "wayland")),
+    Key([],"XF86MonBrightnessDown",lazy.spawn("swayosd-client --brightness lower").when(func=lambda: qtile.core.name == "wayland")),
 ]
 
 # Add key bindings to switch VTs in Wayland.
