@@ -51,7 +51,8 @@ in
         ];
 	
 	systemd.packages = [
-		${pkgs.swayosd}/lib/systemd/system/swayosd-libinput-backend.service
+		pkgs.swayosd
 	];
+	systemd.services.swayosd-libinput-backend.wantedBy = ["default.target"]
     };
 }
