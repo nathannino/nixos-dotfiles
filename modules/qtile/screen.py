@@ -37,7 +37,7 @@ def attempt_screen_translation(screenobj) :
     global screen_dictionary
     
     if (qtile.core.name == "wayland") :
-        return screenobj["index"]
+        return str(screenobj["index"])
 
     for screen_dict_entry in screen_dictionary :
         if (screen_dict_entry["x"] == screenobj["x"] and screen_dict_entry["y"] == screenobj["y"]) :

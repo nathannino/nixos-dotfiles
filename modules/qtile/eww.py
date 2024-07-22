@@ -36,7 +36,7 @@ def eww_update_groups():
             if (not group.current_window.info().get("fullscreen",False)) :
                 istiled = True
 
-        group_dict = {'name': group_info['name'],'label' : group_info['label'], 'windows' : group_info['windows'], 'focus' : group_info['focus'], 'screen' : str(commons.screen.get_screen_name_old_index(group_info['screen'], True)), 'layout' : group_info['layout'], 'isfull' : istiled};
+        group_dict = {'name': group_info['name'],'label' : group_info['label'], 'windows' : group_info['windows'], 'focus' : group_info['focus'], 'screen' : commons.screen.get_screen_name_old_index(group_info['screen'], True), 'layout' : group_info['layout'], 'isfull' : istiled};
         group_array.append(group_dict)
     
     subprocess.run("eww update groups=\'" + json.dumps(group_array).replace("'","'\"'\"'") + "\'",shell=True)
