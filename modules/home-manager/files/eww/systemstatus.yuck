@@ -106,7 +106,7 @@
 			:spacing 3
 			:space-evenly false
 			:visible {EWW_BATTERY != ""}
-			(revealer :transition "slideleft" :reveal "${EWW_BATTERY.total_avg <= 50 || batindhover}" (label :class "batindicator-remaining" :text "${round(EWW_BATTERY.total_avg,0)}%"))
+			(revealer :transition "slideleft" :reveal "${EWW_BATTERY.total_avg <= 50 || batindhover || showbat}" (label :class "batindicator-remaining" :text "${round(EWW_BATTERY.total_avg,0)}%"))
 			(label :class "font-awesome batindicator-bat" :text "${EWW_BATTERY.total_avg >= 80 ? " " : EWW_BATTERY.total_avg >= 60 ? " " : EWW_BATTERY.total_avg >= 40 ? " " : EWW_BATTERY.total_avg >= 20 ? " " : " "}")
 			(label :class "font-awesome batindicator-charging" :text "${matches(jq(EWW_BATTERY, "del(.total_avg) | to_entries | .[] .value.status"),"Charging") ? "" : ""}")
 		)
