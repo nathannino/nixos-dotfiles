@@ -52,6 +52,7 @@ in
 	
 	systemd.packages = [
 		pkgs.swayosd
+		pkgs.wayout
 	];
 	systemd.services.swayosd-libinput-backend.wantedBy = ["default.target"];
     };

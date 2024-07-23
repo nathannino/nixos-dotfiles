@@ -1,6 +1,7 @@
 (defvar showstatus false)
 (defvar showcpu false)
 (defvar showram false)
+(defvar showbat false)
 
 (defwidget statusbarmain [barscreen]
 	(box :orientation "h" :space-evenly false :halign "end"
@@ -13,7 +14,7 @@
 			(revealer :transition "slideleft" :reveal {showstatus == barscreen || round(EWW_RAM.used_mem_perc,0) >= 50 || showram} (box :spacing 5 :space-evenly false (ramindicator) (label :text "")))
 			(revealer :transition "slideleft" :reveal {showstatus == barscreen || round(EWW_CPU.avg,0) >= 50 || showcpu} (box :spacing 5 :space-evenly false (cpuindicator) (label :text "")))
 			(revealer :transition "slideleft" :reveal {showstatus == barscreen || nethover} (box :spacing 5 :space-evenly false (netindicator) (label :text "")))
-			(revealer :transition "slideleft" :reveal {showstatus == barscreen || EWW_BATTERY.total_avg <= 50 || batindhover} (box :spacing 5 :space-evenly false (batindicator) (label :text "")))
+			(revealer :transition "slideleft" :reveal {showstatus == barscreen || EWW_BATTERY.total_avg <= 50 || batindhover || showbat} (box :spacing 5 :space-evenly false (batindicator) (label :text "")))
 			(revealer :transition "slideleft" :reveal {showstatus == barscreen} (box :spacing 5 :space-evenly false (notifications :barscreen "${barscreen}") (label :text "")))
 			(revealer :transition "slideleft" :reveal {showstatus == barscreen} (box :spacing 5 :space-evenly false (systray :orientation "h" :space-evenly false :spacing "5" :icon-size "16") (label :text "")))
 			(revealer :transition "slideleft" :reveal {showstatus == barscreen} (box :spacing 5 :space-evenly false (powerbutton) (label :text "")))
@@ -99,6 +100,7 @@
 	(eventbox
 		:onhover "${EWW_CMD} update batindhover=true"
 		:onhoverlost "${EWW_CMD} update batindhover=false"
+		:onclick "${EWW_CMD} update showbat=${showbat ? "false" : "true"}"
 		(box
 			:class "batindicator statusbar-element"
 			:spacing 3

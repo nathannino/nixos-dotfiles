@@ -36,6 +36,8 @@
 	    	nvd
 	    	qpwgraph
 	    	rssguard
+		waycheck
+		calc
         ];
     };
 }
