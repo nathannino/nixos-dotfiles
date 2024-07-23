@@ -14,6 +14,7 @@
 		:reveal {group.windows != "[]" || group.screen != "null" || workspacehover == barscreen}
 		(eventbox 
 			:onclick "~/.config/eww/scripts/bash/timeout.sh \"qtile cmd-obj -o group ${group.name} -f toscreen\""
+			:onrightclick "notify-send hi hello"
 			(box 
 			:class "${group.screen != "null" ? "screen" : "noscreen"} ${group.screen == currentscreen ? "focused-screen" : ""} ${group.screen == barscreen ? "bar-screen" : ""} ${group.windows == "[]" ? "" : "haswindow"} workspace-group" 
 			" ${group.label} ")
