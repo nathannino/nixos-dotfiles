@@ -69,11 +69,11 @@
 
   xdg.portal = {
 	enable = true;
-	extraPortals = [
-		#pkgs.xdg-desktop-portal-gtk
-		pkgs.kdePackages.xdg-desktop-portal-kde
-		pkgs.xdg-desktop-portal-wlr
-	];
+	#extraPortals = [ # Let's see if we can make it use the config file instead
+	#		#pkgs.xdg-desktop-portal-gtk
+	##		pkgs.kdePackages.xdg-desktop-portal-kde
+	#		pkgs.xdg-desktop-portal-wlr
+	#];
   };
 
   nix.gc = {
