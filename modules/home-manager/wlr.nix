@@ -3,7 +3,7 @@
 {
     home.file.".config/xdg-desktop-portal/sway-portal.conf".text = ''
 [preferred]
-default=kde
+default=gtk
 org.freedesktop.impl.portal.Screenshot=wlr
 org.freedesktop.impl.portal.ScreenCast=wlr
     '';
