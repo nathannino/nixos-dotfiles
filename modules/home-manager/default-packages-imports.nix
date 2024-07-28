@@ -10,6 +10,5 @@
         ./git.nix
         ./sessionvariables.nix
 	./alacritty.nix
-	./wlr.nix
     ];
 }
