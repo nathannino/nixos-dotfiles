@@ -61,6 +61,7 @@ in
 	    customnotif
 	    networkmanagerapplet
 	    swayosd
+	    qtile-unwrapped
         ];
 	
 	systemd.packages = [
