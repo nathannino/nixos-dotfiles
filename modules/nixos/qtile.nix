@@ -1,9 +1,5 @@
 {lib, config, pkgs, ...}:
 
-    	imports = [
-		./wlr.nix
-    	];
-
 let
   cfg = config.qtilemodule;
 in
@@ -16,6 +12,10 @@ in
     #  };
     #};
     config = {
+    	imports = 
+	[
+		./wlr.nix
+    	];
       #services.xserver.windowManager.qtile = { # This literally just installs qtile what???? At best, also adds a config file.
       #  enable = true;
       # # configFile = ./../../hosts/nvidiadesktop/qtilecfg.py; # Doesn't work =(. Check home.nix instead
