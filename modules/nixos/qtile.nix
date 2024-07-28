@@ -16,12 +16,23 @@ in
         (self: super: {
           qtile-unwrapped = super.qtile-unwrapped.overrideAttrs(new: old: {
             passthru.providedSessions = [ "qtile" "qtile-wayland" ];
-                postPatch = old.postPatch + ''
+                postPatch = let
+			qtileWaylandSession = ''
+				[Desktop Entry]
+				Name=Qtile (Wayland)
+				Comment=Qtile on Wayland
+				Exec=env XDG_CURRENT_DESKTOP=sway qtile start -b wayland
+				Type=Application
+				Keywords=wm;tilling
+			'';
+		in old.postPatch + ''
                   mkdir -p $out/share/wayland-sessions
                   mkdir -p $out/share/xsessions
                   install resources/qtile.desktop -Dt $out/share/xsessions
-                  install resources/qtile-wayland.desktop -Dt $out/share/wayland-sessions
+		  echo "${qtileWaylandSession}" > $out/share/wayland-sessions/qtile-wayland.desktop
+		  chmod 777 $out/share/wayland-sessions/qtile-wayland.desktop
                   '';
+		  # install resources/qtile-wayland.desktop -Dt $out/share/wayland-sessions
           });
         })
       ];
