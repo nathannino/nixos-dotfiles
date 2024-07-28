@@ -12,6 +12,12 @@ in
     #  };
     #};
     config = {
+      services.xserver.windowManager.qtile = {
+        enable = true;
+       # configFile = ./../../hosts/nvidiadesktop/qtilecfg.py; # Doesn't work =(. Check home.nix instead
+      };
+
+
       nixpkgs.overlays = [ # I really should have saved the source oups. Something something reddit comment
         (self: super: {
           qtile-unwrapped = super.qtile-unwrapped.overrideAttrs(new: old: {
@@ -39,11 +45,6 @@ in
       ];
 
       services.displayManager.sessionPackages = [ pkgs.qtile-unwrapped ];
-
-      services.xserver.windowManager.qtile = {
-        enable = true;
-       # configFile = ./../../hosts/nvidiadesktop/qtilecfg.py; # Doesn't work =(. Check home.nix instead
-      };
 
       # services.picom.enable = true;
 	
