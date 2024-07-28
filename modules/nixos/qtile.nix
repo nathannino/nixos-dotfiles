@@ -12,15 +12,15 @@ in
     #  };
     #};
     config = {
-      services.xserver.windowManager.qtile = {
-        enable = true;
-       # configFile = ./../../hosts/nvidiadesktop/qtilecfg.py; # Doesn't work =(. Check home.nix instead
-      };
+      #services.xserver.windowManager.qtile = { # This literally just installs qtile what???? At best, also adds a config file and sets the sessionPackage variable. We are just going to do it ourselves
+      #  enable = true;
+      # # configFile = ./../../hosts/nvidiadesktop/qtilecfg.py; # Doesn't work =(. Check home.nix instead
+      #};
 
 
       nixpkgs.overlays = [ # I really should have saved the source oups. Something something reddit comment
         (self: super: {
-          qtile-unwrapped = super.qtile-unwrapped.overrideAttrs(new: old: {
+          qtile = super.qtile.overrideAttrs(new: old: {
             passthru.providedSessions = [ "qtile" "qtile-wayland" ];
                 postPatch = let
 			qtileWaylandSession = ''
@@ -37,14 +37,13 @@ in
                   install resources/qtile.desktop -Dt $out/share/xsessions
 		  echo "${qtileWaylandSession}" > $out/share/wayland-sessions/qtile-wayland.desktop
 		  chmod 777 $out/share/wayland-sessions/qtile-wayland.desktop
-		  touch $out/share/wayland-sessions/testing.txt
                   '';
 		  # install resources/qtile-wayland.desktop -Dt $out/share/wayland-sessions
           });
         })
       ];
 
-      services.displayManager.sessionPackages = [ pkgs.qtile-unwrapped ];
+      services.displayManager.sessionPackages = [ pkgs.qtile ];
 
       # services.picom.enable = true;
 	
@@ -53,6 +52,7 @@ in
 	};
 
         environment.systemPackages = with pkgs; [
+	    qtile
             eww #TODO : Maybe this could be seperated... not sure
             picom #TODO : Only install with no wayland? Not how our thing works right now tho
             # rofi # We using eww instead omg # ok quick update GOD NO. We are not using eww instead this is a horrible idea whyyyyyyyyy
@@ -61,7 +61,6 @@ in
 	    customnotif
 	    networkmanagerapplet
 	    swayosd
-	    qtile-unwrapped
         ];
 	
 	systemd.packages = [
