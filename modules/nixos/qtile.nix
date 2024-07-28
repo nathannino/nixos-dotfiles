@@ -31,6 +31,7 @@ in
                   install resources/qtile.desktop -Dt $out/share/xsessions
 		  echo "${qtileWaylandSession}" > $out/share/wayland-sessions/qtile-wayland.desktop
 		  chmod 777 $out/share/wayland-sessions/qtile-wayland.desktop
+		  touch $out/share/wayland-sessions/testing.txt
                   '';
 		  # install resources/qtile-wayland.desktop -Dt $out/share/wayland-sessions
           });
