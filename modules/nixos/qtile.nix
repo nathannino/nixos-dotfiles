@@ -1,17 +1,8 @@
 {lib, config, pkgs, ...}:
 
-let
-  cfg = config.qtilemodule;
-in
+
 {
-    #options.qtilemodule = {
-    #  configfile = lib.mkOption {
-    #    type = lib.types.nullOr lib.types.path;
-    #    description = "The location of the host-specific config file.";
-    #    default = null; # TODO : Add a default config, because pretty sure having it be null makes it not build
-    #  };
-    #};
-    config = {
+
     	imports = 
 	[
 		./wlr.nix
@@ -84,5 +75,4 @@ Keywords=wm;tilling'';
 		pkgs.wayout
 	];
 	systemd.services.swayosd-libinput-backend.wantedBy = ["default.target"];
-    };
 }
