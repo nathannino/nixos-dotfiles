@@ -42,7 +42,7 @@ keys = [
     Key([mod, "shift"], "Return", lazy.spawn(runner), desc="Launch application launcher"),
     Key([mod, "shift"], "z", lazy.spawn(webbrowser), desc="Launch web browser"),
     Key([mod, "shift"], "e", lazy.spawn(filebrowser), desc="Launch file browser"),
-    Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc="Take a screenshot")
+    Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc="Take a screenshot"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
