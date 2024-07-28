@@ -41,13 +41,12 @@ in
 		  # install resources/qtile-wayland.desktop -Dt $out/share/wayland-sessions
 		postInstall = let
 			qtileWaylandSession = ''
-				[Desktop Entry]
-				Name=Qtile (Wayland)
-				Comment=Qtile on Wayland
-				Exec=env XDG_CURRENT_DESKTOP=sway qtile start -b wayland
-				Type=Application
-				Keywords=wm;tilling
-			'';
+[Desktop Entry]
+Name=Qtile (Wayland)
+Comment=Qtile on Wayland
+Exec=env XDG_CURRENT_DESKTOP=sway qtile start -b wayland
+Type=Application
+Keywords=wm;tilling'';
 		in ''
 		  echo "${qtileWaylandSession}" > $out/share/wayland-sessions/qtile-wayland.desktop
 		  chmod 777 $out/share/wayland-sessions/qtile-wayland.desktop
