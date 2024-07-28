@@ -67,14 +67,14 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  xdg.portal = {
-	enable = true;
+  #xdg.portal = {
+#	enable = true;
 	#extraPortals = [ # Let's see if we can make it use the config file instead
 	#		#pkgs.xdg-desktop-portal-gtk
 	##		pkgs.kdePackages.xdg-desktop-portal-kde
 	#		pkgs.xdg-desktop-portal-wlr
 	#];
-  };
+ # };
 
   nix.gc = {
 	automatic = true;

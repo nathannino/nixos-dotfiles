@@ -38,8 +38,8 @@
 	    	rssguard
 		waycheck
 		calc
-		kdePackages.xdg-desktop-portal-kde
-		xdg-desktop-portal-wlr
+		#kdePackages.xdg-desktop-portal-kde
+		#xdg-desktop-portal-wlr
 		#xdg-desktop-portal-gtk
         ];
     };
