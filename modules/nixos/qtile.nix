@@ -12,7 +12,7 @@ in
     #  };
     #};
     config = {
-      #services.xserver.windowManager.qtile = { # This literally just installs qtile what???? At best, also adds a config file and sets the sessionPackage variable. We are just going to do it ourselves
+      #services.xserver.windowManager.qtile = { # This literally just installs qtile what???? At best, also adds a config file.
       #  enable = true;
       # # configFile = ./../../hosts/nvidiadesktop/qtilecfg.py; # Doesn't work =(. Check home.nix instead
       #};
@@ -20,7 +20,7 @@ in
 
       nixpkgs.overlays = [ # I really should have saved the source oups. Something something reddit comment
         (self: super: {
-          qtile = super.qtile.overrideAttrs(new: old: {
+          qtile-unwrapped = super.qtile-unwrapped.overrideAttrs(new: old: {
             passthru.providedSessions = [ "qtile" "qtile-wayland" ];
                 postPatch = let
 			qtileWaylandSession = ''
@@ -43,7 +43,7 @@ in
         })
       ];
 
-      services.displayManager.sessionPackages = [ pkgs.qtile ];
+      services.displayManager.sessionPackages = [ pkgs.qtile-unwrapped ];
 
       # services.picom.enable = true;
 	
@@ -52,7 +52,6 @@ in
 	};
 
         environment.systemPackages = with pkgs; [
-	    qtile
             eww #TODO : Maybe this could be seperated... not sure
             picom #TODO : Only install with no wayland? Not how our thing works right now tho
             # rofi # We using eww instead omg # ok quick update GOD NO. We are not using eww instead this is a horrible idea whyyyyyyyyy
@@ -61,6 +60,7 @@ in
 	    customnotif
 	    networkmanagerapplet
 	    swayosd
+	    qtile-unwrapped
         ];
 	
 	systemd.packages = [
