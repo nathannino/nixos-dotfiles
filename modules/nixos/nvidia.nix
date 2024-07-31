@@ -12,7 +12,7 @@ in
 
   config = lib.mkIf cfg.enable {
     # Enable OpenGL # TODO : Should this me moved to another module?
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
       # driSupport = true;
       driSupport32Bit = true;
