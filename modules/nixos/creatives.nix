@@ -9,6 +9,7 @@
 
         environment.systemPackages = with pkgs; [
             krita
+	    pixelorama
             inkscape
             libsForQt5.kdenlive # wtf is that in libsForQt5???
         ];
