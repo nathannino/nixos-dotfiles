@@ -11,7 +11,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #./.${modulespath}/steam.nix
+      ./.${modulespath}/steam.nix
       ./.${modulespath}/intelg.nix
       #./.${modulespath}/python-borked.nix
       ./.${modulespath}/qtile.nix
