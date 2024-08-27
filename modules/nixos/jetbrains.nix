@@ -1,5 +1,3 @@
-# nvidia bs file because ndidia graphics card
-# btw, since this is my first nix module, tutorial used to make this, kept for future reference : https://www.youtube.com/watch?v=a67Sv4Mbxmc
 {lib, config, pkgs, ...}:
 
 let
@@ -7,7 +5,7 @@ let
 in
 {
   options.jetbrainide = {
-    ultimate = lib.mkEnableOption "enable nvidia graphics driver";
+    ultimate = lib.mkEnableOption "enable paid jetbrains";
   };
 
   config = lib.mkMerge 
@@ -18,11 +16,13 @@ in
 				jetbrains.rider
 				jetbrains.clion
 				jetbrains.webstorm
+				jetbrains.pycharm-professional
 			];
     		})
 		(lib.mkIf (!cfg.ultimate) {
   			environment.systemPackages = with pkgs; [
 				jetbrains.idea-community-bin
+				jetbrains.pycharm-community-bin
 			];
 		})
 	];
