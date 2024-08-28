@@ -27,6 +27,7 @@
 from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
+from libqtile.backend.wayland import InputConfig
 from commons.keys import keys, mouse
 from commons.groupsnlayouts import groups, layouts
 from commons.variables import *
@@ -34,6 +35,10 @@ import commons.hooks
 import shutil
 
 import subprocess
+
+#wl_input_rules = {
+#            "GTCH7503:00 2A94:D64D"
+#        }
 
 widget_defaults = dict(
     font="sans",

@@ -41,6 +41,7 @@
 		waycheck
 		calc
 		flameshot
+		libreoffice
         ];
     };
 }
