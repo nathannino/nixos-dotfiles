@@ -20,6 +20,7 @@ in
       ./.${modulespath}/plasma6.nix
       ./.${modulespath}/blender.nix
       ./.${modulespath}/jetbrains.nix
+      ./.${modulespath}/slack.nix
       #./.${modulespath}/mpd-system-borked.nix
       inputs.home-manager.nixosModules.default
     ];
