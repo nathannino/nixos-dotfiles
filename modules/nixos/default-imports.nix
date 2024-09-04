@@ -12,5 +12,6 @@
       ./mpd-user.nix
       ./creatives.nix # Not certain if default
       ./appimage.nix
+      ./keyboard.nix
     ];
 }
