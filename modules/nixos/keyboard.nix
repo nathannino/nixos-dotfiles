@@ -4,7 +4,7 @@
 {
     config = {
 	services.xserver = {
-		xkb.layout = "fr,us";
+		xkb.layout = "ca,us";
 		xkb.options = "grp:win_space_toggle";
 	};
     };
