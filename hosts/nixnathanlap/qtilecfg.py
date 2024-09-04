@@ -37,7 +37,7 @@ import shutil
 import subprocess
 
 wl_input_rules = {
-        "type:keyboard": InputConfig(layout="ca")
+        "type:keyboard": InputConfig(layout="fr")
 }
 
 widget_defaults = dict(
