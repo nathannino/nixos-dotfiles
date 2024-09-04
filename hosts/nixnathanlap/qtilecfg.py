@@ -36,9 +36,9 @@ import shutil
 
 import subprocess
 
-#wl_input_rules = {
-#            "GTCH7503:00 2A94:D64D"
-#        }
+wl_input_rules = {
+        "type:keyboard": InputConfig(layout="ca")
+}
 
 widget_defaults = dict(
     font="sans",
