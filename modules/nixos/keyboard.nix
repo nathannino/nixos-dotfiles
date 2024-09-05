@@ -7,11 +7,11 @@ in
     options.keyboardmodule = {
 	layout = lib.mkOption {
 		type = types.string;
-		default = "us"
+		default = "us";
 	};
 	options = lib.mkOption {
 		type = types.string;
-		default = ""
+		default = "";
 	};
     }
     config = {
