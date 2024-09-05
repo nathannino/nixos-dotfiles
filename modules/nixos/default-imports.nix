@@ -16,5 +16,5 @@
     ];
 
     keyboardmodule.layout = "ca,us";
-    keyboardmodule.options = "grp:win_space_toggle"
+    keyboardmodule.options = "grp:win_space_toggle";
 }
