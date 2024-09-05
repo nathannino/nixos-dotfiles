@@ -13,7 +13,7 @@ in
 		type = types.string;
 		default = "";
 	};
-    }
+    };
     config = {
 	services.xserver = {
 		xkb.layout = cfg.layout;
