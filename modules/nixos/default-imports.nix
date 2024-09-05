@@ -15,6 +15,6 @@
       ./keyboard.nix
     ];
 
-    keyboardmodule.layout = "ca,us";
+    keyboardmodule.layout = "us,ca";
     keyboardmodule.options = "grp:win_space_toggle";
 }
