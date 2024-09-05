@@ -6,11 +6,11 @@ in
 {
     options.keyboardmodule = {
 	layout = lib.mkOption {
-		type = types.string;
+		type = lib.types.string;
 		default = "us";
 	};
 	options = lib.mkOption {
-		type = types.string;
+		type = lib.types.string;
 		default = "";
 	};
     };
