@@ -61,7 +61,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  programs.kdeconnect.enable = true;
+  #programs.kdeconnect.enable = true;
 
 
   nix.gc = {
