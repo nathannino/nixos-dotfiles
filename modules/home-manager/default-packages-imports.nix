@@ -10,6 +10,6 @@
         ./git.nix
         ./sessionvariables.nix
 	./alacritty.nix
-	./kdeconnect.nix
+	#./kdeconnect.nix
     ];
 }
