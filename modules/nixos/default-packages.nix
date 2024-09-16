@@ -42,6 +42,7 @@
 		calc
 		flameshot
 		libreoffice
+		maven
         ];
     };
 }
