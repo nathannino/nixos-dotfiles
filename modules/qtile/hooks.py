@@ -154,7 +154,7 @@ def startup_once():
         commons.screen.regenerate_screen_name()
 
         if (qtile.core.name == "x11"):
-            compositor_process = subprocess.Popen([shutil.which("picom")])
+            compositor_process = subprocess.Popen([shutil.which("picom"), "--backend", "glx"])
             # open_process_thread([shutil.which("picom")])
         else :
             waylandosd_process = subprocess.Popen([shutil.which("swayosd-server")])
