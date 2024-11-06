@@ -43,6 +43,9 @@
 		flameshot
 		libreoffice
 		maven
+		(with dotnetCorePackages; combinePackages [
+			sdk_8_0
+		])
         ];
     };
 }
