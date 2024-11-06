@@ -17,6 +17,6 @@
 		iconTheme = {
 			package = pkgs.kdePackages.breeze-icons;
 			name = "Breeze-Dark";
-		}
+		};
 	};
 }
