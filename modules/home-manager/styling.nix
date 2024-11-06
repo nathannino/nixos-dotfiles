@@ -5,7 +5,7 @@
 	qt = {
 		enable = true;
 		platformTheme.name = "kde";
-		style.name = "Breeze-Dark";
+		style.name = "breeze";
 	};
 
 	gtk = {
@@ -14,5 +14,9 @@
 			name = "Breeze-Dark";
 			package = pkgs.kdePackages.breeze-gtk;
 		};
+		iconTheme = {
+			package = pkgs.kdePackages.breeze-icons;
+			name = "Breeze-Dark";
+		}
 	};
 }
