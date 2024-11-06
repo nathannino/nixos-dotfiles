@@ -19,6 +19,8 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  programs.dconf.enable = true;
+
   # Set your time zone.
   time.timeZone = "America/Toronto";
 
