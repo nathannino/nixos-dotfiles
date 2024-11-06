@@ -46,7 +46,7 @@
 		(with dotnetCorePackages; combinePackages [
 			sdk_8_0
 		])
-		gnome.adwaita-icon-theme
+		adwaita-icon-theme
         ];
     };
 }
