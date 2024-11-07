@@ -13,6 +13,7 @@
       ./creatives.nix # Not certain if default
       ./appimage.nix
       ./keyboard.nix
+      ./virtual.nix
     ];
 
     keyboardmodule.layout = "us,ca";
