@@ -8,6 +8,9 @@
         # Enable "experimental" features
         nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # VERY TEMP ISSUE, REVERT WHEN FIXED
+  boot.kernetPackages = pkgs.linuxPackages_latest
+
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
