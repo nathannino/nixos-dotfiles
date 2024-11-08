@@ -9,7 +9,7 @@
         nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # VERY TEMP ISSUE, REVERT WHEN FIXED
-  boot.kernetPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
 
   # Configure network proxy if necessary
