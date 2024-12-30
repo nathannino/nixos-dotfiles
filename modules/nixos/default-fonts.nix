@@ -8,6 +8,7 @@
 		nerd-fonts.ubuntu-mono
 		nerd-fonts.symbols-only
 		nerd-fonts.caskaydia-cove
+		font-awesome
         ];
     };
 }
