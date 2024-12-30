@@ -18,7 +18,7 @@
 			(revealer :transition "slideleft" :reveal {showstatus == barscreen} (box :spacing 5 :space-evenly false (notifications :barscreen "${barscreen}") (label :text "")))
 			(revealer :transition "slideleft" :reveal {showstatus == barscreen} (box :spacing 5 :space-evenly false (systray :orientation "h" :space-evenly false :spacing "5" :icon-size "16") (label :text "")))
 			(revealer :transition "slideleft" :reveal {showstatus == barscreen} (box :spacing 5 :space-evenly false (powerbutton) (label :text "")))
-			(revealer :transition "slideleft" :reveal {showstatus != barscreen} (box :spacing 5 :space-evenly false (label :text " ") (label :text "")))
+			(revealer :transition "slideleft" :reveal {showstatus != barscreen} (box :spacing 5 :space-evenly false (label :class "font-awesome" :text " ") (label :text "")))
 		)
 	))
 )
