@@ -8,6 +8,10 @@
         environment.systemPackages = with pkgs; [
             godot_4-mono
         ];
+
+	pkgs.config.permittedInsecurePackages = [
+		"dotnet-sdk-6.0.428"
+	];
     };
 }
 
