@@ -28,9 +28,9 @@
 							:space-evenly false
 							:orientation "h"
 							:spacing 7
-							(button :onclick "mpc prev"   (label :text " "))
+							(button :onclick "mpc prev"   (label :text ""))
 							(button :onclick "mpc toggle" (box(label :text "" :visible {mpdpaused != ""}) (label :visible {mpdpaused == ""} :text "")))
-							(button :onclick "mpc next"   (label :text " "))
+							(button :onclick "mpc next"   (label :text ""))
 						)
 					)
 				)
@@ -38,7 +38,7 @@
 		)
 		(box :visible {mpdsongname == ""} 
 			(eventbox :onrightclick "~/.config/eww/scripts/bash/mpd-playall" :onclick "${dowindow ? "${EWW_CMD} open mpdwindow" : ""}"
-				(label :text " ")
+				(label :text "")
 			)
 		)
 	)
