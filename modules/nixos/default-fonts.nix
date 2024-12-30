@@ -5,7 +5,9 @@
 {
     config = {
         environment.systemPackages = with pkgs; [
-		nerdfonts
+		nerd-fonts.ubuntu-mono
+		nerd-fonts.symbols-only
+		nerd-fonts.caskaydia-cove
         ];
     };
 }
