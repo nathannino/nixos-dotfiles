@@ -1,4 +1,4 @@
-# TODO : Switch to godot mono support
+# TODO : Remove Insecure Packages exception once possible
 
 {lib, config, pkgs, ...}:
 
