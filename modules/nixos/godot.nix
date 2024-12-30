@@ -9,7 +9,7 @@
             godot_4-mono
         ];
 
-	pkgs.config.permittedInsecurePackages = [
+	nixpkgs.config.permittedInsecurePackages = [
 		"dotnet-sdk-6.0.428"
 	];
     };
