@@ -9,6 +9,7 @@
 		nerd-fonts.symbols-only
 		nerd-fonts.caskaydia-cove
 		font-awesome
+		noto-fonts-cjk-sans
         ];
     };
 }
