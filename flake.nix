@@ -6,7 +6,7 @@
 
     # Latest stable branch of nixpkgs, used for version rollback
     # The current latest version is 23.11
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     home-manager = {
       url = "github:nix-community/home-manager";
