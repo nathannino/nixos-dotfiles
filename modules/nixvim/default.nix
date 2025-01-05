@@ -17,5 +17,20 @@
 				enable = true;
 			};
 		};
+
+		plugins = {
+			lualine.enable = true;
+
+			lsp = {
+				enable = true;
+				
+				servers = {
+					tsserver.enable = true;
+					rust-analyzer.enable = true;
+					pyright.enable = true;
+					nil_ls.enable = true;
+				};
+			};
+		};
 	};
 }
