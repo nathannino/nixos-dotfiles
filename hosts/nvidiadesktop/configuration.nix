@@ -22,6 +22,7 @@ in
       ./.${modulespath}/jetbrains.nix
       #./.${modulespath}/mpd-system-borked.nix
       inputs.home-manager.nixosModules.default
+      inputs.nixvim.nixosModules.nixvim
     ];
 
   # Bootloader.

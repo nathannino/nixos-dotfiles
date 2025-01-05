@@ -12,6 +12,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim = {
+	url = "github:nix-community/nixvim";
+	# If using a stable channel, you can use `url = "github:nix-community/nixvim/nixos-<version>"
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, ... }@inputs :
@@ -27,6 +33,7 @@
         modules = [
           ./hosts/nvidiadesktop/configuration.nix
           inputs.home-manager.nixosModules.default
+	  inputs.nixvim.nixosModules.nixvim
         ];
       };
       nixnathanlap = nixpkgs.lib.nixosSystem {
@@ -34,6 +41,7 @@
         modules = [
           ./hosts/nixnathanlap/configuration.nix
           inputs.home-manager.nixosModules.default
+	  inputs.nixvim.nixosModules.nixvim
         ];
       };
     };
