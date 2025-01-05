@@ -23,7 +23,7 @@ in
       ./.${modulespath}/slack.nix
       #./.${modulespath}/mpd-system-borked.nix
       inputs.home-manager.nixosModules.default
-      inputs.nixvim.nixosModules.nixvim
+      #inputs.nixvim.nixosModules.nixvim
     ];
 
   # Bootloader.
