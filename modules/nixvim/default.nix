@@ -6,6 +6,13 @@
 		viAlias = true;
 		vimAlias = true;
 
+		options = {
+			number = true;
+
+			tabstop = 2;
+			shiftwidth = 2;
+		};
+
 		clipboard = {
 			register = "unnamedplus";
 			providers.xsel.enable = true;
@@ -20,6 +27,8 @@
 
 		plugins = {
 			lualine.enable = true;
+
+			treesitter.enable = true;
 
 			lsp = {
 				enable = true;
