@@ -6,10 +6,12 @@
 		viAlias = true;
 		vimAlias = true;
 
-		number = true;
+		options = {
+			number = true;
 
-		tabstop = 2;
-		shiftwidth = 2;
+			tabstop = 2;
+			shiftwidth = 2;
+		};
 
 		clipboard = {
 			register = "unnamedplus";
