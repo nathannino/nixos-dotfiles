@@ -24,6 +24,8 @@ in
       #./.${modulespath}/mpd-system-borked.nix
       inputs.home-manager.nixosModules.default
       #inputs.nixvim.nixosModules.nixvim
+      ./../../modules/nixvim/default.nix
+      # ./../../modules/nixvim/nonixvim.nix # No nix vim support, enable regular neovim
     ];
 
   # Bootloader.
