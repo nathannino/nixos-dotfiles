@@ -32,9 +32,36 @@
 						installRustc = true;
 						installRustfmt = true;
 					};
+					lua-ls.enable = true;
 					pyright.enable = true;
 					nil_ls.enable = true;
 				};
+			};
+
+			nvim-cmp = {
+				enable = true;
+				autoEnableSources = true;
+				sources = [
+					{name = "nvim_lsp";}
+					{name = "path";}
+					{name = "buffer";}
+				];
+			};
+		};
+
+		mapping = {
+			"<CR>" = "cmp.mapping.confirm({ select = true })";
+			"<Tab>" = {
+				action = ''
+					function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						else
+							fallback()
+						end
+					end
+				'';
+				mode = [ "i" "s" ];
 			};
 		};
 	};
