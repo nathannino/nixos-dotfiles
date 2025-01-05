@@ -6,7 +6,7 @@
 		viAlias = true;
 		vimAlias = true;
 
-		options = {
+		opts = {
 			number = true;
 
 			tabstop = 2;
