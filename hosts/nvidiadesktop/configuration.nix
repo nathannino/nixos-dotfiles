@@ -23,6 +23,7 @@ in
       #./.${modulespath}/mpd-system-borked.nix
       inputs.home-manager.nixosModules.default
       #inputs.nixvim.nixosModules.nixvim
+      ./../../modules/nixvim/default.nix
     ];
 
   # Bootloader.
