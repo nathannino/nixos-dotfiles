@@ -9,7 +9,7 @@
 		clipboard = {
 			register = "unnamedplus";
 			providers.xsel.enable = true;
-			providers.wl-copy.enable = true;d.
+			providers.wl-copy.enable = true;
 		};
 
 		colorschemes = {
