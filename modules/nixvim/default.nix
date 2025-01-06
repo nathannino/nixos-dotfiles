@@ -30,6 +30,10 @@
 
 			treesitter.enable = true;
 
+			toggleterm = {
+				enable = true;
+			};
+
 			lsp = {
 				enable = true;
 				
@@ -69,5 +73,9 @@
 			};
 		};
 
+		performance = {
+			byteCompileLua.enable = true;
+			combinePlugins.enable = true;
+		};
 	};
 }
