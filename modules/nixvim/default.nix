@@ -75,7 +75,7 @@
 
 		performance = {
 			byteCompileLua.enable = true;
-			combinePlugins.enable = true;
+			# combinePlugins.enable = true; # Doesn't work lol
 		};
 	};
 }
