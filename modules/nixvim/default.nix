@@ -33,7 +33,7 @@
 			toggleterm = {
 				enable = true;
 				settings = {
-					open_mapping = "[[<c->]]";
+					open_mapping = "[[<F2>]]";
 				};
 			};
 
@@ -48,7 +48,7 @@
 						installRustc = true;
 						installRustfmt = true;
 					};
-					lua-ls.enable = true;
+					lua_ls.enable = true;
 					pyright.enable = true;
 					nil_ls.enable = true;
 				};
