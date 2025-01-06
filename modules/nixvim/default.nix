@@ -33,7 +33,7 @@
 			toggleterm = {
 				enable = true;
 				settings = {
-					open_mapping = "[[<A>]]";
+					open_mapping = "<c-\>";
 				};
 			};
 
