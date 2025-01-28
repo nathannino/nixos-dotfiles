@@ -37,7 +37,7 @@ in
 
 
   # Modules configuration
-  jetbrainide.ultimate = true;
+  jetbrainide.ultimate = false;
   # mpdmodule.user = "nathan_nino"; # TODO : Change username... yeah probably should find a way to change this based on the user account... =/
   # qtilemodule.configfile = ./qtilecfg.py;
   # pythoncfg.qtile.enable = true;
