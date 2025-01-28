@@ -23,6 +23,5 @@
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d"; # TODO : Split into steam? Or maybe put steam in home-manager?
     FLAKE="\${HOME}/.nixos"; # TODO : Put into main **shared** home-manager file
     NIXPKGS_ALLOW_UNFREE=1;
-    SCRUM_MASTER="Jason";
   };
 }
