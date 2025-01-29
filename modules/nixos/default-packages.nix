@@ -19,6 +19,7 @@
     		git
     		alacritty
     		bat
+		killall
 			filezilla
 			librewolf # TODO : https://nixos.wiki/wiki/Librewolf#Configuration
 			obs-studio
