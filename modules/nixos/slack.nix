@@ -22,7 +22,7 @@ Comment=Slack Desktop
 						Categories=GNOME;GTK;Network;InstantMessaging;
 						MimeType=x-scheme-handler/slack;
 					'';
-				in (old.postPatch or "") ++ ''
+				in (old.postPatch or "") + ''
 					echo ${desktopfile} > $out/share/applications/slack.desktop
 					chmod 777 $out/share/applications/slack.desktop
 				'';
