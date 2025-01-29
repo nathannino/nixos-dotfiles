@@ -27,7 +27,7 @@ Comment=Slack Desktop
 					chmod 777 $out/share/applications/slack.desktop
 				'';
 			});
-		});
+		})
 	];
 
         environment.systemPackages = with pkgs; [
