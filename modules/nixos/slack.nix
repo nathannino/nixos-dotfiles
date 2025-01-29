@@ -15,7 +15,7 @@
 						StartupWMClass=Slack
 Comment=Slack Desktop
 						GenericName=Slack Client for Linux
-						Exec=${pkgs.bashInteractive}/bin/sh -c "${pkgs.killall}/bin/killall slack ; ${pkgs.slack}/bin/slack -s %U"
+						Exec=${pkgs.bashInteractive}/bin/sh -c "${pkgs.killall}/bin/killall slack ; $out/bin/slack -s %U"
 						Icon=slack
 						Type=Application
 						StartupNotify=true
