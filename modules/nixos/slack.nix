@@ -8,7 +8,7 @@
    	nixpkgs.overlays = [
 		(self: super: {
 			slack = super.slack.overrideAttrs(new: old: { # Fix qtile wayland issue with slack
-				postPatch = let
+				postInstall = let
 					desktopfile = ''
 						[Desktop Entry]
 						Name=Slack
@@ -22,7 +22,7 @@ Comment=Slack Desktop
 						Categories=GNOME;GTK;Network;InstantMessaging;
 						MimeType=x-scheme-handler/slack;
 					'';
-				in (old.postPatch or "") + ''
+				in (old.postInstall or "") + ''
 					echo "${desktopfile}" > $out/share/applications/slack.desktop
 					chmod 777 $out/share/applications/slack.desktop
 				'';
