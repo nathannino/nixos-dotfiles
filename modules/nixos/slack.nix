@@ -23,7 +23,7 @@ Comment=Slack Desktop
 						MimeType=x-scheme-handler/slack;
 					'';
 				in (old.postPatch or "") + ''
-					echo ${desktopfile} > $out/share/applications/slack.desktop
+					echo "${desktopfile}" > $out/share/applications/slack.desktop
 					chmod 777 $out/share/applications/slack.desktop
 				'';
 			});
