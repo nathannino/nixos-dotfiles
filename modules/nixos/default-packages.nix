@@ -5,8 +5,6 @@
 {
     config = {
         programs.firefox.enable = true;
-	programs.neovim.enable = true;
-	programs.neovim.defaultEditor = true;
         services.flatpak.enable = true;
 
   	# List packages installed in system profile. To search, run:
