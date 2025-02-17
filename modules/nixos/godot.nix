@@ -6,12 +6,8 @@
     config = {
 
         environment.systemPackages = with pkgs; [
-            godot_4-mono
+            godot_4
         ];
-
-	nixpkgs.config.permittedInsecurePackages = [
-		"dotnet-sdk-6.0.428"
-	];
     };
 }
 
