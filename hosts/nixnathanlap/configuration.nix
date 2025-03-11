@@ -15,6 +15,7 @@ in
       ./.${modulespath}/intelg.nix
       #./.${modulespath}/python-borked.nix
       ./.${modulespath}/qtile.nix
+      ./.${modulespath}/arduino.nix
       ./.${modulespath}/godot.nix
       ./.${modulespath}/default-imports.nix
       ./.${modulespath}/plasma6.nix

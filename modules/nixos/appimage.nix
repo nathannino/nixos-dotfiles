@@ -1,5 +1,4 @@
 # Yay osu
-
 {lib, config, pkgs, ...}:
 
 {
