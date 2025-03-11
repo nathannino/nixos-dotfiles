@@ -7,7 +7,12 @@
             enable = true;
             binfmt = true;
             package = pkgs.appimage-run.override {
-                extraPkgs = pkgs: [ pkgs.icu];
+                extraPkgs = pkgs: [ 
+								pkgs.icu
+								(pkgs.python3.withPackages (python-pkgs: [
+									python-pkgs.pyserial
+								]))
+								];
             };
         };
     };
