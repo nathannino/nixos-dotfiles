@@ -7,8 +7,18 @@ let
 	};
 in
 {
-	home.file."arduino-ide.AppImage" = {
+	home.file.".appimages/arduino-ide.AppImage" = {
 		mode = "0755";
 		source = arduino-appimage;
+	};
+
+	xdg.desktopEntries = {
+		arduino-ide = {
+			name = "Arduino IDE Appimage";
+			genericName = "Arduino IDE";
+			exec = "/home/nathan_nino/.appimages/arduino-ide.AppImage";
+			terminal = false;
+			categories = [ "Application" ];
+		};
 	};
 }

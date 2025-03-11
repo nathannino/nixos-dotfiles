@@ -9,7 +9,8 @@
         ./dunst.nix
         ./git.nix
         ./sessionvariables.nix
-	./alacritty.nix
+				./alacritty.nix
+				./arduino.nix
 	#./kdeconnect.nix
     ];
 }
