@@ -11,7 +11,7 @@
    		nixpkgs.overlays = [
 				(self: super: {
 					arduino-ide = super.arduino-ide.overrideAttrs(new: old: { # Fix qtile wayland issue with slack
-						propagatedBuildInputs = old.propagatedBuildInputs ++ [super.python3Packages.pyserial];
+						propagatedBuildInputs = old.propagatedBuildInputs or [] ++ [super.python3Packages.pyserial];
 					});
 				})
 			];
