@@ -8,7 +8,7 @@ let
 in
 {
 	home.file.".appimages/arduino-ide.AppImage" = {
-		mode = "0755";
+		executable = true;
 		source = arduino-appimage;
 	};
 
