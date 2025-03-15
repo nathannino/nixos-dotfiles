@@ -1,12 +1,12 @@
 # TODO : Remove Insecure Packages exception once possible
 
-{lib, config, pkgs, ...}:
+{lib, config, pkgs, pkgs-stable, ...}:
 
 {
     config = {
 
         environment.systemPackages = with pkgs; [
-            godot_4
+            pkgs-stable.godot_4
         ];
     };
 }
