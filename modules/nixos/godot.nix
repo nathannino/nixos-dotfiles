@@ -6,7 +6,8 @@
     config = {
 
         environment.systemPackages = with pkgs; [
-            pkgs-stable.godot_4
+            #pkgs-stable.godot_4
+            godot_4
         ];
     };
 }
