@@ -118,7 +118,7 @@
 		extraPlugins = [
 			(pkgs.vimUtils.buildVimPlugin {
 				name = "nvim-platformio";
-				src = pkgs.fetchFromGithub {
+				src = pkgs.fetchFromGitHub {
 					owner = "anurag3301";
 					repo = "nvim-platformio.lua";
 					rev = "ccca890e2e1ee7822a64ae501866a027d975ab71";
