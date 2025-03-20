@@ -60,7 +60,6 @@
 					enable = true;
 					clearOnCursorMove = true;
 				};
-				highlightCurrentScope.enable = true;
 				navigation.enable = true;
 			};
 
