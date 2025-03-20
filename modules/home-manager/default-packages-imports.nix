@@ -11,6 +11,7 @@
         ./sessionvariables.nix
 				./alacritty.nix
 				./arduino.nix
+				./direnv.nix
 	#./kdeconnect.nix
     ];
 }
