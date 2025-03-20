@@ -10,6 +10,7 @@
 					arduino-core
 					arduino
 					arduino-cli
+					platformio
         ];
     };
 }
