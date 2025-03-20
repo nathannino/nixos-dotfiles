@@ -115,21 +115,21 @@
 			};
 
 			#TODO : Seperate nvim-platformio dependencies into other file (https://github.com/anurag3301/nvim-platformio.lua)
-			#telescope.enable = true;
+			telescope.enable = true;
 		};
 
 		# TODO : nvim-platformio support
-		#extraPlugins = [
-		#	(pkgs.vimUtils.buildVimPlugin {
-		#		name = "nvim-platformio";
-		#		src = pkgs.fetchFromGitHub {
-		#			owner = "anurag3301";
-		#			repo = "nvim-platformio.lua";
-		#			rev = "ccca890e2e1ee7822a64ae501866a027d975ab71";
-		#			hash = "sha256:15hwsk8y0na3zjj2kbx929vz50vkdkwvjs7vhbk5lq13pp0vajvc";
-		#		};
-		#	})
-		#];
+		extraPlugins = [
+			(pkgs.vimUtils.buildVimPlugin {
+				name = "nvim-platformio";
+				src = pkgs.fetchFromGitHub {
+					owner = "anurag3301";
+					repo = "nvim-platformio.lua";
+					rev = "ccca890e2e1ee7822a64ae501866a027d975ab71";
+					hash = "sha256:15hwsk8y0na3zjj2kbx929vz50vkdkwvjs7vhbk5lq13pp0vajvc";
+				};
+			})
+		];
 
 		performance = {
 			byteCompileLua.enable = true;
