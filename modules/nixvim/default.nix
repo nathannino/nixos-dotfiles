@@ -25,16 +25,34 @@
 			};
 		};
 
+		keymaps = [
+			{
+				action = "<cmd>NvimTreeOpen<CR>";
+				key = "<C-tab>";
+				mode = ["n"];
+				options = {
+					desc = "Toggle file tree.";
+				};
+			}
+		];
+
 		plugins = {
 			lualine.enable = true;
 
 			treesitter.enable = true;
+
+			clangd-extensions.enable = true;
 
 			toggleterm = {
 				enable = true;
 				settings = {
 					open_mapping = "[[<F2>]]";
 				};
+			};
+
+			nvim-tree = {
+				enable = true;
+				hijackCursor = true;
 			};
 
 			lsp = {

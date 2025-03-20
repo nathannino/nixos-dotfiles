@@ -8,10 +8,11 @@
         services.flatpak.enable = true;
 
         environment.systemPackages = with pkgs; [
-            krita
-	    pixelorama
-            inkscape
-            libsForQt5.kdenlive # wtf is that in libsForQt5???
+					krita
+					pixelorama
+					# aseprite # Not ready just yet
+					inkscape
+					libsForQt5.kdenlive # wtf is that in libsForQt5???
         ];
     };
 }

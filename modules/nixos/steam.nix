@@ -11,7 +11,10 @@
             enable = true;
             remotePlay.openFirewall = true;
             dedicatedServer.openFirewall = true;
-            gamescopeSession.enable = true; # We will try without for now, but might need to for wayland
+            gamescopeSession.enable = false; # We will try without for now, but might need to for wayland
+						localNetworkGameTransfers.openFirewall = true;
+						protontricks.enable = true;
+						extraCompatPackages = [ pkgs.proton-ge-bin ];
         };
 
         environment.systemPackages = with pkgs; [
