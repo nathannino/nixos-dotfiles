@@ -113,6 +113,9 @@
 					};
 				};
 			};
+
+			#TODO : Seperate nvim-platformio dependencies into other file (https://github.com/anurag3301/nvim-platformio.lua)
+			telescope.enable = true;
 		};
 
 		extraPlugins = [
