@@ -53,7 +53,11 @@
 			nvim-tree = {
 				enable = true;
 				hijackCursor = true;
+				openOnSetupFile = true;
+				autoReloadOnWrite = true;
 			};
+
+			web-devicons.enable = true;
 
 			lsp = {
 				enable = true;
