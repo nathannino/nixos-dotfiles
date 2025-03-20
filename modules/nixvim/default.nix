@@ -56,6 +56,10 @@
 
 			treesitter-refactor = {
 				enable = true;
+				highlightDefinitions = {
+					enable = true;
+					clearOnCursorMove = true;
+				};
 				highlightCurrentScope.enable = true;
 				navigation.enable = true;
 			};
