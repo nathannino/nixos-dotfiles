@@ -64,6 +64,18 @@
 
 			rainbow-delimiters.enable = true;
 
+			scrollview = {
+				enable = true;
+			};
+
+			render-markdown = {
+				enable = true;
+			};
+
+			auto-session = {
+				enable = true;
+			};
+
 			clangd-extensions.enable = true;
 
 			toggleterm = {
@@ -79,6 +91,9 @@
 				openOnSetup = true;
 				openOnSetupFile = true;
 				autoReloadOnWrite = true;
+				git = {
+					ignore = false;
+				};
 			};
 
 			web-devicons.enable = true;
