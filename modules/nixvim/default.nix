@@ -27,7 +27,7 @@
 
 		keymaps = [
 			{
-				action = "<cmd>NvimTreeOpen<CR>";
+				action = "<cmd>NvimTreeToggle<CR>";
 				key = "<C-tab>";
 				mode = ["n"];
 				options = {
@@ -39,7 +39,22 @@
 		plugins = {
 			lualine.enable = true;
 
-			treesitter.enable = true;
+			treesitter = {
+				enable = true;
+				gccPackage = null;
+				nixGrammars = true;
+				settings = {
+					highlight.enable = true;
+					indent.enable = true;
+				};
+			};
+
+			treesitter-context = {
+				enable = true;
+				settings = { max_lines = 2; };
+			};
+
+			rainbow-delimiters.enable = true;
 
 			clangd-extensions.enable = true;
 
@@ -53,6 +68,7 @@
 			nvim-tree = {
 				enable = true;
 				hijackCursor = true;
+				openOnSetup = true;
 				openOnSetupFile = true;
 				autoReloadOnWrite = true;
 			};
