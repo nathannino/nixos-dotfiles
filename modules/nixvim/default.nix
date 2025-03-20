@@ -54,6 +54,12 @@
 				settings = { max_lines = 5; };
 			};
 
+			treesitter-refactor = {
+				enable = true;
+				highlightCurrentScope.enable = true;
+				navigation.enable = true;
+			};
+
 			rainbow-delimiters.enable = true;
 
 			clangd-extensions.enable = true;
