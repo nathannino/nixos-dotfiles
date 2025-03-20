@@ -12,5 +12,9 @@
 					arduino-cli
 					platformio
         ];
+
+				services.udev.packages = [
+					pkgs.platformio-core.udev
+				];
     };
 }
