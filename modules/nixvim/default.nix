@@ -122,7 +122,7 @@
 					owner = "anurag3301";
 					repo = "nvim-platformio.lua";
 					rev = "ccca890e2e1ee7822a64ae501866a027d975ab71";
-					hash = "15hwsk8y0na3zjj2kbx929vz50vkdkwvjs7vhbk5lq13pp0vajvc";
+					hash = "sha256:15hwsk8y0na3zjj2kbx929vz50vkdkwvjs7vhbk5lq13pp0vajvc";
 				};
 			})
 		];
