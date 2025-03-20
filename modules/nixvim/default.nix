@@ -51,7 +51,7 @@
 
 			treesitter-context = {
 				enable = true;
-				settings = { max_lines = 2; };
+				settings = { max_lines = 5; };
 			};
 
 			rainbow-delimiters.enable = true;
@@ -114,6 +114,18 @@
 				};
 			};
 		};
+
+		extraPlugins = [
+			(pkgs.vimUtils.buildVimPlugin {
+				name = "nvim-platformio";
+				src = pkgs.fetchFromGithub {
+					owner = "anurag3301";
+					repo = "nvim-platformio.lua";
+					rev = "ccca890e2e1ee7822a64ae501866a027d975ab71";
+					hash = "15hwsk8y0na3zjj2kbx929vz50vkdkwvjs7vhbk5lq13pp0vajvc";
+				};
+			})
+		];
 
 		performance = {
 			byteCompileLua.enable = true;
