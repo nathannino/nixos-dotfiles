@@ -10,8 +10,8 @@ let
 in
 {
 	programs.adb.enable = true;
-	environment.systemPackages = [
-		myAndroid
-		pkgs.dart
-	];
+	#environment.systemPackages = [
+	#	myAndroid
+	#	pkgs.dart
+	#];
 }
