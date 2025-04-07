@@ -22,6 +22,7 @@ in
       ./.${modulespath}/blender.nix
       ./.${modulespath}/jetbrains.nix
       ./.${modulespath}/slack.nix
+      ./.${modulespath}/android.nix
       #./.${modulespath}/mpd-system-borked.nix
       inputs.home-manager.nixosModules.default
       #inputs.nixvim.nixosModules.nixvim
