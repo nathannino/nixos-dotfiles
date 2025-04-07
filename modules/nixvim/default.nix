@@ -108,7 +108,7 @@
 					lua_ls.enable = true;
 					pyright.enable = true;
 					nil_ls.enable = true;
-					#clangd.enable = true;
+					clangd.enable = true;
 					#ccls= {
 						#enable = true;
 						#};

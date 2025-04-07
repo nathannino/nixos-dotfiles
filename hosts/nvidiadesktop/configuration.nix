@@ -46,7 +46,7 @@ in
   users.users.nathan_nino = {
     isNormalUser = true;
     description = "Nathan";
-    extraGroups = [ "networkmanager" "wheel" "user-with-access-to-virtualbox" "libvirtd" "dialout" ];
+    extraGroups = [ "networkmanager" "wheel" "user-with-access-to-virtualbox" "libvirtd" "dialout" "adbusers" "kvm"];
     packages = with pkgs; [
       # This is a single user config, don't use this
     ];
