@@ -11,5 +11,6 @@ in
 	programs.adb.enable = true;
 	environment.systemPackages = [
 		myAndroid
+		pkgs.flutter
 	];
 }
