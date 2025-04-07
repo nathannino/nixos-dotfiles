@@ -38,6 +38,7 @@
 	    	qpwgraph
 	    	rssguard
 		waycheck
+		devenv
 		calc
 		flameshot
 		libreoffice
