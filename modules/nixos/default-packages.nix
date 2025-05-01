@@ -49,5 +49,9 @@
 		adwaita-icon-theme
 			segger-jlink # very temp aaa
         ];
+
+		nixpkgs.config.permittedInsecurePackages = [
+			"segger-jlink-qt4-810"
+		];
     };
 }
