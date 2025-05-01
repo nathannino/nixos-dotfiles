@@ -47,6 +47,7 @@
 			sdk_8_0
 		])
 		adwaita-icon-theme
+			segger-jlink # very temp aaa
         ];
     };
 }
