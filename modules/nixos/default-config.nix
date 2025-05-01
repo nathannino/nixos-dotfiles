@@ -17,7 +17,6 @@
   # VERY TEMP ISSUE, REVERT WHEN FIXED
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-	nixpkgs.config.segger-jlink.acceptLicense = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -72,6 +71,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+	nixpkgs.config.segger-jlink.acceptLicense = true;
 
   #programs.kdeconnect.enable = true;
 
