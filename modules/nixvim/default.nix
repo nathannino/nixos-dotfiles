@@ -118,6 +118,31 @@
 			# Debuggers
 			dap = {
 				enable = true;
+				luaConfig = ''
+					require("dap").configuration.cpp = {
+					{
+        		name = "Debug J-Link",
+        		type = "cdbg",
+        		request = "launch",
+        		cwd = "$\{workspaceFolder}",
+        		program = "$\{workspaceFolder}/build/debug/firmware.elf",
+        		stopAtEntry = false,
+        		MIMode = "gdb",
+        		miDebuggerServerAddress = "localhost:2331",
+        		miDebuggerPath = "/opt/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gdb",
+        		serverLaunchTimeout = 5000,
+        		postRemoteConnectCommands = {
+          		{
+            		text = "monitor reset",
+           			ignoreFailures = false
+          		},
+          		{
+            		text = "load",
+            		ignoreFailures = false
+          		},
+        		},
+					}
+				'';
 			};
 
 			dap-ui = {
