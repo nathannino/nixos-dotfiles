@@ -115,6 +115,20 @@
 				};
 			};
 
+			# Debuggers
+			dap = {
+				enable = true;
+			};
+
+			dap-ui = {
+				enable = true;
+			};
+
+			dap-lldb = {
+				enable = true;
+			};
+			# Debuggers end
+
 			cmp = {
 				enable = true;
 				autoEnableSources = true;
