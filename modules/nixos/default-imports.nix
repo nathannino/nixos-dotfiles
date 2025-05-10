@@ -19,6 +19,7 @@
       ./appimage.nix
       ./keyboard.nix
       ./virtual.nix
+			./../louvretest/test.nix
     ];
 
     keyboardmodule.layout = "us,ca";
