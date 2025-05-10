@@ -8,4 +8,7 @@
 		pkgs.wprs
 		pkgs.louvresession
 	];
+	services.displayManager.sessionPackages = [
+		pkgs.louvresession
+	];
 }
