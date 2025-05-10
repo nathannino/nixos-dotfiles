@@ -1,6 +1,9 @@
 {lib, config, pkgs, ...}:
 
 {
+	environment.systemPackages = [
+		pkgs.wprs
+	];
 	environment.etc."wayland-sessions/impatientcomp.desktop" = {
 		text = ''
 				[Desktop Entry]
