@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=Qtile (funny)
-Comment=Qtile on Wayland
-Exec=env XDG_CURRENT_DESKTOP=sway qtile start -b wayland
-Type=Application
-Keywords=wm;tilling
