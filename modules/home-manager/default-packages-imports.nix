@@ -12,6 +12,7 @@
 				./alacritty.nix
 				./arduino.nix
 				./direnv.nix
+				./desktopfiles.nix
 	#./kdeconnect.nix
     ];
 }
